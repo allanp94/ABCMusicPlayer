@@ -3,5 +3,7 @@ module abcMusicPlayer {
 	exports abc.player;
 
 	requires junit;
-	requires rt;
+	requires java.desktop;
+	//requires junit4;
+	//requires rt;
 }
