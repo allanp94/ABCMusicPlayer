@@ -40,7 +40,7 @@ public class Main {
         AbcParser parser = new AbcParser(tokenStream);
         //ParseTree tree = parser.r();
         
-        //showTree(parser);
+        showTree(parser);
         
         //ParseTreeWalker walker = new ParseTreeWalker();
         //walker.walk( new AbcBaseListener(), tree );
