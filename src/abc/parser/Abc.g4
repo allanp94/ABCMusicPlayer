@@ -6,5 +6,9 @@
 grammar Abc;
 import Configuration;
 
-line: PLUS EOF;
-PLUS: '+';
+//line: PLUS EOF;
+//PLUS: '+';
+
+r   : 'hello' ID;
+ID  : [a-z]+ ;
+WS  : [ \t\r\n]+ -> skip ;
