@@ -48,11 +48,11 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-    	play("sample_abc/test.txt");
+    	play("sample_abc/headertest.abc");
     }
     
     public static void showTree(AbcParser parser) {
-        ParseTree tree = parser.r();
+        ParseTree tree = parser.song();
         
         //show AST in console
         System.out.println(tree.toStringTree(parser));
@@ -60,9 +60,8 @@ public class Main {
         //show AST in GUI
         JFrame frame = new JFrame("Antlr AST");
         JPanel panel = new JPanel();
-        TreeViewer viewer = new TreeViewer(Arrays.asList(
-                parser.getRuleNames()),tree);
-        viewer.setScale(10); // Scale a little
+        TreeViewer viewer = new TreeViewer(Arrays.asList(parser.getRuleNames()),tree);
+        viewer.setScale(1); // Scale a little
         panel.add(viewer);
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
