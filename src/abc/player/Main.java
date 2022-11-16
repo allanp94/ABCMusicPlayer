@@ -5,13 +5,8 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-
-import abc.parser.AbcBaseListener;
 import abc.parser.AbcLexer;
 import abc.parser.AbcParser;
-import abc.parser.AbcListener;
-
 import java.io.IOException;
 import java.util.Arrays;
 

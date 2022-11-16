@@ -8,6 +8,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/schoolgit/ABCMusicPlayer/ABCMusicPlayer/lib/antlr.jar"/>
+	<classpathentry kind="lib" path="lib/antlr.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
