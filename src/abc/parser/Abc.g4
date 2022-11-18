@@ -7,11 +7,11 @@ grammar Abc;
 import Configuration;
 
 song
- : header body EOF
+ : header NEWLINE body EOF
  ;
 
 header
- : headerRules+ endRule eol
+ : headerRules+ endRule
  ;
  
 body
@@ -19,7 +19,7 @@ body
  ;
  
 headerRules
- : field COLON content 
+ : field COLON content NEWLINE
  ;
  
 bodyRules
@@ -27,7 +27,7 @@ bodyRules
  ;
  
 endRule
- : endField COLON endRuleContent
+ : endField COLON content NEWLINE
  ;
  
 content
