@@ -7,37 +7,57 @@ grammar Abc;
 import Configuration;
 
 song
- : header EOF
+ : header body EOF
  ;
 
 header
- : rules+
+ : headerRules+ endRule eol
  ;
  
-rules
- : field COLON content eol
+body
+ : bodyRules+ eol
+ ;
+ 
+headerRules
+ : field COLON content 
+ ;
+ 
+bodyRules
+ : BAR* WORD+ BAR
+ ;
+ 
+endRule
+ : endField COLON endRuleContent
  ;
  
 content
- : STRING
- | KEYC
- |  KEYK
+ :  STRING
+ |  KEYC
  |  KEYL
  |  KEYM
  |  KEYQ
  |  KEYT
  |  KEYX
+ |  WORD
+ ;
+
+endRuleContent
+ : STRING
+ | KEYK
  | WORD
  ;
 
 field
  : KEYC
- | KEYK
  | KEYL
  | KEYM
  | KEYQ
  | KEYT
  | KEYX
+ ;
+ 
+endField
+ : KEYK
  ;
   
 eol
@@ -46,6 +66,8 @@ eol
  ;
 
 COLON   : ':';
+
+BAR 	: '|'; 
 
 KEYC    : 'C';
 KEYK    : 'K';

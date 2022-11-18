@@ -43,13 +43,49 @@ public class AbcBaseListener implements AbcListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterRules(AbcParser.RulesContext ctx) { }
+  @Override public void enterBody(AbcParser.BodyContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitRules(AbcParser.RulesContext ctx) { }
+  @Override public void exitBody(AbcParser.BodyContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterHeaderRules(AbcParser.HeaderRulesContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitHeaderRules(AbcParser.HeaderRulesContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterBodyRules(AbcParser.BodyRulesContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitBodyRules(AbcParser.BodyRulesContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterEndRule(AbcParser.EndRuleContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitEndRule(AbcParser.EndRuleContext ctx) { }
   /**
    * {@inheritDoc}
    *
@@ -67,6 +103,18 @@ public class AbcBaseListener implements AbcListener {
    *
    * <p>The default implementation does nothing.</p>
    */
+  @Override public void enterEndRuleContent(AbcParser.EndRuleContentContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitEndRuleContent(AbcParser.EndRuleContentContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
   @Override public void enterField(AbcParser.FieldContext ctx) { }
   /**
    * {@inheritDoc}
@@ -74,6 +122,18 @@ public class AbcBaseListener implements AbcListener {
    * <p>The default implementation does nothing.</p>
    */
   @Override public void exitField(AbcParser.FieldContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterEndField(AbcParser.EndFieldContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitEndField(AbcParser.EndFieldContext ctx) { }
   /**
    * {@inheritDoc}
    *

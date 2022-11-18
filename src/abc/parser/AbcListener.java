@@ -31,15 +31,45 @@ public interface AbcListener extends ParseTreeListener {
    */
   void exitHeader(AbcParser.HeaderContext ctx);
   /**
-   * Enter a parse tree produced by {@link AbcParser#rules}.
+   * Enter a parse tree produced by {@link AbcParser#body}.
    * @param ctx the parse tree
    */
-  void enterRules(AbcParser.RulesContext ctx);
+  void enterBody(AbcParser.BodyContext ctx);
   /**
-   * Exit a parse tree produced by {@link AbcParser#rules}.
+   * Exit a parse tree produced by {@link AbcParser#body}.
    * @param ctx the parse tree
    */
-  void exitRules(AbcParser.RulesContext ctx);
+  void exitBody(AbcParser.BodyContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcParser#headerRules}.
+   * @param ctx the parse tree
+   */
+  void enterHeaderRules(AbcParser.HeaderRulesContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcParser#headerRules}.
+   * @param ctx the parse tree
+   */
+  void exitHeaderRules(AbcParser.HeaderRulesContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcParser#bodyRules}.
+   * @param ctx the parse tree
+   */
+  void enterBodyRules(AbcParser.BodyRulesContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcParser#bodyRules}.
+   * @param ctx the parse tree
+   */
+  void exitBodyRules(AbcParser.BodyRulesContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcParser#endRule}.
+   * @param ctx the parse tree
+   */
+  void enterEndRule(AbcParser.EndRuleContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcParser#endRule}.
+   * @param ctx the parse tree
+   */
+  void exitEndRule(AbcParser.EndRuleContext ctx);
   /**
    * Enter a parse tree produced by {@link AbcParser#content}.
    * @param ctx the parse tree
@@ -51,6 +81,16 @@ public interface AbcListener extends ParseTreeListener {
    */
   void exitContent(AbcParser.ContentContext ctx);
   /**
+   * Enter a parse tree produced by {@link AbcParser#endRuleContent}.
+   * @param ctx the parse tree
+   */
+  void enterEndRuleContent(AbcParser.EndRuleContentContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcParser#endRuleContent}.
+   * @param ctx the parse tree
+   */
+  void exitEndRuleContent(AbcParser.EndRuleContentContext ctx);
+  /**
    * Enter a parse tree produced by {@link AbcParser#field}.
    * @param ctx the parse tree
    */
@@ -60,6 +100,16 @@ public interface AbcListener extends ParseTreeListener {
    * @param ctx the parse tree
    */
   void exitField(AbcParser.FieldContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcParser#endField}.
+   * @param ctx the parse tree
+   */
+  void enterEndField(AbcParser.EndFieldContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcParser#endField}.
+   * @param ctx the parse tree
+   */
+  void exitEndField(AbcParser.EndFieldContext ctx);
   /**
    * Enter a parse tree produced by {@link AbcParser#eol}.
    * @param ctx the parse tree
