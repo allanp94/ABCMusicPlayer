@@ -7,7 +7,7 @@ grammar Abc;
 import Configuration;
 
 song
- : header NEWLINE body EOF
+ : header body EOF
  ;
 
 header
@@ -39,6 +39,7 @@ content
  |  KEYT
  |  KEYX
  |  WORD
+ |  NUMBER
  ;
 
 endRuleContent

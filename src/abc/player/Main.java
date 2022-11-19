@@ -43,7 +43,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-    	play("sample_abc/headertest.abc");
+    	play("sample_abc/scale.abc");
     }
     
     public static void showTree(AbcParser parser) {

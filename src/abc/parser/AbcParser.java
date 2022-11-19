@@ -109,7 +109,6 @@ public class AbcParser extends Parser {
     public HeaderContext header() {
       return getRuleContext(HeaderContext.class,0);
     }
-    public TerminalNode NEWLINE() { return getToken(AbcParser.NEWLINE, 0); }
     public BodyContext body() {
       return getRuleContext(BodyContext.class,0);
     }
@@ -137,10 +136,8 @@ public class AbcParser extends Parser {
       setState(22);
       header();
       setState(23);
-      match(NEWLINE);
-      setState(24);
       body();
-      setState(25);
+      setState(24);
       match(EOF);
       }
     }
@@ -186,21 +183,21 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(28); 
+      setState(27); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
         {
-        setState(27);
+        setState(26);
         headerRules();
         }
         }
-        setState(30); 
+        setState(29); 
         _errHandler.sync(this);
         _la = _input.LA(1);
       } while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << KEYC) | (1L << KEYL) | (1L << KEYM) | (1L << KEYQ) | (1L << KEYT) | (1L << KEYX))) != 0) );
-      setState(32);
+      setState(31);
       endRule();
       }
     }
@@ -246,21 +243,21 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(35); 
+      setState(34); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
         {
-        setState(34);
+        setState(33);
         bodyRules();
         }
         }
-        setState(37); 
+        setState(36); 
         _errHandler.sync(this);
         _la = _input.LA(1);
       } while ( _la==BAR || _la==WORD );
-      setState(39);
+      setState(38);
       eol();
       }
     }
@@ -304,13 +301,13 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(41);
+      setState(40);
       field();
-      setState(42);
+      setState(41);
       match(COLON);
-      setState(43);
+      setState(42);
       content();
-      setState(44);
+      setState(43);
       match(NEWLINE);
       }
     }
@@ -355,35 +352,35 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(49);
+      setState(48);
       _errHandler.sync(this);
       _la = _input.LA(1);
       while (_la==BAR) {
         {
         {
-        setState(46);
+        setState(45);
         match(BAR);
         }
         }
-        setState(51);
+        setState(50);
         _errHandler.sync(this);
         _la = _input.LA(1);
       }
-      setState(53); 
+      setState(52); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
         {
-        setState(52);
+        setState(51);
         match(WORD);
         }
         }
-        setState(55); 
+        setState(54); 
         _errHandler.sync(this);
         _la = _input.LA(1);
       } while ( _la==WORD );
-      setState(57);
+      setState(56);
       match(BAR);
       }
     }
@@ -427,13 +424,13 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(59);
+      setState(58);
       endField();
-      setState(60);
+      setState(59);
       match(COLON);
-      setState(61);
+      setState(60);
       content();
-      setState(62);
+      setState(61);
       match(NEWLINE);
       }
     }
@@ -457,6 +454,7 @@ public class AbcParser extends Parser {
     public TerminalNode KEYT() { return getToken(AbcParser.KEYT, 0); }
     public TerminalNode KEYX() { return getToken(AbcParser.KEYX, 0); }
     public TerminalNode WORD() { return getToken(AbcParser.WORD, 0); }
+    public TerminalNode NUMBER() { return getToken(AbcParser.NUMBER, 0); }
     public ContentContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
     }
@@ -478,9 +476,9 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(64);
+      setState(63);
       _la = _input.LA(1);
-      if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << KEYC) | (1L << KEYL) | (1L << KEYM) | (1L << KEYQ) | (1L << KEYT) | (1L << KEYX) | (1L << STRING) | (1L << WORD))) != 0)) ) {
+      if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << KEYC) | (1L << KEYL) | (1L << KEYM) | (1L << KEYQ) | (1L << KEYT) | (1L << KEYX) | (1L << STRING) | (1L << NUMBER) | (1L << WORD))) != 0)) ) {
       _errHandler.recoverInline(this);
       } else {
         consume();
@@ -523,7 +521,7 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(66);
+      setState(65);
       _la = _input.LA(1);
       if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << KEYK) | (1L << STRING) | (1L << WORD))) != 0)) ) {
       _errHandler.recoverInline(this);
@@ -571,7 +569,7 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(68);
+      setState(67);
       _la = _input.LA(1);
       if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << KEYC) | (1L << KEYL) | (1L << KEYM) | (1L << KEYQ) | (1L << KEYT) | (1L << KEYX))) != 0)) ) {
       _errHandler.recoverInline(this);
@@ -613,7 +611,7 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(70);
+      setState(69);
       match(KEYK);
       }
     }
@@ -652,7 +650,7 @@ public class AbcParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(72);
+      setState(71);
       _la = _input.LA(1);
       if ( !(_la==EOF || _la==NEWLINE) ) {
       _errHandler.recoverInline(this);
@@ -673,26 +671,26 @@ public class AbcParser extends Parser {
   }
 
   public static final String _serializedATN =
-    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\22M\4\2\t\2\4\3"+
+    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\22L\4\2\t\2\4\3"+
       "\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
-      "\t\13\4\f\t\f\3\2\3\2\3\2\3\2\3\2\3\3\6\3\37\n\3\r\3\16\3 \3\3\3\3"+
-      "\3\4\6\4&\n\4\r\4\16\4\'\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\7\6\62\n"+
-      "\6\f\6\16\6\65\13\6\3\6\6\68\n\6\r\6\16\69\3\6\3\6\3\7\3\7\3\7\3\7"+
-      "\3\7\3\b\3\b\3\t\3\t\3\n\3\n\3\13\3\13\3\f\3\f\3\f\2\2\r\2\4\6\b\n"+
-      "\f\16\20\22\24\26\2\6\6\2\5\5\7\13\16\16\22\22\5\2\6\6\16\16\22\22"+
-      "\4\2\5\5\7\13\3\3\17\17E\2\30\3\2\2\2\4\36\3\2\2\2\6%\3\2\2\2\b+\3"+
-      "\2\2\2\n\63\3\2\2\2\f=\3\2\2\2\16B\3\2\2\2\20D\3\2\2\2\22F\3\2\2\2"+
-      "\24H\3\2\2\2\26J\3\2\2\2\30\31\5\4\3\2\31\32\7\17\2\2\32\33\5\6\4"+
-      "\2\33\34\7\2\2\3\34\3\3\2\2\2\35\37\5\b\5\2\36\35\3\2\2\2\37 \3\2"+
-      "\2\2 \36\3\2\2\2 !\3\2\2\2!\"\3\2\2\2\"#\5\f\7\2#\5\3\2\2\2$&\5\n"+
-      "\6\2%$\3\2\2\2&\'\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\5\26\f"+
-      "\2*\7\3\2\2\2+,\5\22\n\2,-\7\3\2\2-.\5\16\b\2./\7\17\2\2/\t\3\2\2"+
-      "\2\60\62\7\4\2\2\61\60\3\2\2\2\62\65\3\2\2\2\63\61\3\2\2\2\63\64\3"+
-      "\2\2\2\64\67\3\2\2\2\65\63\3\2\2\2\668\7\22\2\2\67\66\3\2\2\289\3"+
-      "\2\2\29\67\3\2\2\29:\3\2\2\2:;\3\2\2\2;<\7\4\2\2<\13\3\2\2\2=>\5\24"+
-      "\13\2>?\7\3\2\2?@\5\16\b\2@A\7\17\2\2A\r\3\2\2\2BC\t\2\2\2C\17\3\2"+
-      "\2\2DE\t\3\2\2E\21\3\2\2\2FG\t\4\2\2G\23\3\2\2\2HI\7\6\2\2I\25\3\2"+
-      "\2\2JK\t\5\2\2K\27\3\2\2\2\6 \'\639";
+      "\t\13\4\f\t\f\3\2\3\2\3\2\3\2\3\3\6\3\36\n\3\r\3\16\3\37\3\3\3\3\3"+
+      "\4\6\4%\n\4\r\4\16\4&\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\7\6\61\n\6\f"+
+      "\6\16\6\64\13\6\3\6\6\6\67\n\6\r\6\16\68\3\6\3\6\3\7\3\7\3\7\3\7\3"+
+      "\7\3\b\3\b\3\t\3\t\3\n\3\n\3\13\3\13\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f"+
+      "\16\20\22\24\26\2\6\7\2\5\5\7\13\16\16\20\20\22\22\5\2\6\6\16\16\22"+
+      "\22\4\2\5\5\7\13\3\3\17\17D\2\30\3\2\2\2\4\35\3\2\2\2\6$\3\2\2\2\b"+
+      "*\3\2\2\2\n\62\3\2\2\2\f<\3\2\2\2\16A\3\2\2\2\20C\3\2\2\2\22E\3\2"+
+      "\2\2\24G\3\2\2\2\26I\3\2\2\2\30\31\5\4\3\2\31\32\5\6\4\2\32\33\7\2"+
+      "\2\3\33\3\3\2\2\2\34\36\5\b\5\2\35\34\3\2\2\2\36\37\3\2\2\2\37\35"+
+      "\3\2\2\2\37 \3\2\2\2 !\3\2\2\2!\"\5\f\7\2\"\5\3\2\2\2#%\5\n\6\2$#"+
+      "\3\2\2\2%&\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\'(\3\2\2\2()\5\26\f\2)\7\3"+
+      "\2\2\2*+\5\22\n\2+,\7\3\2\2,-\5\16\b\2-.\7\17\2\2.\t\3\2\2\2/\61\7"+
+      "\4\2\2\60/\3\2\2\2\61\64\3\2\2\2\62\60\3\2\2\2\62\63\3\2\2\2\63\66"+
+      "\3\2\2\2\64\62\3\2\2\2\65\67\7\22\2\2\66\65\3\2\2\2\678\3\2\2\28\66"+
+      "\3\2\2\289\3\2\2\29:\3\2\2\2:;\7\4\2\2;\13\3\2\2\2<=\5\24\13\2=>\7"+
+      "\3\2\2>?\5\16\b\2?@\7\17\2\2@\r\3\2\2\2AB\t\2\2\2B\17\3\2\2\2CD\t"+
+      "\3\2\2D\21\3\2\2\2EF\t\4\2\2F\23\3\2\2\2GH\7\6\2\2H\25\3\2\2\2IJ\t"+
+      "\5\2\2J\27\3\2\2\2\6\37&\628";
   public static final ATN _ATN =
     new ATNDeserializer().deserialize(_serializedATN.toCharArray());
   static {
