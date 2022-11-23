@@ -9,11 +9,11 @@ import org.junit.runners.MethodSorters;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 
-@FixMethodOrder(MethodSorters.JVM)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SequencePlayerTest {
 
     @Test
-    public void Test() throws InterruptedException {
+    public void piece0Test() throws InterruptedException {
         try {
             SequencePlayer player = new SequencePlayer(120, 12);
 
@@ -21,10 +21,34 @@ public class SequencePlayerTest {
             assertEquals(new Pitch('C').toString(),"C");
             assertEquals(new Pitch('C').toMidiNote(),60);
             
-            player.addNote(new Pitch('D').toMidiNote(), 12, 12); //C
-            assertEquals(new Pitch('D').toString(),"C");
+            player.addNote(new Pitch('D').toMidiNote(), 12, 12); //D
+            assertEquals(new Pitch('D').toString(),"D");
             assertEquals(new Pitch('D').toMidiNote(),62);
+           
+            player.addNote(new Pitch('E').toMidiNote(), 24, 12); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
             
+            player.addNote(new Pitch('F').toMidiNote(), 36, 12); //F
+            assertEquals(new Pitch('F').toString(),"F");
+            assertEquals(new Pitch('F').toMidiNote(),65);
+            
+            player.addNote(new Pitch('G').toMidiNote(), 48, 12); //G
+            assertEquals(new Pitch('G').toString(),"G");
+            assertEquals(new Pitch('G').toMidiNote(),67);
+           
+            player.addNote(new Pitch('A').toMidiNote(), 60, 12); //A
+            assertEquals(new Pitch('A').toString(),"A");
+            assertEquals(new Pitch('A').toMidiNote(),69);
+            
+            player.addNote(new Pitch('B').toMidiNote(), 72, 12); //B
+            assertEquals(new Pitch('B').toString(),"B");
+            assertEquals(new Pitch('B').toMidiNote(),71);
+             
+            player.addNote(new Pitch('C').transpose(12).toMidiNote(), 84, 12); //c
+            assertEquals(new Pitch('C').transpose(12).toString(),"C'");
+            assertEquals(new Pitch('C').transpose(12).toMidiNote(),72);
+           
             System.out.println(player);
             
             player.play();
