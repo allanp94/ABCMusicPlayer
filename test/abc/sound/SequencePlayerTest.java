@@ -1,49 +1,160 @@
 package abc.sound;
 
 import static org.junit.Assert.*;
+
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 
+@FixMethodOrder(MethodSorters.JVM)
 public class SequencePlayerTest {
 
+    @Test
+    public void Test() throws InterruptedException {
+        try {
+            SequencePlayer player = new SequencePlayer(120, 12);
+
+            player.addNote(new Pitch('C').toMidiNote(), 0, 12); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
+            player.addNote(new Pitch('D').toMidiNote(), 12, 12); //C
+            assertEquals(new Pitch('D').toString(),"C");
+            assertEquals(new Pitch('D').toMidiNote(),62);
+            
+            System.out.println(player);
+            
+            player.play();
+           
+        } catch (MidiUnavailableException mue) {
+            fail("MidiUnavailableException");
+            mue.printStackTrace();
+        } catch (InvalidMidiDataException imde) {
+            fail("InvalidMidiDataException");
+            imde.printStackTrace();
+        }
+    }
+    
     @Test
     public void piece1Test() throws InterruptedException {
         try {
             SequencePlayer player = new SequencePlayer(120, 12);
 
-            player.addNote(new Pitch('C').toMidiNote(), 0, 12);
-            player.addNote(new Pitch('C').toMidiNote(), 12, 12);
-            player.addNote(new Pitch('C').toMidiNote(), 24, 9);
-            player.addNote(new Pitch('D').toMidiNote(), 33, 3);
-            player.addNote(new Pitch('E').toMidiNote(), 36, 12);
+            player.addNote(new Pitch('C').toMidiNote(), 0, 12); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
+            player.addNote(new Pitch('C').toMidiNote(), 12, 12); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
+            player.addNote(new Pitch('C').toMidiNote(), 24, 9); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
+            player.addNote(new Pitch('D').toMidiNote(), 33, 3); //D
+            assertEquals(new Pitch('D').toString(),"D");
+            assertEquals(new Pitch('D').toMidiNote(),62);
+            
+            player.addNote(new Pitch('E').toMidiNote(), 36, 12); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
+            
      
-            player.addNote(new Pitch('E').toMidiNote(), 48, 9);
-            player.addNote(new Pitch('D').toMidiNote(), 57, 3);
-            player.addNote(new Pitch('E').toMidiNote(), 60, 9);
-            player.addNote(new Pitch('F').toMidiNote(), 69, 3);
-            player.addNote(new Pitch('G').toMidiNote(), 72, 24);
+            player.addNote(new Pitch('E').toMidiNote(), 48, 9); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
+            
+            player.addNote(new Pitch('D').toMidiNote(), 57, 3); //D
+            assertEquals(new Pitch('D').toString(),"D");
+            assertEquals(new Pitch('D').toMidiNote(),62);
+            
+            player.addNote(new Pitch('E').toMidiNote(), 60, 9); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
+            
+            player.addNote(new Pitch('F').toMidiNote(), 69, 3); //F
+            assertEquals(new Pitch('F').toString(),"F");
+            assertEquals(new Pitch('F').toMidiNote(),65);
+            
+            player.addNote(new Pitch('G').toMidiNote(), 72, 24); //G
+            assertEquals(new Pitch('G').toString(),"G");
+            assertEquals(new Pitch('G').toMidiNote(),67);
+            
 
-            player.addNote(new Pitch('C').transpose(12).toMidiNote(), 96, 4);
-            player.addNote(new Pitch('C').transpose(12).toMidiNote(), 100, 4);
-            player.addNote(new Pitch('C').transpose(12).toMidiNote(), 104, 4);
-            player.addNote(new Pitch('G').toMidiNote(), 108, 4);
-            player.addNote(new Pitch('G').toMidiNote(), 112, 4);
-            player.addNote(new Pitch('G').toMidiNote(), 116, 4);
+            player.addNote(new Pitch('C').transpose(12).toMidiNote(), 96, 4); //c
+            assertEquals(new Pitch('C').transpose(12).toString(),"C'");
+            assertEquals(new Pitch('C').transpose(12).toMidiNote(),72);
             
-            player.addNote(new Pitch('E').toMidiNote(), 120, 4);
-            player.addNote(new Pitch('E').toMidiNote(), 124, 4);
-            player.addNote(new Pitch('E').toMidiNote(), 128, 4);
-            player.addNote(new Pitch('C').toMidiNote(), 132, 4);
-            player.addNote(new Pitch('C').toMidiNote(), 136, 4);
-            player.addNote(new Pitch('C').toMidiNote(), 140, 4);
+            player.addNote(new Pitch('C').transpose(12).toMidiNote(), 100, 4); //c
+            assertEquals(new Pitch('C').transpose(12).toString(),"C'");
+            assertEquals(new Pitch('C').transpose(12).toMidiNote(),72);
             
-            player.addNote(new Pitch('G').toMidiNote(), 144, 9);
-            player.addNote(new Pitch('F').toMidiNote(), 153, 3);
-            player.addNote(new Pitch('E').toMidiNote(), 156, 9);
-            player.addNote(new Pitch('D').toMidiNote(), 165, 3);
-            player.addNote(new Pitch('C').toMidiNote(), 168, 24);
+            player.addNote(new Pitch('C').transpose(12).toMidiNote(), 104, 4); //c
+            assertEquals(new Pitch('C').transpose(12).toString(),"C'");
+            assertEquals(new Pitch('C').transpose(12).toMidiNote(),72);
+            
+            player.addNote(new Pitch('G').toMidiNote(), 108, 4); //G
+            assertEquals(new Pitch('G').toString(),"G");
+            assertEquals(new Pitch('G').toMidiNote(),67);
+            
+            player.addNote(new Pitch('G').toMidiNote(), 112, 4); //G
+            assertEquals(new Pitch('G').toString(),"G");
+            assertEquals(new Pitch('G').toMidiNote(),67);
+            
+            player.addNote(new Pitch('G').toMidiNote(), 116, 4); //G
+            assertEquals(new Pitch('G').toString(),"G");
+            assertEquals(new Pitch('G').toMidiNote(),67);
+            
+            
+            player.addNote(new Pitch('E').toMidiNote(), 120, 4); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
+            
+            player.addNote(new Pitch('E').toMidiNote(), 124, 4); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
+            
+            player.addNote(new Pitch('E').toMidiNote(), 128, 4); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
+            
+            player.addNote(new Pitch('C').toMidiNote(), 132, 4); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
+            player.addNote(new Pitch('C').toMidiNote(), 136, 4); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
+            player.addNote(new Pitch('C').toMidiNote(), 140, 4); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
+            
+            player.addNote(new Pitch('G').toMidiNote(), 144, 9); //G
+            assertEquals(new Pitch('G').toString(),"G");
+            assertEquals(new Pitch('G').toMidiNote(),67);
+            
+            player.addNote(new Pitch('F').toMidiNote(), 153, 3); //F
+            assertEquals(new Pitch('F').toString(),"F");
+            assertEquals(new Pitch('F').toMidiNote(),65);
+            
+            player.addNote(new Pitch('E').toMidiNote(), 156, 9); //E
+            assertEquals(new Pitch('E').toString(),"E");
+            assertEquals(new Pitch('E').toMidiNote(),64);
+            
+            player.addNote(new Pitch('D').toMidiNote(), 165, 3); //D
+            assertEquals(new Pitch('D').toString(),"D");
+            assertEquals(new Pitch('D').toMidiNote(),62);
+            
+            player.addNote(new Pitch('C').toMidiNote(), 168, 24); //C
+            assertEquals(new Pitch('C').toString(),"C");
+            assertEquals(new Pitch('C').toMidiNote(),60);
+            
 
             System.out.println(player);
             
@@ -59,7 +170,7 @@ public class SequencePlayerTest {
     }
 
     @Test
-    public void piece2Test() {
+    public void piece2Test() throws InterruptedException {
         try {
             SequencePlayer player = new SequencePlayer(200, 12);
 
@@ -119,5 +230,4 @@ public class SequencePlayerTest {
             imde.printStackTrace();
         }
     }
-    
 }
