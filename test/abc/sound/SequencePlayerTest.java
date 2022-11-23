@@ -7,7 +7,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 
 public class SequencePlayerTest {
-/*
+
     @Test
     public void piece1Test() throws InterruptedException {
         try {
@@ -57,18 +57,12 @@ public class SequencePlayerTest {
             imde.printStackTrace();
         }
     }
-*/
+
     @Test
     public void piece2Test() {
         try {
             SequencePlayer player = new SequencePlayer(200, 12);
 
-/*
-            new Pitch('C').transpose(1) makes C-sharp 
-            new Pitch('E').transpose(-1) makes E-flat 
-            new Pitch('C').transpose(OCTAVE) makes high C 
-            new Pitch('C').transpose(-OCTAVE) makes low C
-  */          
             player.addNote(new Pitch('E').transpose(12).toMidiNote(), 0, 6); //e
             player.addNote(new Pitch('F').transpose(1).toMidiNote(), 0, 6); //^F
             player.addNote(new Pitch('E').transpose(12).toMidiNote(), 6, 6); //e
