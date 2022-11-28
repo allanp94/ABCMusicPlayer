@@ -66,6 +66,10 @@ public class Pitch {
             throw new IllegalArgumentException(c + " must be in the range A-G");
         }
     }
+    
+    public Pitch(Pitch pitch) {
+    	this.value = pitch.value;
+    }
 
     /**
      * @return pitch made by transposing this pitch by semitonesUp semitones;
