@@ -23,10 +23,14 @@ headerRules
  ;
  
 bodyRules
- : BAR* WORD+ BAR
+ : BAR* sequence BAR
  ;
  
-endRule
+ sequence
+ : SPACE* NOTES SPACE
+ ;
+ 
+ endRule
  : endField COLON content NEWLINE
  ;
  
@@ -87,3 +91,5 @@ ANYCHAR : .;
 
 //i don't like this... there has to be a better way
 WORD    : ( 'a'..'z' | 'A'..'Z' | SPACE | SLASH | '=' | '.' | STRING | NUMBER)+;
+
+NOTES	: ( 'a'..'z' | 'A'..'Z' | SLASH | NUMBER | '[' | ']' | '^')+;

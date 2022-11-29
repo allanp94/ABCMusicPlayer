@@ -1,0 +1,7 @@
+COLON=1
+BAR=2
+KEY=3
+NEWLINE=4
+WORD=5
+':'=1
+'|'=2

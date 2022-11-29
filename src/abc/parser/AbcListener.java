@@ -61,6 +61,16 @@ public interface AbcListener extends ParseTreeListener {
    */
   void exitBodyRules(AbcParser.BodyRulesContext ctx);
   /**
+   * Enter a parse tree produced by {@link AbcParser#sequence}.
+   * @param ctx the parse tree
+   */
+  void enterSequence(AbcParser.SequenceContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcParser#sequence}.
+   * @param ctx the parse tree
+   */
+  void exitSequence(AbcParser.SequenceContext ctx);
+  /**
    * Enter a parse tree produced by {@link AbcParser#endRule}.
    * @param ctx the parse tree
    */

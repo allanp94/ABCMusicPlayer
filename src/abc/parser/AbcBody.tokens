@@ -1,0 +1,8 @@
+COLON=1
+BAR=2
+SPACE=3
+SLASH=4
+NEWLINE=5
+NOTES=6
+':'=1
+'|'=2
