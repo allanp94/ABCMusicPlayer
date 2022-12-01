@@ -8,16 +8,25 @@ import java.util.stream.Collectors;
 
 import abc.sound.SequencePlayer;
 
+/*
+ * Song class Represents both the Header and Notes composing an ABC file song.
+ */
 public class Song {
 
 	private Header header;
 	private List<Note> notes;
 	
+	/*
+	 * Get a Song instance with the specified Header and Note List.
+	 */
 	public Song(Header header, List<Note> notes) {
 		this.setHeader(header);
 		this.setNotes(notes);
 	}
 	
+	/*
+	 * Get a Song instance with the specified Header and a blank Note List.
+	 */
 	public Song(Header header) {
 		this.setHeader(header);
 		this.notes = new ArrayList<>();
@@ -28,6 +37,7 @@ public class Song {
 	}
 	
 	public void setHeader(Header header) {
+		if (header == null) throw new IllegalArgumentException("Header cannot be null");
 		this.header = header;
 	}
 	
@@ -37,6 +47,10 @@ public class Song {
 				.collect(Collectors.toList());
 	}
 	
+	/*
+	 * Add the given notes to the end of the note list.
+	 * Any given notes Voice must be either null or be listed in the header voices list
+	 */
 	public void setNotes(List<Note> notes) {
 		this.notes = new ArrayList<>();
 		
@@ -45,6 +59,10 @@ public class Song {
 		}
 	}
 	
+	/*
+	 * Add the given note to the end of the note list.
+	 * Any given notes Voice must be either null or be listed in the header voices list
+	 */
 	public void AddNote(Note note) {
 		// check if notes voice is in header if not the default null voice
 		if (note.getVoice() != null && !header.getVoices().contains(note.getVoice())) {
@@ -58,6 +76,9 @@ public class Song {
 		return header.toString() + notes.toString();
 	}
 	
+	/*
+	 * toSequencePlayer will transfer the song information to a SequencePlayer that can play the song instance.
+	 */
 	public SequencePlayer toSequencePlayer() {
 		// TODO: Implement in separate task
 		throw new UnsupportedOperationException();

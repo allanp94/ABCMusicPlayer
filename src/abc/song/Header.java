@@ -3,6 +3,9 @@ package abc.song;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * The Header class represents any given header information for an ABC file song.
+ */
 public class Header {
 	private String composerName; // C
 	private String keySignature; // K
