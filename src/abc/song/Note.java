@@ -8,6 +8,7 @@ import abc.sound.Pitch;
 public class Note {
 	private Pitch pitch;
 	private double length;
+	private String accidental;
 	private boolean chord;
 	private String voice;
 	
@@ -19,6 +20,7 @@ public class Note {
 	public Note(Pitch pitch, double length) {
 		this.setPitch(pitch);
 		this.setLength(length);
+		this.setAccidental(null);
 		this.setChord(false);
 		this.setVoice(null);
 	}
@@ -30,11 +32,13 @@ public class Note {
 	public Note(
 			Pitch pitch,
 			double length,
+			String accidental,
 			boolean chord,
 			String voice
 			) {
 		this.setPitch(pitch);
 		this.setLength(length);
+		this.setAccidental(accidental);
 		this.setChord(chord);
 		this.setVoice(voice);
 	}
@@ -45,6 +49,7 @@ public class Note {
 	public Note(Note note) {
 		this.setPitch(note.getPitch());
 		this.setLength(note.getLength());
+		this.setAccidental(note.getAccidental());
 		this.setChord(note.isChord());
 		this.setVoice(note.getVoice());
 	}
@@ -83,5 +88,13 @@ public class Note {
 	
 	public String toString() {
 		return "{"+"Pitch: "+pitch+" Length: "+String.valueOf(length)+" Chord: "+String.valueOf(chord)+" Voice: "+voice+"}";
+	}
+
+	public String getAccidental() {
+		return accidental;
+	}
+
+	public void setAccidental(String accidental) {
+		this.accidental = accidental;
 	}
 }
