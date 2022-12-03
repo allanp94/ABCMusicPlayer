@@ -14,7 +14,7 @@ public class Header {
 	private void addHeaderDetails(Song e) {
 		headerDetails.add(e);
 	}
-	
+
 	
 	
 }
