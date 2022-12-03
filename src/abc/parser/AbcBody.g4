@@ -7,30 +7,86 @@ grammar AbcBody;
 import Configuration;
 
 body
- : bodyRules+ eol
+ : measures+ (BAR | ENDREPEAT)? EOF
  ;
  
-bodyRules
- : BAR* content BAR
+measures
+ : start* (tuplet | note | chord)+
  ;
  
-content
- : NOTES
+ start
+ : BAR
+ | BEGINREPEAT
+ | PARTONE
+ | PARTTWO
+ | ENDREPEAT
  ;
+ 
+//eol
+// : NEWLINE
+// | EOF
+// ;
+ 
+//content
+// : note
+// ;
   
-eol
- : NEWLINE
- | EOF
+BEGINREPEAT
+ : '|:'
+ ;
+ 
+PARTONE
+ : '|[1' ;
+
+PARTTWO
+ : '|[2' ;
+
+ENDREPEAT
+ : ':|['
  ;
 
 COLON   : ':';
 
-BAR 	: '|'; 
+BAR 	: ('|'|'|]'); 
 
-SPACE   : (' ' | '\t');
-SLASH   : '/' | '\\';
-NEWLINE : '\r'? '\n' | '\r';
+tuplet
+: 
+
+'(' (duplet | triplet | quadruplet);
+
+duplet: 
+'2' note note;
+
+triplet: 
+'3' note note note;
+
+quadruplet: 
+'4' note note note note ;
+
+//SPACE   : (' ' | '\t')+ -> skip;
+//NEWLINE : '\r'? '\n' | '\r';
 
 //i don't like this... there has to be a better way
 
-NOTES	: ( 'a'..'z' | 'A'..'Z' | SLASH | '[' | ']' | '^' )+;
+LENGTH
+ : (NUMBER|FRACTION)
+ ;
+
+FRACTION	: NUMBER? '/' NUMBER?;
+//SLASH   : '/' | '\\';
+NUMBER	: [0-9]+;
+
+
+note
+ : ACCIDENTAL? LETTER LENGTH?
+ ;
+ 
+chord
+ : '[' note+ ']'
+ ;
+ 
+ 
+ACCIDENTAL	: ('_'|'^'|'=')+;
+LETTER	: ('a'..'z'|'A'..'Z') (','|'\'')*;
+
+WS: [ \n\t\r]+ -> skip;
