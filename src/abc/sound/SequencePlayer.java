@@ -123,7 +123,11 @@ public class SequencePlayer {
         });
 
         // start playing!
-        sequencer.start();
+        sequencer.start();   
+
+        while (sequencer.isRunning()) {
+            Thread.yield();
+        }
     }
 
     /**
