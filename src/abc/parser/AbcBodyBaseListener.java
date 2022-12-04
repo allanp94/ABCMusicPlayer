@@ -67,37 +67,13 @@ public class AbcBodyBaseListener implements AbcBodyListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterDuplet(AbcBodyParser.DupletContext ctx) { }
+  @Override public void enterChord(AbcBodyParser.ChordContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitDuplet(AbcBodyParser.DupletContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void enterTriplet(AbcBodyParser.TripletContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitTriplet(AbcBodyParser.TripletContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void enterQuadruplet(AbcBodyParser.QuadrupletContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitQuadruplet(AbcBodyParser.QuadrupletContext ctx) { }
+  @Override public void exitChord(AbcBodyParser.ChordContext ctx) { }
   /**
    * {@inheritDoc}
    *
@@ -110,18 +86,6 @@ public class AbcBodyBaseListener implements AbcBodyListener {
    * <p>The default implementation does nothing.</p>
    */
   @Override public void exitNote(AbcBodyParser.NoteContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void enterChord(AbcBodyParser.ChordContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitChord(AbcBodyParser.ChordContext ctx) { }
 
   /**
    * {@inheritDoc}

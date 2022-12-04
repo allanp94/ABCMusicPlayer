@@ -20,25 +20,21 @@ public class AbcBodyParser extends Parser {
   protected static final PredictionContextCache _sharedContextCache =
     new PredictionContextCache();
   public static final int
-    T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, BEGINREPEAT=7, PARTONE=8, 
-    PARTTWO=9, ENDREPEAT=10, COLON=11, BAR=12, LENGTH=13, FRACTION=14, NUMBER=15, 
-    ACCIDENTAL=16, LETTER=17, WS=18;
+    T__0=1, T__1=2, T__2=3, COLON=4, BAR=5, NUMBER=6, FRACTION=7, ACCIDENTAL=8, 
+    LETTER=9, WS=10;
   public static final int
-    RULE_body = 0, RULE_measures = 1, RULE_start = 2, RULE_tuplet = 3, RULE_duplet = 4, 
-    RULE_triplet = 5, RULE_quadruplet = 6, RULE_note = 7, RULE_chord = 8;
+    RULE_body = 0, RULE_measures = 1, RULE_start = 2, RULE_tuplet = 3, RULE_chord = 4, 
+    RULE_note = 5;
   public static final String[] ruleNames = {
-    "body", "measures", "start", "tuplet", "duplet", "triplet", "quadruplet", 
-    "note", "chord"
+    "body", "measures", "start", "tuplet", "chord", "note"
   };
 
   private static final String[] _LITERAL_NAMES = {
-    null, "'('", "'2'", "'3'", "'4'", "'['", "']'", "'|:'", "'|[1'", "'|[2'", 
-    "':|['", "':'"
+    null, "'('", "'['", "']'", "':'"
   };
   private static final String[] _SYMBOLIC_NAMES = {
-    null, null, null, null, null, null, null, "BEGINREPEAT", "PARTONE", 
-    "PARTTWO", "ENDREPEAT", "COLON", "BAR", "LENGTH", "FRACTION", "NUMBER", 
-    "ACCIDENTAL", "LETTER", "WS"
+    null, null, null, null, "COLON", "BAR", "NUMBER", "FRACTION", "ACCIDENTAL", 
+    "LETTER", "WS"
   };
   public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -86,6 +82,9 @@ public class AbcBodyParser extends Parser {
   public ATN getATN() { return _ATN; }
 
 
+  	public int counter;
+
+
       // This method makes the parser stop running if it encounters
       // invalid input and throw a RuntimeException.
       public void reportErrorsAsExceptions() {
@@ -115,7 +114,6 @@ public class AbcBodyParser extends Parser {
       return getRuleContext(MeasuresContext.class,i);
     }
     public TerminalNode BAR() { return getToken(AbcBodyParser.BAR, 0); }
-    public TerminalNode ENDREPEAT() { return getToken(AbcBodyParser.ENDREPEAT, 0); }
     public BodyContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
     }
@@ -138,7 +136,7 @@ public class AbcBodyParser extends Parser {
       int _alt;
       enterOuterAlt(_localctx, 1);
       {
-      setState(19); 
+      setState(13); 
       _errHandler.sync(this);
       _alt = 1;
       do {
@@ -146,7 +144,7 @@ public class AbcBodyParser extends Parser {
         case 1:
           {
           {
-          setState(18);
+          setState(12);
           measures();
           }
           }
@@ -154,25 +152,20 @@ public class AbcBodyParser extends Parser {
         default:
           throw new NoViableAltException(this);
         }
-        setState(21); 
+        setState(15); 
         _errHandler.sync(this);
         _alt = getInterpreter().adaptivePredict(_input,0,_ctx);
       } while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-      setState(24);
+      setState(18);
       _la = _input.LA(1);
-      if (_la==ENDREPEAT || _la==BAR) {
+      if (_la==BAR) {
         {
-        setState(23);
-        _la = _input.LA(1);
-        if ( !(_la==ENDREPEAT || _la==BAR) ) {
-        _errHandler.recoverInline(this);
-        } else {
-          consume();
-        }
+        setState(17);
+        match(BAR);
         }
       }
 
-      setState(26);
+      setState(20);
       match(EOF);
       }
     }
@@ -234,45 +227,45 @@ public class AbcBodyParser extends Parser {
       int _alt;
       enterOuterAlt(_localctx, 1);
       {
-      setState(31);
+      setState(25);
       _errHandler.sync(this);
       _la = _input.LA(1);
-      while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BEGINREPEAT) | (1L << PARTONE) | (1L << PARTTWO) | (1L << ENDREPEAT) | (1L << BAR))) != 0)) {
+      while (_la==BAR) {
         {
         {
-        setState(28);
+        setState(22);
         start();
         }
         }
-        setState(33);
+        setState(27);
         _errHandler.sync(this);
         _la = _input.LA(1);
       }
-      setState(37); 
+      setState(31); 
       _errHandler.sync(this);
       _alt = 1;
       do {
         switch (_alt) {
         case 1:
           {
-          setState(37);
+          setState(31);
           switch (_input.LA(1)) {
           case T__0:
             {
-            setState(34);
+            setState(28);
             tuplet();
             }
             break;
           case ACCIDENTAL:
           case LETTER:
             {
-            setState(35);
+            setState(29);
             note();
             }
             break;
-          case T__4:
+          case T__1:
             {
-            setState(36);
+            setState(30);
             chord();
             }
             break;
@@ -284,7 +277,7 @@ public class AbcBodyParser extends Parser {
         default:
           throw new NoViableAltException(this);
         }
-        setState(39); 
+        setState(33); 
         _errHandler.sync(this);
         _alt = getInterpreter().adaptivePredict(_input,4,_ctx);
       } while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
@@ -303,10 +296,6 @@ public class AbcBodyParser extends Parser {
 
   public static class StartContext extends ParserRuleContext {
     public TerminalNode BAR() { return getToken(AbcBodyParser.BAR, 0); }
-    public TerminalNode BEGINREPEAT() { return getToken(AbcBodyParser.BEGINREPEAT, 0); }
-    public TerminalNode PARTONE() { return getToken(AbcBodyParser.PARTONE, 0); }
-    public TerminalNode PARTTWO() { return getToken(AbcBodyParser.PARTTWO, 0); }
-    public TerminalNode ENDREPEAT() { return getToken(AbcBodyParser.ENDREPEAT, 0); }
     public StartContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
     }
@@ -324,17 +313,11 @@ public class AbcBodyParser extends Parser {
   public final StartContext start() throws RecognitionException {
     StartContext _localctx = new StartContext(_ctx, getState());
     enterRule(_localctx, 4, RULE_start);
-    int _la;
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(41);
-      _la = _input.LA(1);
-      if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BEGINREPEAT) | (1L << PARTONE) | (1L << PARTTWO) | (1L << ENDREPEAT) | (1L << BAR))) != 0)) ) {
-      _errHandler.recoverInline(this);
-      } else {
-        consume();
-      }
+      setState(35);
+      match(BAR);
       }
     }
     catch (RecognitionException re) {
@@ -349,14 +332,13 @@ public class AbcBodyParser extends Parser {
   }
 
   public static class TupletContext extends ParserRuleContext {
-    public DupletContext duplet() {
-      return getRuleContext(DupletContext.class,0);
+    public Token NUMBER;
+    public TerminalNode NUMBER() { return getToken(AbcBodyParser.NUMBER, 0); }
+    public List<NoteContext> note() {
+      return getRuleContexts(NoteContext.class);
     }
-    public TripletContext triplet() {
-      return getRuleContext(TripletContext.class,0);
-    }
-    public QuadrupletContext quadruplet() {
-      return getRuleContext(QuadrupletContext.class,0);
+    public NoteContext note(int i) {
+      return getRuleContext(NoteContext.class,i);
     }
     public TupletContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
@@ -375,236 +357,34 @@ public class AbcBodyParser extends Parser {
   public final TupletContext tuplet() throws RecognitionException {
     TupletContext _localctx = new TupletContext(_ctx, getState());
     enterRule(_localctx, 6, RULE_tuplet);
+    counter = 1;
     try {
+      int _alt;
       enterOuterAlt(_localctx, 1);
       {
-      setState(43);
+      setState(37);
       match(T__0);
-      setState(47);
-      switch (_input.LA(1)) {
-      case T__1:
-        {
-        setState(44);
-        duplet();
+      setState(38);
+      ((TupletContext)_localctx).NUMBER = match(NUMBER);
+      setState(45);
+      _errHandler.sync(this);
+      _alt = getInterpreter().adaptivePredict(_input,5,_ctx);
+      while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+        if ( _alt==1 ) {
+          {
+          {
+          setState(39);
+          if (!(counter<=(((TupletContext)_localctx).NUMBER!=null?Integer.valueOf(((TupletContext)_localctx).NUMBER.getText()):0))) throw new FailedPredicateException(this, "counter<=$NUMBER.int");
+          setState(40);
+          note();
+          counter++;
+          }
+          } 
         }
-        break;
-      case T__2:
-        {
-        setState(45);
-        triplet();
-        }
-        break;
-      case T__3:
-        {
-        setState(46);
-        quadruplet();
-        }
-        break;
-      default:
-        throw new NoViableAltException(this);
+        setState(47);
+        _errHandler.sync(this);
+        _alt = getInterpreter().adaptivePredict(_input,5,_ctx);
       }
-      }
-    }
-    catch (RecognitionException re) {
-      _localctx.exception = re;
-      _errHandler.reportError(this, re);
-      _errHandler.recover(this, re);
-    }
-    finally {
-      exitRule();
-    }
-    return _localctx;
-  }
-
-  public static class DupletContext extends ParserRuleContext {
-    public List<NoteContext> note() {
-      return getRuleContexts(NoteContext.class);
-    }
-    public NoteContext note(int i) {
-      return getRuleContext(NoteContext.class,i);
-    }
-    public DupletContext(ParserRuleContext parent, int invokingState) {
-      super(parent, invokingState);
-    }
-    @Override public int getRuleIndex() { return RULE_duplet; }
-    @Override
-    public void enterRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterDuplet(this);
-    }
-    @Override
-    public void exitRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitDuplet(this);
-    }
-  }
-
-  public final DupletContext duplet() throws RecognitionException {
-    DupletContext _localctx = new DupletContext(_ctx, getState());
-    enterRule(_localctx, 8, RULE_duplet);
-    try {
-      enterOuterAlt(_localctx, 1);
-      {
-      setState(49);
-      match(T__1);
-      setState(50);
-      note();
-      setState(51);
-      note();
-      }
-    }
-    catch (RecognitionException re) {
-      _localctx.exception = re;
-      _errHandler.reportError(this, re);
-      _errHandler.recover(this, re);
-    }
-    finally {
-      exitRule();
-    }
-    return _localctx;
-  }
-
-  public static class TripletContext extends ParserRuleContext {
-    public List<NoteContext> note() {
-      return getRuleContexts(NoteContext.class);
-    }
-    public NoteContext note(int i) {
-      return getRuleContext(NoteContext.class,i);
-    }
-    public TripletContext(ParserRuleContext parent, int invokingState) {
-      super(parent, invokingState);
-    }
-    @Override public int getRuleIndex() { return RULE_triplet; }
-    @Override
-    public void enterRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterTriplet(this);
-    }
-    @Override
-    public void exitRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitTriplet(this);
-    }
-  }
-
-  public final TripletContext triplet() throws RecognitionException {
-    TripletContext _localctx = new TripletContext(_ctx, getState());
-    enterRule(_localctx, 10, RULE_triplet);
-    try {
-      enterOuterAlt(_localctx, 1);
-      {
-      setState(53);
-      match(T__2);
-      setState(54);
-      note();
-      setState(55);
-      note();
-      setState(56);
-      note();
-      }
-    }
-    catch (RecognitionException re) {
-      _localctx.exception = re;
-      _errHandler.reportError(this, re);
-      _errHandler.recover(this, re);
-    }
-    finally {
-      exitRule();
-    }
-    return _localctx;
-  }
-
-  public static class QuadrupletContext extends ParserRuleContext {
-    public List<NoteContext> note() {
-      return getRuleContexts(NoteContext.class);
-    }
-    public NoteContext note(int i) {
-      return getRuleContext(NoteContext.class,i);
-    }
-    public QuadrupletContext(ParserRuleContext parent, int invokingState) {
-      super(parent, invokingState);
-    }
-    @Override public int getRuleIndex() { return RULE_quadruplet; }
-    @Override
-    public void enterRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterQuadruplet(this);
-    }
-    @Override
-    public void exitRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitQuadruplet(this);
-    }
-  }
-
-  public final QuadrupletContext quadruplet() throws RecognitionException {
-    QuadrupletContext _localctx = new QuadrupletContext(_ctx, getState());
-    enterRule(_localctx, 12, RULE_quadruplet);
-    try {
-      enterOuterAlt(_localctx, 1);
-      {
-      setState(58);
-      match(T__3);
-      setState(59);
-      note();
-      setState(60);
-      note();
-      setState(61);
-      note();
-      setState(62);
-      note();
-      }
-    }
-    catch (RecognitionException re) {
-      _localctx.exception = re;
-      _errHandler.reportError(this, re);
-      _errHandler.recover(this, re);
-    }
-    finally {
-      exitRule();
-    }
-    return _localctx;
-  }
-
-  public static class NoteContext extends ParserRuleContext {
-    public TerminalNode LETTER() { return getToken(AbcBodyParser.LETTER, 0); }
-    public TerminalNode ACCIDENTAL() { return getToken(AbcBodyParser.ACCIDENTAL, 0); }
-    public TerminalNode LENGTH() { return getToken(AbcBodyParser.LENGTH, 0); }
-    public NoteContext(ParserRuleContext parent, int invokingState) {
-      super(parent, invokingState);
-    }
-    @Override public int getRuleIndex() { return RULE_note; }
-    @Override
-    public void enterRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterNote(this);
-    }
-    @Override
-    public void exitRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitNote(this);
-    }
-  }
-
-  public final NoteContext note() throws RecognitionException {
-    NoteContext _localctx = new NoteContext(_ctx, getState());
-    enterRule(_localctx, 14, RULE_note);
-    int _la;
-    try {
-      enterOuterAlt(_localctx, 1);
-      {
-      setState(65);
-      _la = _input.LA(1);
-      if (_la==ACCIDENTAL) {
-        {
-        setState(64);
-        match(ACCIDENTAL);
-        }
-      }
-
-      setState(67);
-      match(LETTER);
-      setState(69);
-      _la = _input.LA(1);
-      if (_la==LENGTH) {
-        {
-        setState(68);
-        match(LENGTH);
-        }
-      }
-
       }
     }
     catch (RecognitionException re) {
@@ -641,29 +421,29 @@ public class AbcBodyParser extends Parser {
 
   public final ChordContext chord() throws RecognitionException {
     ChordContext _localctx = new ChordContext(_ctx, getState());
-    enterRule(_localctx, 16, RULE_chord);
+    enterRule(_localctx, 8, RULE_chord);
     int _la;
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(71);
-      match(T__4);
-      setState(73); 
+      setState(48);
+      match(T__1);
+      setState(50); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
         {
-        setState(72);
+        setState(49);
         note();
         }
         }
-        setState(75); 
+        setState(52); 
         _errHandler.sync(this);
         _la = _input.LA(1);
       } while ( _la==ACCIDENTAL || _la==LETTER );
-      setState(77);
-      match(T__5);
+      setState(54);
+      match(T__2);
       }
     }
     catch (RecognitionException re) {
@@ -677,29 +457,105 @@ public class AbcBodyParser extends Parser {
     return _localctx;
   }
 
+  public static class NoteContext extends ParserRuleContext {
+    public TerminalNode LETTER() { return getToken(AbcBodyParser.LETTER, 0); }
+    public TerminalNode ACCIDENTAL() { return getToken(AbcBodyParser.ACCIDENTAL, 0); }
+    public TerminalNode NUMBER() { return getToken(AbcBodyParser.NUMBER, 0); }
+    public TerminalNode FRACTION() { return getToken(AbcBodyParser.FRACTION, 0); }
+    public NoteContext(ParserRuleContext parent, int invokingState) {
+      super(parent, invokingState);
+    }
+    @Override public int getRuleIndex() { return RULE_note; }
+    @Override
+    public void enterRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterNote(this);
+    }
+    @Override
+    public void exitRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitNote(this);
+    }
+  }
+
+  public final NoteContext note() throws RecognitionException {
+    NoteContext _localctx = new NoteContext(_ctx, getState());
+    enterRule(_localctx, 10, RULE_note);
+    int _la;
+    try {
+      enterOuterAlt(_localctx, 1);
+      {
+      setState(57);
+      _la = _input.LA(1);
+      if (_la==ACCIDENTAL) {
+        {
+        setState(56);
+        match(ACCIDENTAL);
+        }
+      }
+
+      setState(59);
+      match(LETTER);
+      setState(61);
+      switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+      case 1:
+        {
+        setState(60);
+        _la = _input.LA(1);
+        if ( !(_la==NUMBER || _la==FRACTION) ) {
+        _errHandler.recoverInline(this);
+        } else {
+          consume();
+        }
+        }
+        break;
+      }
+      }
+    }
+    catch (RecognitionException re) {
+      _localctx.exception = re;
+      _errHandler.reportError(this, re);
+      _errHandler.recover(this, re);
+    }
+    finally {
+      exitRule();
+    }
+    return _localctx;
+  }
+
+  public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
+    switch (ruleIndex) {
+    case 3:
+      return tuplet_sempred((TupletContext)_localctx, predIndex);
+    }
+    return true;
+  }
+  private boolean tuplet_sempred(TupletContext _localctx, int predIndex) {
+    switch (predIndex) {
+    case 0:
+      return counter<=(((TupletContext)_localctx).NUMBER!=null?Integer.valueOf(((TupletContext)_localctx).NUMBER.getText()):0);
+    }
+    return true;
+  }
+
   public static final String _serializedATN =
-    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\24R\4\2\t\2\4\3"+
-      "\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\6"+
-      "\2\26\n\2\r\2\16\2\27\3\2\5\2\33\n\2\3\2\3\2\3\3\7\3 \n\3\f\3\16\3"+
-      "#\13\3\3\3\3\3\3\3\6\3(\n\3\r\3\16\3)\3\4\3\4\3\5\3\5\3\5\3\5\5\5"+
-      "\62\n\5\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3"+
-      "\b\3\t\5\tD\n\t\3\t\3\t\5\tH\n\t\3\n\3\n\6\nL\n\n\r\n\16\nM\3\n\3"+
-      "\n\3\n\2\2\13\2\4\6\b\n\f\16\20\22\2\4\4\2\f\f\16\16\4\2\t\f\16\16"+
-      "S\2\25\3\2\2\2\4!\3\2\2\2\6+\3\2\2\2\b-\3\2\2\2\n\63\3\2\2\2\f\67"+
-      "\3\2\2\2\16<\3\2\2\2\20C\3\2\2\2\22I\3\2\2\2\24\26\5\4\3\2\25\24\3"+
-      "\2\2\2\26\27\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\32\3\2\2\2\31"+
-      "\33\t\2\2\2\32\31\3\2\2\2\32\33\3\2\2\2\33\34\3\2\2\2\34\35\7\2\2"+
-      "\3\35\3\3\2\2\2\36 \5\6\4\2\37\36\3\2\2\2 #\3\2\2\2!\37\3\2\2\2!\""+
-      "\3\2\2\2\"\'\3\2\2\2#!\3\2\2\2$(\5\b\5\2%(\5\20\t\2&(\5\22\n\2\'$"+
-      "\3\2\2\2\'%\3\2\2\2\'&\3\2\2\2()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*\5\3"+
-      "\2\2\2+,\t\3\2\2,\7\3\2\2\2-\61\7\3\2\2.\62\5\n\6\2/\62\5\f\7\2\60"+
-      "\62\5\16\b\2\61.\3\2\2\2\61/\3\2\2\2\61\60\3\2\2\2\62\t\3\2\2\2\63"+
-      "\64\7\4\2\2\64\65\5\20\t\2\65\66\5\20\t\2\66\13\3\2\2\2\678\7\5\2"+
-      "\289\5\20\t\29:\5\20\t\2:;\5\20\t\2;\r\3\2\2\2<=\7\6\2\2=>\5\20\t"+
-      "\2>?\5\20\t\2?@\5\20\t\2@A\5\20\t\2A\17\3\2\2\2BD\7\22\2\2CB\3\2\2"+
-      "\2CD\3\2\2\2DE\3\2\2\2EG\7\23\2\2FH\7\17\2\2GF\3\2\2\2GH\3\2\2\2H"+
-      "\21\3\2\2\2IK\7\7\2\2JL\5\20\t\2KJ\3\2\2\2LM\3\2\2\2MK\3\2\2\2MN\3"+
-      "\2\2\2NO\3\2\2\2OP\7\b\2\2P\23\3\2\2\2\13\27\32!\')\61CGM";
+    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\fB\4\2\t\2\4\3"+
+      "\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\6\2\20\n\2\r\2\16\2\21\3"+
+      "\2\5\2\25\n\2\3\2\3\2\3\3\7\3\32\n\3\f\3\16\3\35\13\3\3\3\3\3\3\3"+
+      "\6\3\"\n\3\r\3\16\3#\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\7\5.\n\5\f\5"+
+      "\16\5\61\13\5\3\6\3\6\6\6\65\n\6\r\6\16\6\66\3\6\3\6\3\7\5\7<\n\7"+
+      "\3\7\3\7\5\7@\n\7\3\7\2\2\b\2\4\6\b\n\f\2\3\3\2\b\tE\2\17\3\2\2\2"+
+      "\4\33\3\2\2\2\6%\3\2\2\2\b\'\3\2\2\2\n\62\3\2\2\2\f;\3\2\2\2\16\20"+
+      "\5\4\3\2\17\16\3\2\2\2\20\21\3\2\2\2\21\17\3\2\2\2\21\22\3\2\2\2\22"+
+      "\24\3\2\2\2\23\25\7\7\2\2\24\23\3\2\2\2\24\25\3\2\2\2\25\26\3\2\2"+
+      "\2\26\27\7\2\2\3\27\3\3\2\2\2\30\32\5\6\4\2\31\30\3\2\2\2\32\35\3"+
+      "\2\2\2\33\31\3\2\2\2\33\34\3\2\2\2\34!\3\2\2\2\35\33\3\2\2\2\36\""+
+      "\5\b\5\2\37\"\5\f\7\2 \"\5\n\6\2!\36\3\2\2\2!\37\3\2\2\2! \3\2\2\2"+
+      "\"#\3\2\2\2#!\3\2\2\2#$\3\2\2\2$\5\3\2\2\2%&\7\7\2\2&\7\3\2\2\2\'"+
+      "(\7\3\2\2(/\7\b\2\2)*\6\5\2\3*+\5\f\7\2+,\b\5\1\2,.\3\2\2\2-)\3\2"+
+      "\2\2.\61\3\2\2\2/-\3\2\2\2/\60\3\2\2\2\60\t\3\2\2\2\61/\3\2\2\2\62"+
+      "\64\7\4\2\2\63\65\5\f\7\2\64\63\3\2\2\2\65\66\3\2\2\2\66\64\3\2\2"+
+      "\2\66\67\3\2\2\2\678\3\2\2\289\7\5\2\29\13\3\2\2\2:<\7\n\2\2;:\3\2"+
+      "\2\2;<\3\2\2\2<=\3\2\2\2=?\7\13\2\2>@\t\2\2\2?>\3\2\2\2?@\3\2\2\2"+
+      "@\r\3\2\2\2\13\21\24\33!#/\66;?";
   public static final ATN _ATN =
     new ATNDeserializer().deserialize(_serializedATN.toCharArray());
   static {
