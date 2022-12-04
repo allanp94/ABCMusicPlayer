@@ -57,6 +57,7 @@ public class Header {
 		this.setKeySignature(headerToCopy.getKeySignature());
 		this.setLength(headerToCopy.getLength());
 		this.setMeter(headerToCopy.getMeter());
+		this.setTempoLength(headerToCopy.getTempoLength());
 		this.setTempo(headerToCopy.getTempo());
 		this.setTitle(headerToCopy.getTitle());
 		this.setVoices(headerToCopy.getVoices());
@@ -156,7 +157,7 @@ public class Header {
 				"Meter: " + meter + "\n" +
 				"Tempo: " + tempo + "\n" +
 				"Title: " + title + "\n" +
-				"Voices: " + voices + "\n";
+				"Voices: " + String.join(", ", voices).trim() + "\n";
 	}
 
 }
