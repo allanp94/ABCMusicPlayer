@@ -19,18 +19,6 @@ public class AbcHeaderBaseListener implements AbcHeaderListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterSong(AbcHeaderParser.SongContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitSong(AbcHeaderParser.SongContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
   @Override public void enterHeader(AbcHeaderParser.HeaderContext ctx) { }
   /**
    * {@inheritDoc}
@@ -50,42 +38,6 @@ public class AbcHeaderBaseListener implements AbcHeaderListener {
    * <p>The default implementation does nothing.</p>
    */
   @Override public void exitHeaderRules(AbcHeaderParser.HeaderRulesContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void enterContent(AbcHeaderParser.ContentContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitContent(AbcHeaderParser.ContentContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void enterField(AbcHeaderParser.FieldContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitField(AbcHeaderParser.FieldContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void enterEol(AbcHeaderParser.EolContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitEol(AbcHeaderParser.EolContext ctx) { }
 
   /**
    * {@inheritDoc}

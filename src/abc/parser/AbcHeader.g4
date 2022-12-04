@@ -6,46 +6,14 @@
 grammar AbcHeader;
 import Configuration;
 
-song
- : header  EOF
- ;
-
 header
- : headerRules+ 
+ : headerRules+ EOF
  ;
 
 headerRules
- : field COLON content NEWLINE
- ;
- 
-content
- :  KEY
- |  WORD
- ;
-
-field
- : KEY;
-
-  
-eol
- : NEWLINE
- | EOF
+ : TEXT COLON TEXT
  ;
 
 COLON   : ':';
-
-BAR 	: '|'; 
-
-KEY 	: [A-Z];
-
-
-
-fragment SPACE   : (' ' | '\t');
-fragment SLASH   : '/' | '\\';
-fragment STRING  : '"' ~('"')* '"';
-NEWLINE : '\r'? '\n' | '\r';
-fragment NUMBER  : [0-9]+;
-fragment ANYCHAR : .; 
-
-//i don't like this... there has to be a better way
-WORD    : ( 'a'..'z' | 'A'..'Z' | SPACE | SLASH | '=' | '.'| ',' | '\'' | STRING | NUMBER)+;
+TEXT : ~[:\r\n]+;
+NEWLINE : [\n\t\r]+ -> skip;

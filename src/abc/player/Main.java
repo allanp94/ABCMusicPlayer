@@ -61,7 +61,7 @@ public class Main {
     	AbcHeaderLexer lexer  = new AbcHeaderLexer(stream);
         TokenStream tokenStream = new CommonTokenStream(lexer);
         AbcHeaderParser parser = new AbcHeaderParser(tokenStream);
-        ParseTree tree = parser.song();
+        ParseTree tree = parser.header();
         
         showTree(tree, parser);
     	
