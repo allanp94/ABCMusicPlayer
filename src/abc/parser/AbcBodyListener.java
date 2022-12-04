@@ -21,33 +21,83 @@ public interface AbcBodyListener extends ParseTreeListener {
    */
   void exitBody(AbcBodyParser.BodyContext ctx);
   /**
-   * Enter a parse tree produced by {@link AbcBodyParser#bodyRules}.
+   * Enter a parse tree produced by {@link AbcBodyParser#measures}.
    * @param ctx the parse tree
    */
-  void enterBodyRules(AbcBodyParser.BodyRulesContext ctx);
+  void enterMeasures(AbcBodyParser.MeasuresContext ctx);
   /**
-   * Exit a parse tree produced by {@link AbcBodyParser#bodyRules}.
+   * Exit a parse tree produced by {@link AbcBodyParser#measures}.
    * @param ctx the parse tree
    */
-  void exitBodyRules(AbcBodyParser.BodyRulesContext ctx);
+  void exitMeasures(AbcBodyParser.MeasuresContext ctx);
   /**
-   * Enter a parse tree produced by {@link AbcBodyParser#content}.
+   * Enter a parse tree produced by {@link AbcBodyParser#start}.
    * @param ctx the parse tree
    */
-  void enterContent(AbcBodyParser.ContentContext ctx);
+  void enterStart(AbcBodyParser.StartContext ctx);
   /**
-   * Exit a parse tree produced by {@link AbcBodyParser#content}.
+   * Exit a parse tree produced by {@link AbcBodyParser#start}.
    * @param ctx the parse tree
    */
-  void exitContent(AbcBodyParser.ContentContext ctx);
+  void exitStart(AbcBodyParser.StartContext ctx);
   /**
-   * Enter a parse tree produced by {@link AbcBodyParser#eol}.
+   * Enter a parse tree produced by {@link AbcBodyParser#tuplet}.
    * @param ctx the parse tree
    */
-  void enterEol(AbcBodyParser.EolContext ctx);
+  void enterTuplet(AbcBodyParser.TupletContext ctx);
   /**
-   * Exit a parse tree produced by {@link AbcBodyParser#eol}.
+   * Exit a parse tree produced by {@link AbcBodyParser#tuplet}.
    * @param ctx the parse tree
    */
-  void exitEol(AbcBodyParser.EolContext ctx);
+  void exitTuplet(AbcBodyParser.TupletContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcBodyParser#duplet}.
+   * @param ctx the parse tree
+   */
+  void enterDuplet(AbcBodyParser.DupletContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcBodyParser#duplet}.
+   * @param ctx the parse tree
+   */
+  void exitDuplet(AbcBodyParser.DupletContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcBodyParser#triplet}.
+   * @param ctx the parse tree
+   */
+  void enterTriplet(AbcBodyParser.TripletContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcBodyParser#triplet}.
+   * @param ctx the parse tree
+   */
+  void exitTriplet(AbcBodyParser.TripletContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcBodyParser#quadruplet}.
+   * @param ctx the parse tree
+   */
+  void enterQuadruplet(AbcBodyParser.QuadrupletContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcBodyParser#quadruplet}.
+   * @param ctx the parse tree
+   */
+  void exitQuadruplet(AbcBodyParser.QuadrupletContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcBodyParser#note}.
+   * @param ctx the parse tree
+   */
+  void enterNote(AbcBodyParser.NoteContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcBodyParser#note}.
+   * @param ctx the parse tree
+   */
+  void exitNote(AbcBodyParser.NoteContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcBodyParser#chord}.
+   * @param ctx the parse tree
+   */
+  void enterChord(AbcBodyParser.ChordContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcBodyParser#chord}.
+   * @param ctx the parse tree
+   */
+  void exitChord(AbcBodyParser.ChordContext ctx);
 }
