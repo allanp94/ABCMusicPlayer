@@ -40,8 +40,8 @@ public class Header {
 			) {
 		this.setComposerName(composerName);
 		this.setKeySignature(keySignature);
-		this.setLength(length);
 		this.setMeter(meter);
+		this.setLength(length);
 		this.setTempoLength(tempoLength);
 		this.setTempo(tempo);
 		this.setTitle(title);
@@ -55,8 +55,8 @@ public class Header {
 	public Header(Header headerToCopy) {
 		this.setComposerName(headerToCopy.getComposerName());
 		this.setKeySignature(headerToCopy.getKeySignature());
-		this.setLength(headerToCopy.getLength());
 		this.setMeter(headerToCopy.getMeter());
+		this.setLength(headerToCopy.getLength());
 		this.setTempoLength(headerToCopy.getTempoLength());
 		this.setTempo(headerToCopy.getTempo());
 		this.setTitle(headerToCopy.getTitle());
@@ -131,6 +131,9 @@ public class Header {
 	}
 
 	public List<String> getVoices() {
+		if (voices == null)
+			return this.voices;
+		
 		return new ArrayList<>(voices);
 	}
 
