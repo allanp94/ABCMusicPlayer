@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * Main entry point of your application.
@@ -37,7 +38,6 @@ public class Main {
      * @throws IOException 
      */
     public static void play(String file) throws IOException {
-    	
     	//read in the file to be read
     	String content = new String(Files.readAllBytes(Paths.get(file)));
     	
@@ -49,11 +49,10 @@ public class Main {
         
 
         String header = content.substring(0, headerEndPosition); 
-        readHeader(header); 
+        //readHeader(header); 
         
         String body = content.substring(headerEndPosition); 
-        //readBody(body) TODO STILL
-
+        readBody(body);
     }
     
     public static void readHeader(String headerString) {
@@ -78,22 +77,21 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-    	play("sample_abc/paddy.abc");
+    	play("sample_abc/little_night_music.abc");
     }
     
     public static void showTree(ParseTree tree, Parser parser) {
-        
-        
         //show AST in console
         System.out.println(tree.toStringTree(parser));
 
         //show AST in GUI
         JFrame frame = new JFrame("Antlr AST");
         JPanel panel = new JPanel();
+        JScrollPane scrPane = new JScrollPane(panel);
         TreeViewer viewer = new TreeViewer(Arrays.asList(parser.getRuleNames()),tree);
         viewer.setScale(1); // Scale a little
         panel.add(viewer);
-        frame.add(panel);
+        frame.add(scrPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

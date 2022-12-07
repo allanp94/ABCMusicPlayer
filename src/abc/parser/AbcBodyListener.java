@@ -21,25 +21,35 @@ public interface AbcBodyListener extends ParseTreeListener {
    */
   void exitBody(AbcBodyParser.BodyContext ctx);
   /**
-   * Enter a parse tree produced by {@link AbcBodyParser#measures}.
+   * Enter a parse tree produced by {@link AbcBodyParser#section}.
    * @param ctx the parse tree
    */
-  void enterMeasures(AbcBodyParser.MeasuresContext ctx);
+  void enterSection(AbcBodyParser.SectionContext ctx);
   /**
-   * Exit a parse tree produced by {@link AbcBodyParser#measures}.
+   * Exit a parse tree produced by {@link AbcBodyParser#section}.
    * @param ctx the parse tree
    */
-  void exitMeasures(AbcBodyParser.MeasuresContext ctx);
+  void exitSection(AbcBodyParser.SectionContext ctx);
   /**
-   * Enter a parse tree produced by {@link AbcBodyParser#start}.
+   * Enter a parse tree produced by {@link AbcBodyParser#measure}.
    * @param ctx the parse tree
    */
-  void enterStart(AbcBodyParser.StartContext ctx);
+  void enterMeasure(AbcBodyParser.MeasureContext ctx);
   /**
-   * Exit a parse tree produced by {@link AbcBodyParser#start}.
+   * Exit a parse tree produced by {@link AbcBodyParser#measure}.
    * @param ctx the parse tree
    */
-  void exitStart(AbcBodyParser.StartContext ctx);
+  void exitMeasure(AbcBodyParser.MeasureContext ctx);
+  /**
+   * Enter a parse tree produced by {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void enterDivider(AbcBodyParser.DividerContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void exitDivider(AbcBodyParser.DividerContext ctx);
   /**
    * Enter a parse tree produced by {@link AbcBodyParser#tuplet}.
    * @param ctx the parse tree

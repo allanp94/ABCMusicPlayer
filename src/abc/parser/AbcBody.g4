@@ -11,19 +11,23 @@ import Configuration;
 }
 
 body
- : measures+ (BAR /*  | ENDREPEAT*/)? EOF
+ : section+ divider? EOF
  ;
  
-measures
- : start* (tuplet | note | chord)+
+section
+ : (VOICE | measure)+ divider?
  ;
  
- start
+measure
+ : divider? (PARTONE | PARTTWO)? (tuplet | note | chord)+
+ ;
+ 
+ divider
  : BAR
-// | BEGINREPEAT
-// | PARTONE
-// | PARTTWO
-// | ENDREPEAT
+ | BEGINREPEAT
+ | PARTONE
+ | PARTTWO
+ | ENDREPEAT
  ;
   
 tuplet
@@ -32,32 +36,37 @@ tuplet
 ;
 
 chord
- : '[' note+ ']'
+ : LEFTBRACKET note+ RIGHTBRACKET
  ;
 
 note
  : ACCIDENTAL? LETTER (NUMBER|FRACTION)?
  ;
 
-//BEGINREPEAT
-// : '|:'
-// ;
-// 
-//PARTONE
-// : '|[1' ;
-//
-//PARTTWO
-// : '|[2' ;
-//
-//ENDREPEAT
-// : ':|['
-// ;
 
-COLON   : ':';
 
+BEGINREPEAT
+ : '|:'
+ ;
+ 
+PARTONE
+ : '[1' ;
+
+PARTTWO
+ : '[2' ;
+
+ENDREPEAT
+ : ':|'
+ ;
+
+VOICE   : 'V' COLON ' '* [a-zA-Z0-9]+;
+fragment COLON   : ':';
+LEFTBRACKET : '[';
+RIGHTBRACKET : ']';
 BAR 	: ('|'|'|]'); 
 NUMBER	: [0-9]+;
 FRACTION	: NUMBER? '/' NUMBER?;
 ACCIDENTAL	: ('_'|'^'|'=')+;
 LETTER	: ('a'..'z'|'A'..'Z') (','|'\'')*;
 WS: [ \n\t\r]+ -> skip;
+PERCENT: '%' -> skip;

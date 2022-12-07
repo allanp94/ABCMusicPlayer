@@ -31,25 +31,37 @@ public class AbcBodyBaseListener implements AbcBodyListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterMeasures(AbcBodyParser.MeasuresContext ctx) { }
+  @Override public void enterSection(AbcBodyParser.SectionContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitMeasures(AbcBodyParser.MeasuresContext ctx) { }
+  @Override public void exitSection(AbcBodyParser.SectionContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterStart(AbcBodyParser.StartContext ctx) { }
+  @Override public void enterMeasure(AbcBodyParser.MeasureContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitStart(AbcBodyParser.StartContext ctx) { }
+  @Override public void exitMeasure(AbcBodyParser.MeasureContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterDivider(AbcBodyParser.DividerContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitDivider(AbcBodyParser.DividerContext ctx) { }
   /**
    * {@inheritDoc}
    *
