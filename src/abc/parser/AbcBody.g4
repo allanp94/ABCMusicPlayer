@@ -69,4 +69,7 @@ FRACTION	: NUMBER? '/' NUMBER?;
 ACCIDENTAL	: ('_'|'^'|'=')+;
 LETTER	: ('a'..'z'|'A'..'Z') (','|'\'')*;
 WS: [ \n\t\r]+ -> skip;
+
+
+
 PERCENT: '%' -> skip;

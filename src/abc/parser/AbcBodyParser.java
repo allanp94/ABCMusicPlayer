@@ -131,6 +131,11 @@ public class AbcBodyParser extends Parser {
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitBody(this);
     }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitBody(this);
+      else return visitor.visitChildren(this);
+    }
   }
 
   public final BodyContext body() throws RecognitionException {
@@ -210,6 +215,11 @@ public class AbcBodyParser extends Parser {
     @Override
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitSection(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitSection(this);
+      else return visitor.visitChildren(this);
     }
   }
 
@@ -319,6 +329,11 @@ public class AbcBodyParser extends Parser {
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitMeasure(this);
     }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitMeasure(this);
+      else return visitor.visitChildren(this);
+    }
   }
 
   public final MeasureContext measure() throws RecognitionException {
@@ -423,6 +438,11 @@ public class AbcBodyParser extends Parser {
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitDivider(this);
     }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitDivider(this);
+      else return visitor.visitChildren(this);
+    }
   }
 
   public final DividerContext divider() throws RecognitionException {
@@ -472,6 +492,11 @@ public class AbcBodyParser extends Parser {
     @Override
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitTuplet(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitTuplet(this);
+      else return visitor.visitChildren(this);
     }
   }
 
@@ -540,6 +565,11 @@ public class AbcBodyParser extends Parser {
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitChord(this);
     }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitChord(this);
+      else return visitor.visitChildren(this);
+    }
   }
 
   public final ChordContext chord() throws RecognitionException {
@@ -596,6 +626,11 @@ public class AbcBodyParser extends Parser {
     @Override
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitNote(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitNote(this);
+      else return visitor.visitChildren(this);
     }
   }
 

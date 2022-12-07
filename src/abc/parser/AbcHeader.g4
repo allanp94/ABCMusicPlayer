@@ -10,10 +10,15 @@ header
  : headerRules+ EOF
  ;
 
-headerRules
- : TEXT COLON TEXT
+headerRules									
+ : FIELDTEXT COLON content						# headerField
  ;
+ 
+content
+ : CONTENTTEXT | FIELDTEXT						# contentField
+ ; 
 
 COLON   : ':';
-TEXT : ~[:\r\n]+;
+FIELDTEXT : [A-Z]; 
+CONTENTTEXT :  ~[:\r\n]+ ;
 NEWLINE : [\n\t\r]+ -> skip;
