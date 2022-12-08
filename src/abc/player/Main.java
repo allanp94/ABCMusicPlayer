@@ -14,13 +14,18 @@ import abc.parser.AbcHeaderLexer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import abc.parser.HeaderVisitor;
+import abc.song.Header; 
 
 /**
  * Main entry point of your application.
@@ -49,10 +54,10 @@ public class Main {
         
 
         String header = content.substring(0, headerEndPosition); 
-        //readHeader(header); 
+        readHeader(header); 
         
         String body = content.substring(headerEndPosition); 
-        readBody(body);
+        //readBody(body);
     }
     
     public static void readHeader(String headerString) {
@@ -62,7 +67,11 @@ public class Main {
         AbcHeaderParser parser = new AbcHeaderParser(tokenStream);
         ParseTree tree = parser.header();
         
-        showTree(tree, parser);
+        HeaderVisitor header = new HeaderVisitor(); 
+        Header headerObj = header.visit(tree);
+        System.out.println(headerObj.toString());
+        
+        //showTree(tree, parser);
     	
     }
     
@@ -77,7 +86,21 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-    	play("sample_abc/little_night_music.abc");
+    	//play("sample_abc/paddy.abc");
+    	
+    	String songList[] = {
+    	                  "sample_abc/abc_song.abc",
+    	                  "sample_abc/fur_elise.abc",
+    	                  "sample_abc/little_night_music.abc",
+    	                  "sample_abc/paddy.abc",
+    	                  "sample_abc/waxies_dargle.abc"       
+    	}; 
+    	
+    	for(String i: songList) {
+    		System.out.println(i);
+    		play(i);
+    	}
+    
     }
     
     public static void showTree(ParseTree tree, Parser parser) {

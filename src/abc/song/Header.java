@@ -9,8 +9,8 @@ import java.util.List;
 public class Header {
 	private String composerName; // C
 	private String keySignature; // K
-	private Float length; // L
 	private Float meter; // M
+	private Float length; // L
 	private Float tempoLength; // Q
 	private Integer tempo; // Q
 	private String title; // T
@@ -31,8 +31,8 @@ public class Header {
 	public Header(
 				String composerName,
 				String keySignature,
-				Float length,
 				Float meter,
+				Float length,
 				Float tempoLength,
 				Integer tempo,
 				String title,
@@ -40,8 +40,8 @@ public class Header {
 			) {
 		this.setComposerName(composerName);
 		this.setKeySignature(keySignature);
-		this.setLength(length);
 		this.setMeter(meter);
+		this.setLength(length);
 		this.setTempoLength(tempoLength);
 		this.setTempo(tempo);
 		this.setTitle(title);
@@ -55,8 +55,8 @@ public class Header {
 	public Header(Header headerToCopy) {
 		this.setComposerName(headerToCopy.getComposerName());
 		this.setKeySignature(headerToCopy.getKeySignature());
-		this.setLength(headerToCopy.getLength());
 		this.setMeter(headerToCopy.getMeter());
+		this.setLength(headerToCopy.getLength());
 		this.setTempo(headerToCopy.getTempo());
 		this.setTitle(headerToCopy.getTitle());
 		this.setVoices(headerToCopy.getVoices());
@@ -152,8 +152,8 @@ public class Header {
 	public String toString() {
 		return "Composer Name: " + composerName + "\n" +
 				"Key Signature: " + keySignature + "\n" +
-				"Default Length: " + length + "\n" +
 				"Meter: " + meter + "\n" +
+				"Default Length: " + length + "\n" +
 				"Tempo: " + tempo + "\n" +
 				"Title: " + title + "\n" +
 				"Voices: " + voices + "\n";
