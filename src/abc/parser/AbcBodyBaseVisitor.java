@@ -41,6 +41,13 @@ public class AbcBodyBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
    * <p>The default implementation returns the result of calling
    * {@link #visitChildren} on {@code ctx}.</p>
    */
+  @Override public T visitParts(AbcBodyParser.PartsContext ctx) { return visitChildren(ctx); }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation returns the result of calling
+   * {@link #visitChildren} on {@code ctx}.</p>
+   */
   @Override public T visitDivider(AbcBodyParser.DividerContext ctx) { return visitChildren(ctx); }
   /**
    * {@inheritDoc}

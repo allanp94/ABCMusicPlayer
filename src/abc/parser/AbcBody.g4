@@ -19,7 +19,11 @@ section
  ;
  
 measure
- : divider? (PARTONE | PARTTWO)? (tuplet | note | chord)+
+ : divider? parts? (tuplet | note | chord)+
+ ;
+ 
+parts
+ : PARTONE | PARTTWO
  ;
  
  divider

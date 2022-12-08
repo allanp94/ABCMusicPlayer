@@ -55,6 +55,18 @@ public class AbcBodyBaseListener implements AbcBodyListener {
    *
    * <p>The default implementation does nothing.</p>
    */
+  @Override public void enterParts(AbcBodyParser.PartsContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitParts(AbcBodyParser.PartsContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
   @Override public void enterDivider(AbcBodyParser.DividerContext ctx) { }
   /**
    * {@inheritDoc}

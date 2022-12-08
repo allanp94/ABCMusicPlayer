@@ -32,6 +32,12 @@ public interface AbcBodyVisitor<T> extends ParseTreeVisitor<T> {
    */
   T visitMeasure(AbcBodyParser.MeasureContext ctx);
   /**
+   * Visit a parse tree produced by {@link AbcBodyParser#parts}.
+   * @param ctx the parse tree
+   * @return the visitor result
+   */
+  T visitParts(AbcBodyParser.PartsContext ctx);
+  /**
    * Visit a parse tree produced by {@link AbcBodyParser#divider}.
    * @param ctx the parse tree
    * @return the visitor result

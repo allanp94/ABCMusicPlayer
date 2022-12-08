@@ -27,6 +27,9 @@ import javax.swing.JScrollPane;
 import abc.parser.HeaderVisitor;
 import abc.song.Header; 
 
+import abc.parser.BodyVisitor;
+import abc.song.Body; 
+
 /**
  * Main entry point of your application.
  */
@@ -54,10 +57,10 @@ public class Main {
         
 
         String header = content.substring(0, headerEndPosition); 
-        readHeader(header); 
+        //readHeader(header); 
         
         String body = content.substring(headerEndPosition); 
-        //readBody(body);
+        readBody(body);
     }
     
     public static void readHeader(String headerString) {
@@ -71,7 +74,7 @@ public class Main {
         Header headerObj = header.visit(tree);
         System.out.println(headerObj.toString());
         
-        //showTree(tree, parser);
+        showTree(tree, parser);
     	
     }
     
@@ -82,22 +85,27 @@ public class Main {
         AbcBodyParser parser = new AbcBodyParser(tokenStream);
         ParseTree tree = parser.body();
         
-        showTree(tree, parser);
+        BodyVisitor body = new BodyVisitor(); 
+        Body bodyObj = body.visit(tree);
+        //System.out.println(bodyObj.toString());
+                
+        //showTree(tree, parser);
     }
 
     public static void main(String[] args) throws IOException {
     	//play("sample_abc/paddy.abc");
     	
     	String songList[] = {
-    	                  "sample_abc/abc_song.abc",
-    	                  "sample_abc/fur_elise.abc",
-    	                  "sample_abc/little_night_music.abc",
-    	                  "sample_abc/paddy.abc",
-    	                  "sample_abc/waxies_dargle.abc"       
+                //"sample_abc/abc_song.abc",
+                //"sample_abc/waxies_dargle.abc",
+    	        //"sample_abc/fur_elise.abc",
+    	        //"sample_abc/little_night_music.abc",
+    	        //"sample_abc/paddy.abc",
+    	        "sample_abc/scale.abc"       
     	}; 
     	
     	for(String i: songList) {
-    		System.out.println(i);
+    		//System.out.println(i);
     		play(i);
     	}
     
