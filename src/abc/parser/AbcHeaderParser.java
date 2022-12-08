@@ -20,18 +20,18 @@ public class AbcHeaderParser extends Parser {
   protected static final PredictionContextCache _sharedContextCache =
     new PredictionContextCache();
   public static final int
-    COLON=1, FIELDTEXT=2, CONTENTTEXT=3, NEWLINE=4;
+    COLON=1, TEXT=2, NEWLINE=3;
   public static final int
-    RULE_header = 0, RULE_headerRules = 1, RULE_content = 2;
+    RULE_header = 0, RULE_headerRules = 1;
   public static final String[] ruleNames = {
-    "header", "headerRules", "content"
+    "header", "headerRules"
   };
 
   private static final String[] _LITERAL_NAMES = {
     null, "':'"
   };
   private static final String[] _SYMBOLIC_NAMES = {
-    null, "COLON", "FIELDTEXT", "CONTENTTEXT", "NEWLINE"
+    null, "COLON", "TEXT", "NEWLINE"
   };
   public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -133,21 +133,21 @@ public class AbcHeaderParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(7); 
+      setState(5); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
         {
-        setState(6);
+        setState(4);
         headerRules();
         }
         }
-        setState(9); 
+        setState(7); 
         _errHandler.sync(this);
         _la = _input.LA(1);
-      } while ( _la==FIELDTEXT );
-      setState(11);
+      } while ( _la==TEXT );
+      setState(9);
       match(EOF);
       }
     }
@@ -163,34 +163,26 @@ public class AbcHeaderParser extends Parser {
   }
 
   public static class HeaderRulesContext extends ParserRuleContext {
+    public List<TerminalNode> TEXT() { return getTokens(AbcHeaderParser.TEXT); }
+    public TerminalNode TEXT(int i) {
+      return getToken(AbcHeaderParser.TEXT, i);
+    }
+    public TerminalNode COLON() { return getToken(AbcHeaderParser.COLON, 0); }
     public HeaderRulesContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
     }
     @Override public int getRuleIndex() { return RULE_headerRules; }
-   
-    public HeaderRulesContext() { }
-    public void copyFrom(HeaderRulesContext ctx) {
-      super.copyFrom(ctx);
-    }
-  }
-  public static class HeaderFieldContext extends HeaderRulesContext {
-    public TerminalNode FIELDTEXT() { return getToken(AbcHeaderParser.FIELDTEXT, 0); }
-    public TerminalNode COLON() { return getToken(AbcHeaderParser.COLON, 0); }
-    public ContentContext content() {
-      return getRuleContext(ContentContext.class,0);
-    }
-    public HeaderFieldContext(HeaderRulesContext ctx) { copyFrom(ctx); }
     @Override
     public void enterRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).enterHeaderField(this);
+      if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).enterHeaderRules(this);
     }
     @Override
     public void exitRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).exitHeaderField(this);
+      if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).exitHeaderRules(this);
     }
     @Override
     public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-      if ( visitor instanceof AbcHeaderVisitor ) return ((AbcHeaderVisitor<? extends T>)visitor).visitHeaderField(this);
+      if ( visitor instanceof AbcHeaderVisitor ) return ((AbcHeaderVisitor<? extends T>)visitor).visitHeaderRules(this);
       else return visitor.visitChildren(this);
     }
   }
@@ -199,64 +191,14 @@ public class AbcHeaderParser extends Parser {
     HeaderRulesContext _localctx = new HeaderRulesContext(_ctx, getState());
     enterRule(_localctx, 2, RULE_headerRules);
     try {
-      _localctx = new HeaderFieldContext(_localctx);
       enterOuterAlt(_localctx, 1);
       {
-      setState(13);
-      match(FIELDTEXT);
-      setState(14);
+      setState(11);
+      match(TEXT);
+      setState(12);
       match(COLON);
-      setState(15);
-      content();
-      }
-    }
-    catch (RecognitionException re) {
-      _localctx.exception = re;
-      _errHandler.reportError(this, re);
-      _errHandler.recover(this, re);
-    }
-    finally {
-      exitRule();
-    }
-    return _localctx;
-  }
-
-  public static class ContentContext extends ParserRuleContext {
-    public TerminalNode CONTENTTEXT() { return getToken(AbcHeaderParser.CONTENTTEXT, 0); }
-    public TerminalNode FIELDTEXT() { return getToken(AbcHeaderParser.FIELDTEXT, 0); }
-    public ContentContext(ParserRuleContext parent, int invokingState) {
-      super(parent, invokingState);
-    }
-    @Override public int getRuleIndex() { return RULE_content; }
-    @Override
-    public void enterRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).enterContent(this);
-    }
-    @Override
-    public void exitRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).exitContent(this);
-    }
-    @Override
-    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-      if ( visitor instanceof AbcHeaderVisitor ) return ((AbcHeaderVisitor<? extends T>)visitor).visitContent(this);
-      else return visitor.visitChildren(this);
-    }
-  }
-
-  public final ContentContext content() throws RecognitionException {
-    ContentContext _localctx = new ContentContext(_ctx, getState());
-    enterRule(_localctx, 4, RULE_content);
-    int _la;
-    try {
-      enterOuterAlt(_localctx, 1);
-      {
-      setState(17);
-      _la = _input.LA(1);
-      if ( !(_la==FIELDTEXT || _la==CONTENTTEXT) ) {
-      _errHandler.recoverInline(this);
-      } else {
-        consume();
-      }
+      setState(13);
+      match(TEXT);
       }
     }
     catch (RecognitionException re) {
@@ -271,12 +213,11 @@ public class AbcHeaderParser extends Parser {
   }
 
   public static final String _serializedATN =
-    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\6\26\4\2\t\2\4"+
-      "\3\t\3\4\4\t\4\3\2\6\2\n\n\2\r\2\16\2\13\3\2\3\2\3\3\3\3\3\3\3\3\3"+
-      "\4\3\4\3\4\2\2\5\2\4\6\2\3\3\2\4\5\23\2\t\3\2\2\2\4\17\3\2\2\2\6\23"+
-      "\3\2\2\2\b\n\5\4\3\2\t\b\3\2\2\2\n\13\3\2\2\2\13\t\3\2\2\2\13\f\3"+
-      "\2\2\2\f\r\3\2\2\2\r\16\7\2\2\3\16\3\3\2\2\2\17\20\7\4\2\2\20\21\7"+
-      "\3\2\2\21\22\5\6\4\2\22\5\3\2\2\2\23\24\t\2\2\2\24\7\3\2\2\2\3\13";
+    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\5\22\4\2\t\2\4"+
+      "\3\t\3\3\2\6\2\b\n\2\r\2\16\2\t\3\2\3\2\3\3\3\3\3\3\3\3\3\3\2\2\4"+
+      "\2\4\2\2\20\2\7\3\2\2\2\4\r\3\2\2\2\6\b\5\4\3\2\7\6\3\2\2\2\b\t\3"+
+      "\2\2\2\t\7\3\2\2\2\t\n\3\2\2\2\n\13\3\2\2\2\13\f\7\2\2\3\f\3\3\2\2"+
+      "\2\r\16\7\4\2\2\16\17\7\3\2\2\17\20\7\4\2\2\20\5\3\2\2\2\3\t";
   public static final ATN _ATN =
     new ATNDeserializer().deserialize(_serializedATN.toCharArray());
   static {

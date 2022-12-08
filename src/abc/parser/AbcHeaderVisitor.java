@@ -20,16 +20,9 @@ public interface AbcHeaderVisitor<T> extends ParseTreeVisitor<T> {
    */
   T visitHeader(AbcHeaderParser.HeaderContext ctx);
   /**
-   * Visit a parse tree produced by the {@code headerField}
-   * labeled alternative in {@link AbcHeaderParser#headerRules}.
+   * Visit a parse tree produced by {@link AbcHeaderParser#headerRules}.
    * @param ctx the parse tree
    * @return the visitor result
    */
-  T visitHeaderField(AbcHeaderParser.HeaderFieldContext ctx);
-  /**
-   * Visit a parse tree produced by {@link AbcHeaderParser#content}.
-   * @param ctx the parse tree
-   * @return the visitor result
-   */
-  T visitContent(AbcHeaderParser.ContentContext ctx);
+  T visitHeaderRules(AbcHeaderParser.HeaderRulesContext ctx);
 }

@@ -21,25 +21,13 @@ public interface AbcHeaderListener extends ParseTreeListener {
    */
   void exitHeader(AbcHeaderParser.HeaderContext ctx);
   /**
-   * Enter a parse tree produced by the {@code headerField}
-   * labeled alternative in {@link AbcHeaderParser#headerRules}.
+   * Enter a parse tree produced by {@link AbcHeaderParser#headerRules}.
    * @param ctx the parse tree
    */
-  void enterHeaderField(AbcHeaderParser.HeaderFieldContext ctx);
+  void enterHeaderRules(AbcHeaderParser.HeaderRulesContext ctx);
   /**
-   * Exit a parse tree produced by the {@code headerField}
-   * labeled alternative in {@link AbcHeaderParser#headerRules}.
+   * Exit a parse tree produced by {@link AbcHeaderParser#headerRules}.
    * @param ctx the parse tree
    */
-  void exitHeaderField(AbcHeaderParser.HeaderFieldContext ctx);
-  /**
-   * Enter a parse tree produced by {@link AbcHeaderParser#content}.
-   * @param ctx the parse tree
-   */
-  void enterContent(AbcHeaderParser.ContentContext ctx);
-  /**
-   * Exit a parse tree produced by {@link AbcHeaderParser#content}.
-   * @param ctx the parse tree
-   */
-  void exitContent(AbcHeaderParser.ContentContext ctx);
+  void exitHeaderRules(AbcHeaderParser.HeaderRulesContext ctx);
 }

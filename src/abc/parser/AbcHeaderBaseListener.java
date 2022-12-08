@@ -31,25 +31,13 @@ public class AbcHeaderBaseListener implements AbcHeaderListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterHeaderField(AbcHeaderParser.HeaderFieldContext ctx) { }
+  @Override public void enterHeaderRules(AbcHeaderParser.HeaderRulesContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitHeaderField(AbcHeaderParser.HeaderFieldContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void enterContent(AbcHeaderParser.ContentContext ctx) { }
-  /**
-   * {@inheritDoc}
-   *
-   * <p>The default implementation does nothing.</p>
-   */
-  @Override public void exitContent(AbcHeaderParser.ContentContext ctx) { }
+  @Override public void exitHeaderRules(AbcHeaderParser.HeaderRulesContext ctx) { }
 
   /**
    * {@inheritDoc}

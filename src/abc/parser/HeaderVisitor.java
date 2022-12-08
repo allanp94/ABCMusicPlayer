@@ -1,60 +1,88 @@
 package abc.parser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import abc.song.Header; 
 
-public class HeaderVisitor extends AbcHeaderBaseVisitor<String> {
+public class HeaderVisitor extends AbcHeaderBaseVisitor<Header> {
+	
+	public Header visitHeader(AbcHeaderParser.HeaderContext ctx) {
+		Map<String, String> headerHashMap = new HashMap<String, String>(); 
+		int voiceCount = 0;
+		
+		for (int i = 0; i < ctx.getChildCount() - 1; i++) {
+			String field = ctx.getChild(i).getChild(0).getText();
+			String content = ctx.getChild(i).getChild(2).getText();
 
-	Map<String, String> headerHashMap = new HashMap<String, String>(); 
-	protected Header headerObj;
-	
-	@Override 
-	public String visitHeaderField(AbcHeaderParser.HeaderFieldContext ctx) {
+			if (field.equals("V")) {
+				headerHashMap.put(field + "" + voiceCount, content);
+				voiceCount++;
+			} else {
+			headerHashMap.put(field, content);
+			}
+		} //end for
 		
-		String fieldTextId = ctx.FIELDTEXT().getText(); 
-		String fieldContentText = visit(ctx.content());  
-		System.out.println(fieldTextId);
-		System.out.println(fieldContentText);
-		
-		headerHashMap.put(fieldTextId, fieldContentText);		
-//		
-//		switch(fieldTextId) {
-//			case "Q": 
-//				headerObj.setTempo(Integer.parseInt(fieldContentText));
-//			case "K":
-//				headerObj.setKeySignature(fieldContentText);
-//			case "L":
-//				headerObj.setLength(Float.parseFloat(fieldContentText));
-//			case "M":
-//				headerObj.setMeter(Float.parseFloat(fieldContentText));
-//			case "C":
-//				headerObj.setComposerName(fieldContentText);
-//			case "T":
-//				headerObj.setTitle(fieldContentText);
-//		}
-		
-		return fieldContentText; 
-	}
+		return hashMapToHeader(headerHashMap, voiceCount);
+	}//end visitHead
 	
-	@Override 
-	public String visitContent(AbcHeaderParser.ContentContext ctx) {
-		return ctx.getText();
-	}
-	
-	//function that returns the contents of the headerHashMap
-	public void printHashMap() {
-		for (String i: headerHashMap.keySet()) {
-			System.out.println("Field: " + i + " value: " + headerHashMap.get(i));
+
+	Float parseStringToFloat(String ratio) {
+		try {
+			if (ratio.contains("/")) {
+				String[] rat = ratio.split("/");
+				return Float.parseFloat(rat[0]) / Float.parseFloat(rat[1]);
+			} else {
+				return Float.parseFloat(ratio);
+			}
+		} catch(Exception e) {
+			return null;
 		}
 	}
 	
-	public Header getHeader() {
-		
-		return headerObj; 
-	}
 	
-
+	// converts the hashMap to the appropriate value needed for the Header object
+	private Header hashMapToHeader(Map<String, String> hashMap, int count) {
+	
+		String composerName = hashMap.get("C"); 
+		String keySignature = hashMap.get("K");
+		String title = hashMap.get("T");
+		List<String> voices = new ArrayList<String>();
+		Float meter = parseStringToFloat(hashMap.get("M"));
+		Float length = parseStringToFloat(hashMap.get("L"));
+		String tempoString = hashMap.get("Q"); 
+		Float tempoLength = null;
+		Integer tempo = 0; 
+		
+		if (tempoString != null) {
+			if (tempoString.contains("=")) {
+				String[] t = tempoString.split("=");
+				tempoLength = parseStringToFloat(t[0]);	
+				tempo = Integer.parseInt(t[1]);
+			} else {
+				tempo = Integer.parseInt(tempoString); 
+			}
+		}
+		
+		for (int i = 0; i < count; i++) {
+			voices.add(hashMap.get("V" + "" + i));
+		}
+		
+		
+		Header headerObj = new Header(
+				 composerName,
+				 keySignature,
+				 meter,
+				 length,
+				 tempoLength,
+				 tempo,
+				 title,
+				 voices		
+				 );
+		
+		return headerObj;
+	}//endHashMapToHeader
+		
 }

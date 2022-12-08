@@ -7,18 +7,13 @@ grammar AbcHeader;
 import Configuration;
 
 header
- : headerRules+ EOF
+ : headerRules+ EOF								
  ;
 
 headerRules									
- : FIELDTEXT COLON content						# headerField
+ : TEXT COLON TEXT
  ;
- 
-content
- : CONTENTTEXT | FIELDTEXT						# contentField
- ; 
 
 COLON   : ':';
-FIELDTEXT : [A-Z]; 
-CONTENTTEXT :  ~[:\r\n]+ ;
+TEXT :  ~[:\r\n]+ ;
 NEWLINE : [\n\t\r]+ -> skip;
