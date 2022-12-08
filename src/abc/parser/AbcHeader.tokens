@@ -1,0 +1,4 @@
+COLON=1
+TEXT=2
+NEWLINE=3
+':'=1
