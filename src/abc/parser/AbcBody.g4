@@ -46,9 +46,7 @@ chord
 note
  : ACCIDENTAL? LETTER (NUMBER|FRACTION)?
  ;
-
-
-
+ 
 BEGINREPEAT
  : '|:'
  ;

@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiUnavailableException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,6 +32,7 @@ import abc.song.Header;
 import abc.parser.BodyVisitor;
 import abc.song.Body; 
 
+import abc.song.Song; 
 /**
  * Main entry point of your application.
  */
@@ -44,8 +47,10 @@ public class Main {
      * 
      * @param file the name of input abc file
      * @throws IOException 
+     * @throws InvalidMidiDataException 
+     * @throws MidiUnavailableException 
      */
-    public static void play(String file) throws IOException {
+    public static void play(String file) throws IOException, MidiUnavailableException, InvalidMidiDataException {
     	//read in the file to be read
     	String content = new String(Files.readAllBytes(Paths.get(file)));
     	
@@ -56,14 +61,18 @@ public class Main {
         int headerEndPosition = matcher.end();
         
 
-        String header = content.substring(0, headerEndPosition); 
-        //readHeader(header); 
+        String header = content.substring(0, headerEndPosition);
+        Header Header = readHeader(header);
         
-        String body = content.substring(headerEndPosition); 
-        readBody(body);
+        String body = content.substring(headerEndPosition);
+        Body Body = readBody(body);
+        
+        Song Song = new Song(Header, Body);
+        Song.toSequencePlayer();
+        
     }
     
-    public static void readHeader(String headerString) {
+	public static Header readHeader(String headerString) {
     	CharStream stream = new ANTLRInputStream(headerString);
     	AbcHeaderLexer lexer  = new AbcHeaderLexer(stream);
         TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -72,13 +81,15 @@ public class Main {
         
         HeaderVisitor header = new HeaderVisitor(); 
         Header headerObj = header.visit(tree);
-        System.out.println(headerObj.toString());
+        //System.out.println(headerObj.toString());
         
-        showTree(tree, parser);
+        //showTree(tree, parser);
+        
+        return headerObj;
     	
     }
     
-    public static void readBody(String bodyString) {
+    public static Body readBody(String bodyString) {
     	CharStream stream = new ANTLRInputStream(bodyString);
     	AbcBodyLexer lexer  = new AbcBodyLexer(stream);
         TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -90,9 +101,12 @@ public class Main {
         //System.out.println(bodyObj.toString());
                 
         //showTree(tree, parser);
+        
+        return bodyObj;
+        
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, MidiUnavailableException, InvalidMidiDataException {
     	//play("sample_abc/paddy.abc");
     	
     	String songList[] = {
@@ -101,7 +115,10 @@ public class Main {
     	        //"sample_abc/fur_elise.abc",
     	        //"sample_abc/little_night_music.abc",
     	        //"sample_abc/paddy.abc",
-    	        "sample_abc/scale.abc"       
+    	        //"sample_abc/scale.abc",
+    	        //"sample_abc/invention.abc",
+    	        "sample_abc/test.abc",
+    	        //"sample_abc/sample1.abc"       
     	}; 
     	
     	for(String i: songList) {
@@ -113,7 +130,7 @@ public class Main {
     
     public static void showTree(ParseTree tree, Parser parser) {
         //show AST in console
-        System.out.println(tree.toStringTree(parser));
+        //System.out.println(tree.toStringTree(parser));
 
         //show AST in GUI
         JFrame frame = new JFrame("Antlr AST");

@@ -1,4 +1,4 @@
-package abc.sound;
+package abc.song;
 
 /**
  * Pitch is an immutable type representing the frequency of a musical note.
@@ -75,35 +75,35 @@ public class Pitch {
      */
     public Pitch(String c) {
         try {
-        	char letter = c.charAt(0);
-        	char octave = '\0';
+        	char test = c.charAt(0);
+        	char test2 = '\0';
         	if (c.length() > 1)
-        		octave = c.charAt(1);
+        		test2 = c.charAt(1);
         	
-        	int basepitch = 60;
-        	if (Character.isUpperCase(letter))
+        	int test3 = 60;
+        	if (Character.isUpperCase(test))
         	{
-        		basepitch = SCALE[letter-'A'];
+        		test3 = SCALE[test-'A'];
         	}
         	else
         	{
-        		basepitch = SCALE[Character.toUpperCase(letter) -'A'];
-        		basepitch += 12;
+        		test3 = SCALE[Character.toUpperCase(test) -'A'];
+        		test3 += 12;
         	}
         	
-        	if (octave != '\0') {
-        		if (octave == '\'') {
-        			basepitch += 12;
+        	if (test2 != '\0') {
+        		if (test2 == '\'') {
+        			test3 += 12;
         		}
         		else {
-        			basepitch -= 12;
+        			test3 -= 12;
         		}
         	}
         	
         	//System.out.println(test3);
         	
             //value = SCALE[c-'A'];
-            value = basepitch;
+            value = test3;
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new IllegalArgumentException(c + " must be in the range A-G");
         }

@@ -1,13 +1,11 @@
 package abc.song;
 
-import abc.sound.Pitch;
-
 /*
  * The Header class represents any given note information for an ABC file song.
  */
 public class Note {
 	private Pitch pitch;
-	private double length;
+	private float length;
 	private String accidental;
 	private boolean chord;
 	private String voice;
@@ -17,7 +15,7 @@ public class Note {
 	 * All fields allow null.
 	 * 
 	 */
-	public Note(Pitch pitch, double length) {
+	public Note(Pitch pitch, float length) {
 		this.setPitch(pitch);
 		this.setLength(length);
 		this.setAccidental(null);
@@ -31,7 +29,7 @@ public class Note {
 	 */
 	public Note(
 			Pitch pitch,
-			double length,
+			float length,
 			String accidental,
 			boolean chord,
 			String voice
@@ -62,11 +60,11 @@ public class Note {
 		this.pitch = pitch;
 	}
 
-	public double getLength() {
+	public float getLength() {
 		return length;
 	}
 
-	public void setLength(double length) {
+	public void setLength(float length) {
 		this.length = length;
 	}
 
