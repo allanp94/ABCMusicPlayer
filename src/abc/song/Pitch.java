@@ -53,6 +53,8 @@ public class Pitch {
     private Pitch(int value) {
         this.value = value;
     }
+    
+	private boolean rest = false;
 
     /**
      * Make a Pitch named c in the middle octave of the piano keyboard.
@@ -75,35 +77,39 @@ public class Pitch {
      */
     public Pitch(String c) {
         try {
-        	char test = c.charAt(0);
-        	char test2 = '\0';
-        	if (c.length() > 1)
-        		test2 = c.charAt(1);
-        	
-        	int test3 = 60;
-        	if (Character.isUpperCase(test))
+        	char letter = c.charAt(0);
+        	int pitch = 0;
+        	if (letter != 'z' && letter != 'Z')
         	{
-        		test3 = SCALE[test-'A'];
+	        	char octave = '\0';
+	        	if (c.length() > 1)
+	        		octave = c.charAt(1);
+	        	pitch = 60;
+	        	if (Character.isUpperCase(letter))
+	        	{
+	        		pitch = SCALE[letter-'A'];
+	        	}
+	        	else
+	        	{
+	        		pitch = SCALE[Character.toUpperCase(letter) -'A'];
+	        		pitch += OCTAVE;
+	        	}
+	        	
+	        	if (octave != '\0') {
+	        		if (octave == '\'') {
+	        			pitch += OCTAVE;
+	        		}
+	        		else {
+	        			pitch -= OCTAVE;
+	        		}
+	        	}
         	}
-        	else
-        	{
-        		test3 = SCALE[Character.toUpperCase(test) -'A'];
-        		test3 += 12;
-        	}
-        	
-        	if (test2 != '\0') {
-        		if (test2 == '\'') {
-        			test3 += 12;
-        		}
-        		else {
-        			test3 -= 12;
-        		}
-        	}
-        	
+        	else 
+        		this.setRest(true);
         	//System.out.println(test3);
         	
             //value = SCALE[c-'A'];
-            value = test3;
+            value = pitch;
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new IllegalArgumentException(c + " must be in the range A-G");
         }
@@ -152,11 +158,20 @@ public class Pitch {
         return value;
     }
 
+    public boolean isRest() {
+        return this.rest;
+    }
+
+    public void setRest(boolean rest) {
+    	this.rest = rest;
+    }
+
 
     /**
      * @return the MIDI note of this pitch
      */
     public int toMidiNote() {
+    	//System.out.println(value);
         return value + 60;
     }
 

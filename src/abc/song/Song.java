@@ -83,8 +83,11 @@ public class Song {
 			
 			
 			Note note = body.getNotes().get(i);
-			
-			player.addNote(note.getPitch().toMidiNote(), tickcount, (int)note.getLength()*ticksPerBeat);
+
+
+			//System.out.println(note.getPitch().isRest());
+			if (!note.getPitch().isRest())
+				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)note.getLength()*ticksPerBeat);
 			
 			tickcount += (int)note.getLength()*ticksPerBeat;
 			

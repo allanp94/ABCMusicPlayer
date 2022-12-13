@@ -125,7 +125,6 @@ public class Main {
     		//System.out.println(i);
     		play(i);
     	}
-    
     }
     
     public static void showTree(ParseTree tree, Parser parser) {

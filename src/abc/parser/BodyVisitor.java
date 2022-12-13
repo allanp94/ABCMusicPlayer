@@ -93,10 +93,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 			}
 		);
 		
-		Body bodyObj = new Body(
-				orderedNoteList
-				 );
-		
+		Body bodyObj = new Body(orderedNoteList);
 		return bodyObj;
 	}
 	
@@ -121,5 +118,4 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 			return null;
 		}
 	}
-	
 }
