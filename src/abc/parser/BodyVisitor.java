@@ -11,10 +11,11 @@ import abc.song.Body;
 import abc.song.Song;
 
 public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
+	static int ChordID = 1;
+		
 	public Body visitBody(AbcBodyParser.BodyContext ctx) {
 
 		List<Note> orderedNoteList = new ArrayList<Note>();
-		
 		ctx.section().forEach( (s) -> {
 				if (s.VOICE() != null && !s.VOICE().isEmpty()) {
 					//System.out.println(s.VOICE());
@@ -27,6 +28,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 						//System.out.println(m.parts().getText());
 					}
 					if (m.note() != null && !m.note().isEmpty()) {
+						System.out.println(m.note());
 						m.note().forEach( (n) -> {
 							if (n.ACCIDENTAL() != null) {
 								//System.out.println(n.ACCIDENTAL().getText());
@@ -57,10 +59,9 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 									V = s.VOICE().get(0).getText();
 								}
 								
-								Boolean C = false;
+								int C = 0;
 								
 								Note N = new Note(
-										//new Pitch(n.LETTER().getText()), 
 										P, 
 										L, 
 										A, 
@@ -78,12 +79,66 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 							}
 						});
 					}
-					
-					else if (m.chord() != null && !m.chord().isEmpty()) {
-						//LEFTBRACKET note+ RIGHTBRACKET
+					if (m.chord() != null && !m.chord().isEmpty()) {
+						m.chord().forEach( (c) -> {
+							if (c.note() != null && !c.note().isEmpty()) {
+								System.out.println(c.note());
+								c.note().forEach( (n) -> {
+									if (n.ACCIDENTAL() != null) {
+										//System.out.println(n.ACCIDENTAL().getText());
+									}
+									if (n.LETTER() != null) {
+										//System.out.println(n.LETTER().getText());
+										
+										Pitch P = new Pitch(n.LETTER().getText());
+										//new Pitch('C').toMidiNote();
+										
+										float L = 1;
+										if (n.FRACTION() != null) {
+											//System.out.println(n.NUMBER().getText());
+											L = parseStringToFloat(n.FRACTION().getText());
+											//System.out.println(L);
+										}
+										else if (n.NUMBER() != null) {
+											L = parseStringToFloat(n.NUMBER().getText());
+										}
+
+										String A = null;
+										if (n.ACCIDENTAL() != null) {
+											A = n.ACCIDENTAL().getText();
+										}
+
+										String V = null;
+										if (s.VOICE() != null && !s.VOICE().isEmpty()) {
+											V = s.VOICE().get(0).getText();
+										}
+										
+										int C = ChordID;
+										
+										Note N = new Note(
+												P, 
+												L, 
+												A, 
+												C, 
+												V
+												);
+										orderedNoteList.add(N);
+									}
+
+									if (n.NUMBER() != null) {
+										//System.out.println(n.NUMBER().getText());
+									}
+									else if (n.FRACTION() != null) {
+										//System.out.println(n.FRACTION().getText());
+									}
+								});
+							}
+							ChordID++;
+						});
 					}
 					
 					else if (m.tuplet() != null && !m.tuplet().isEmpty()) {
+						//System.out.println(m.tuplet());
 						//'(' NUMBER ( {counter<=$NUMBER.int}? note {counter++;} )*
 					}
 				});

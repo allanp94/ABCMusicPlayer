@@ -7,7 +7,7 @@ public class Note {
 	private Pitch pitch;
 	private float length;
 	private String accidental;
-	private boolean chord;
+	private int chord;
 	private String voice;
 	
 	/*
@@ -19,7 +19,7 @@ public class Note {
 		this.setPitch(pitch);
 		this.setLength(length);
 		this.setAccidental(null);
-		this.setChord(false);
+		this.setChordID(0);
 		this.setVoice(null);
 	}
 	
@@ -31,13 +31,13 @@ public class Note {
 			Pitch pitch,
 			float length,
 			String accidental,
-			boolean chord,
+			int chord,
 			String voice
 			) {
 		this.setPitch(pitch);
 		this.setLength(length);
 		this.setAccidental(accidental);
-		this.setChord(chord);
+		this.setChordID(chord);
 		this.setVoice(voice);
 	}
 	
@@ -48,7 +48,7 @@ public class Note {
 		this.setPitch(note.getPitch());
 		this.setLength(note.getLength());
 		this.setAccidental(note.getAccidental());
-		this.setChord(note.isChord());
+		this.setChordID(note.getChordID());
 		this.setVoice(note.getVoice());
 	}
 
@@ -68,11 +68,11 @@ public class Note {
 		this.length = length;
 	}
 
-	public boolean isChord() {
+	public int getChordID() {
 		return chord;
 	}
 
-	public void setChord(boolean chord) {
+	public void setChordID(int chord) {
 		this.chord = chord;
 	}
 

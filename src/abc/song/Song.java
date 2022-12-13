@@ -76,8 +76,9 @@ public class Song {
 		Integer ticksPerBeat = 12;
 		
 		SequencePlayer player = new SequencePlayer(beatsPerMinute, ticksPerBeat);
-		
+
 		Integer tickcount = 0;
+		Integer chordID = 1;
 		
 		for (int i = 0; i < body.getNotes().size(); i++) {
 			
@@ -85,18 +86,27 @@ public class Song {
 			Note note = body.getNotes().get(i);
 
 
-			//System.out.println(note.getPitch().isRest());
-			if (!note.getPitch().isRest())
+			//System.out.println(note.getChordID());
+
+			if (note.getChordID() > 0)
+			{
+				if  (chordID != note.getChordID())
+				{
+					chordID = note.getChordID();
+					tickcount += (int)note.getLength()*ticksPerBeat;
+				}
 				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)note.getLength()*ticksPerBeat);
-			
-			tickcount += (int)note.getLength()*ticksPerBeat;
-			
-			
+			}
+			else if (!note.getPitch().isRest())
+			{
+				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)note.getLength()*ticksPerBeat);
+				tickcount += (int)note.getLength()*ticksPerBeat;
+			}
 		}
 		
 	       //player.addNote(new Pitch('C').toMidiNote(), 0, 1);
 
-           //System.out.println(player);
+           System.out.println(player);
 
            // play!
            player.play();
