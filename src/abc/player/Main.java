@@ -67,8 +67,8 @@ public class Main {
         String body = content.substring(headerEndPosition);
         Body Body = readBody(body);
         
-        Song Song = new Song(Header, Body);
-        Song.toSequencePlayer();
+        //Song Song = new Song(Header, Body);
+        //Song.toSequencePlayer();
         
     }
     
@@ -100,7 +100,7 @@ public class Main {
         Body bodyObj = body.visit(tree);
         //System.out.println(bodyObj.toString());
                 
-        //showTree(tree, parser);
+        showTree(tree, parser);
         
         return bodyObj;
         
