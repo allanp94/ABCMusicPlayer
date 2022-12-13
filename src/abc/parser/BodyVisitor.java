@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 import abc.song.Pitch;
 import abc.parser.AbcBodyParser.MeasureContext;
 import abc.song.Body;
@@ -18,11 +21,17 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 		
 	public Body visitBody(AbcBodyParser.BodyContext ctx) {
 		ctx.section().forEach( (s) -> {
+//			List<TerminalNode> voice = s.VOICE();
+//			System.out.println(voice);
 			List<MeasureContext> measure = s.measure(); 
 			for (int i = 0; i < measure.size(); i++) {
-				Body measure1 = visit(s.measure(i)); 
+				Body measure1 = visit(s.measure(i));
+//				System.out.println(measure1);
 			}
 	});
+		
+		Body bodyObj = new Body(orderedNoteList);
+		return bodyObj;
 //		System.out.println(stringNoteList);
 		
 		
@@ -160,8 +169,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 //			}
 //		);
 //		
-//		Body bodyObj = new Body(orderedNoteList);
-		return null;
+
 	}
 	
 
@@ -206,18 +214,18 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 
 
 	@Override public Body visitNote(AbcBodyParser.NoteContext ctx) {
-		System.out.println(ctx.getText());
+//		System.out.println(ctx.getText());
 		String A = null,V = null;
-		float L = 0;
 		Pitch P = null; 
 		int C = ChordID;
-		V = "1";
-		
+		float L = 0;
+//		V = "1";
 
 		if (ctx.LETTER() != null) {
 			P = new Pitch((ctx.LETTER().getText())); 
 //			System.out.println("Pitch " + P);
 		}; 
+		
 		
 		if (ctx.FRACTION() != null) {
 			L = parseStringToFloat(ctx.FRACTION().getText());
@@ -225,8 +233,9 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 		}
 		else if (ctx.NUMBER() != null) {
 			L = parseStringToFloat(ctx.NUMBER().getText()); 
-//			System.out.println("Length " + L);
+			System.out.println("Length " + L);
 		}
+		System.out.println(L);
 		
 		
 		if (ctx.ACCIDENTAL() != null) {
@@ -234,26 +243,28 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 //			System.out.println("Accidental" + A);
 		}
 		
-		System.out.println("Pitch " + P);
-		System.out.println("Length " + L);
-		System.out.println("Accidental " + A);
+//		System.out.println("Pitch " + P);
+//		System.out.println("Length " + L);
+//		System.out.println("Accidental " + A);
 
 		
 		Note N = new Note(P,L,A,C,V);
+		C++;
 
-//				P, 
-//				L, 
-//				A, 
-//				C, 
-//				V
-//				);
-		System.out.println(N);
-		
 		stringNoteList.add(ctx.getText()); 
 		orderedNoteList.add(N);
 
 		return visitChildren(ctx); 
 		}
+	
+	  @Override public Body visitMeasure(AbcBodyParser.MeasureContext ctx) {
+		  for (int o = 0; o < ctx.getChildCount(); o++) {
+//			  System.out.println(ctx.getChild(o).getText());
+//			  if (ctx.getChild(o))
+			  
+		  }
+		  return visitChildren(ctx);
+	  }
 	  
 	@Override public Body visitTuplet(AbcBodyParser.TupletContext ctx) { 
 		System.out.println(ctx.getText());
@@ -285,7 +296,6 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 //		System.out.println(ctx.ENDREPEAT().getText());
 		return visitChildren(ctx); 
 		}
-	
 	
 	
 }

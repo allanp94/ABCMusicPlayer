@@ -83,9 +83,10 @@ public class Song {
 		for (int i = 0; i < body.getNotes().size(); i++) {
 			
 			
+			
 			Note note = body.getNotes().get(i);
 
-
+//			System.out.println(note);
 			//System.out.println(note.getChordID());
 
 			if (note.getChordID() > 0)
@@ -106,7 +107,7 @@ public class Song {
 		
 	       //player.addNote(new Pitch('C').toMidiNote(), 0, 1);
 
-           System.out.println(player);
+//           System.out.println(player);
 
            // play!
            player.play();

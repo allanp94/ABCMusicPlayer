@@ -68,6 +68,7 @@ public class Main {
         Body Body = readBody(body);
         
         Song Song = new Song(Header, Body);
+        System.out.println(Song.toString());
         Song.toSequencePlayer();
         
     }
@@ -112,12 +113,12 @@ public class Main {
     	String songList[] = {
                 //"sample_abc/abc_song.abc",
                 //"sample_abc/waxies_dargle.abc",
-    	        //"sample_abc/fur_elise.abc",
+    	        "sample_abc/fur_elise.abc",
     	        //"sample_abc/little_night_music.abc",
     	        //"sample_abc/paddy.abc",
     	        //"sample_abc/scale.abc",
     	        //"sample_abc/invention.abc",
-    	        "sample_abc/test.abc",
+    	        //"sample_abc/test.abc",
     	        //"sample_abc/sample1.abc"       
     	}; 
     	
