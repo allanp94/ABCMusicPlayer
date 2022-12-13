@@ -28,7 +28,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 						//System.out.println(m.parts().getText());
 					}
 					if (m.note() != null && !m.note().isEmpty()) {
-						System.out.println(m.note());
+						//System.out.println(m.note());
 						m.note().forEach( (n) -> {
 							if (n.ACCIDENTAL() != null) {
 								//System.out.println(n.ACCIDENTAL().getText());
@@ -48,6 +48,8 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 								else if (n.NUMBER() != null) {
 									L = parseStringToFloat(n.NUMBER().getText());
 								}
+								
+								System.out.println(L);
 
 								String A = null;
 								if (n.ACCIDENTAL() != null) {
@@ -82,7 +84,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 					if (m.chord() != null && !m.chord().isEmpty()) {
 						m.chord().forEach( (c) -> {
 							if (c.note() != null && !c.note().isEmpty()) {
-								System.out.println(c.note());
+								//System.out.println(c.note());
 								c.note().forEach( (n) -> {
 									if (n.ACCIDENTAL() != null) {
 										//System.out.println(n.ACCIDENTAL().getText());

@@ -85,23 +85,22 @@ public class Song {
 			
 			Note note = body.getNotes().get(i);
 
-
-			//System.out.println(note.getChordID());
-
 			if (note.getChordID() > 0)
 			{
 				if  (chordID != note.getChordID())
 				{
 					chordID = note.getChordID();
-					tickcount += (int)note.getLength()*ticksPerBeat;
+					tickcount += (int)(note.getLength()*ticksPerBeat);
 				}
-				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)note.getLength()*ticksPerBeat);
+				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));
 			}
 			else if (!note.getPitch().isRest())
 			{
-				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)note.getLength()*ticksPerBeat);
-				tickcount += (int)note.getLength()*ticksPerBeat;
+				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));
+				tickcount += (int)(note.getLength()*ticksPerBeat);
 			}
+			else
+				tickcount += (int)(note.getLength()*ticksPerBeat);
 		}
 		
 	       //player.addNote(new Pitch('C').toMidiNote(), 0, 1);
