@@ -67,13 +67,61 @@ public class AbcBodyBaseListener implements AbcBodyListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterDivider(AbcBodyParser.DividerContext ctx) { }
+  @Override public void enterBar(AbcBodyParser.BarContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitDivider(AbcBodyParser.DividerContext ctx) { }
+  @Override public void exitBar(AbcBodyParser.BarContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterBeginRepeat(AbcBodyParser.BeginRepeatContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitBeginRepeat(AbcBodyParser.BeginRepeatContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterPartOne(AbcBodyParser.PartOneContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitPartOne(AbcBodyParser.PartOneContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterPartTwo(AbcBodyParser.PartTwoContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitPartTwo(AbcBodyParser.PartTwoContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterEndRepeat(AbcBodyParser.EndRepeatContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitEndRepeat(AbcBodyParser.EndRepeatContext ctx) { }
   /**
    * {@inheritDoc}
    *

@@ -51,15 +51,65 @@ public interface AbcBodyListener extends ParseTreeListener {
    */
   void exitParts(AbcBodyParser.PartsContext ctx);
   /**
-   * Enter a parse tree produced by {@link AbcBodyParser#divider}.
+   * Enter a parse tree produced by the {@code bar}
+   * labeled alternative in {@link AbcBodyParser#divider}.
    * @param ctx the parse tree
    */
-  void enterDivider(AbcBodyParser.DividerContext ctx);
+  void enterBar(AbcBodyParser.BarContext ctx);
   /**
-   * Exit a parse tree produced by {@link AbcBodyParser#divider}.
+   * Exit a parse tree produced by the {@code bar}
+   * labeled alternative in {@link AbcBodyParser#divider}.
    * @param ctx the parse tree
    */
-  void exitDivider(AbcBodyParser.DividerContext ctx);
+  void exitBar(AbcBodyParser.BarContext ctx);
+  /**
+   * Enter a parse tree produced by the {@code beginRepeat}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void enterBeginRepeat(AbcBodyParser.BeginRepeatContext ctx);
+  /**
+   * Exit a parse tree produced by the {@code beginRepeat}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void exitBeginRepeat(AbcBodyParser.BeginRepeatContext ctx);
+  /**
+   * Enter a parse tree produced by the {@code partOne}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void enterPartOne(AbcBodyParser.PartOneContext ctx);
+  /**
+   * Exit a parse tree produced by the {@code partOne}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void exitPartOne(AbcBodyParser.PartOneContext ctx);
+  /**
+   * Enter a parse tree produced by the {@code partTwo}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void enterPartTwo(AbcBodyParser.PartTwoContext ctx);
+  /**
+   * Exit a parse tree produced by the {@code partTwo}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void exitPartTwo(AbcBodyParser.PartTwoContext ctx);
+  /**
+   * Enter a parse tree produced by the {@code endRepeat}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void enterEndRepeat(AbcBodyParser.EndRepeatContext ctx);
+  /**
+   * Exit a parse tree produced by the {@code endRepeat}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   */
+  void exitEndRepeat(AbcBodyParser.EndRepeatContext ctx);
   /**
    * Enter a parse tree produced by {@link AbcBodyParser#tuplet}.
    * @param ctx the parse tree

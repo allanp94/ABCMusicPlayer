@@ -467,26 +467,98 @@ public class AbcBodyParser extends Parser {
   }
 
   public static class DividerContext extends ParserRuleContext {
-    public TerminalNode BAR() { return getToken(AbcBodyParser.BAR, 0); }
-    public TerminalNode BEGINREPEAT() { return getToken(AbcBodyParser.BEGINREPEAT, 0); }
-    public TerminalNode PARTONE() { return getToken(AbcBodyParser.PARTONE, 0); }
-    public TerminalNode PARTTWO() { return getToken(AbcBodyParser.PARTTWO, 0); }
-    public TerminalNode ENDREPEAT() { return getToken(AbcBodyParser.ENDREPEAT, 0); }
     public DividerContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
     }
     @Override public int getRuleIndex() { return RULE_divider; }
+   
+    public DividerContext() { }
+    public void copyFrom(DividerContext ctx) {
+      super.copyFrom(ctx);
+    }
+  }
+  public static class BarContext extends DividerContext {
+    public TerminalNode BAR() { return getToken(AbcBodyParser.BAR, 0); }
+    public BarContext(DividerContext ctx) { copyFrom(ctx); }
     @Override
     public void enterRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterDivider(this);
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterBar(this);
     }
     @Override
     public void exitRule(ParseTreeListener listener) {
-      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitDivider(this);
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitBar(this);
     }
     @Override
     public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitDivider(this);
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitBar(this);
+      else return visitor.visitChildren(this);
+    }
+  }
+  public static class PartTwoContext extends DividerContext {
+    public TerminalNode PARTTWO() { return getToken(AbcBodyParser.PARTTWO, 0); }
+    public PartTwoContext(DividerContext ctx) { copyFrom(ctx); }
+    @Override
+    public void enterRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterPartTwo(this);
+    }
+    @Override
+    public void exitRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitPartTwo(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitPartTwo(this);
+      else return visitor.visitChildren(this);
+    }
+  }
+  public static class EndRepeatContext extends DividerContext {
+    public TerminalNode ENDREPEAT() { return getToken(AbcBodyParser.ENDREPEAT, 0); }
+    public EndRepeatContext(DividerContext ctx) { copyFrom(ctx); }
+    @Override
+    public void enterRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterEndRepeat(this);
+    }
+    @Override
+    public void exitRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitEndRepeat(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitEndRepeat(this);
+      else return visitor.visitChildren(this);
+    }
+  }
+  public static class BeginRepeatContext extends DividerContext {
+    public TerminalNode BEGINREPEAT() { return getToken(AbcBodyParser.BEGINREPEAT, 0); }
+    public BeginRepeatContext(DividerContext ctx) { copyFrom(ctx); }
+    @Override
+    public void enterRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterBeginRepeat(this);
+    }
+    @Override
+    public void exitRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitBeginRepeat(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitBeginRepeat(this);
+      else return visitor.visitChildren(this);
+    }
+  }
+  public static class PartOneContext extends DividerContext {
+    public TerminalNode PARTONE() { return getToken(AbcBodyParser.PARTONE, 0); }
+    public PartOneContext(DividerContext ctx) { copyFrom(ctx); }
+    @Override
+    public void enterRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).enterPartOne(this);
+    }
+    @Override
+    public void exitRule(ParseTreeListener listener) {
+      if ( listener instanceof AbcBodyListener ) ((AbcBodyListener)listener).exitPartOne(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcBodyVisitor ) return ((AbcBodyVisitor<? extends T>)visitor).visitPartOne(this);
       else return visitor.visitChildren(this);
     }
   }
@@ -494,17 +566,51 @@ public class AbcBodyParser extends Parser {
   public final DividerContext divider() throws RecognitionException {
     DividerContext _localctx = new DividerContext(_ctx, getState());
     enterRule(_localctx, 8, RULE_divider);
-    int _la;
     try {
-      enterOuterAlt(_localctx, 1);
-      {
-      setState(50);
-      _la = _input.LA(1);
-      if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BEGINREPEAT) | (1L << PARTONE) | (1L << PARTTWO) | (1L << ENDREPEAT) | (1L << BAR))) != 0)) ) {
-      _errHandler.recoverInline(this);
-      } else {
-        consume();
-      }
+      setState(55);
+      switch (_input.LA(1)) {
+      case BAR:
+        _localctx = new BarContext(_localctx);
+        enterOuterAlt(_localctx, 1);
+        {
+        setState(50);
+        match(BAR);
+        }
+        break;
+      case BEGINREPEAT:
+        _localctx = new BeginRepeatContext(_localctx);
+        enterOuterAlt(_localctx, 2);
+        {
+        setState(51);
+        match(BEGINREPEAT);
+        }
+        break;
+      case PARTONE:
+        _localctx = new PartOneContext(_localctx);
+        enterOuterAlt(_localctx, 3);
+        {
+        setState(52);
+        match(PARTONE);
+        }
+        break;
+      case PARTTWO:
+        _localctx = new PartTwoContext(_localctx);
+        enterOuterAlt(_localctx, 4);
+        {
+        setState(53);
+        match(PARTTWO);
+        }
+        break;
+      case ENDREPEAT:
+        _localctx = new EndRepeatContext(_localctx);
+        enterOuterAlt(_localctx, 5);
+        {
+        setState(54);
+        match(ENDREPEAT);
+        }
+        break;
+      default:
+        throw new NoViableAltException(this);
       }
     }
     catch (RecognitionException re) {
@@ -554,28 +660,28 @@ public class AbcBodyParser extends Parser {
       int _alt;
       enterOuterAlt(_localctx, 1);
       {
-      setState(52);
+      setState(57);
       match(T__0);
-      setState(53);
+      setState(58);
       ((TupletContext)_localctx).NUMBER = match(NUMBER);
-      setState(60);
+      setState(65);
       _errHandler.sync(this);
-      _alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+      _alt = getInterpreter().adaptivePredict(_input,10,_ctx);
       while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
         if ( _alt==1 ) {
           {
           {
-          setState(54);
+          setState(59);
           if (!(counter<=(((TupletContext)_localctx).NUMBER!=null?Integer.valueOf(((TupletContext)_localctx).NUMBER.getText()):0))) throw new FailedPredicateException(this, "counter<=$NUMBER.int");
-          setState(55);
+          setState(60);
           note();
           counter++;
           }
           } 
         }
-        setState(62);
+        setState(67);
         _errHandler.sync(this);
-        _alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+        _alt = getInterpreter().adaptivePredict(_input,10,_ctx);
       }
       }
     }
@@ -625,23 +731,23 @@ public class AbcBodyParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(63);
+      setState(68);
       match(LEFTBRACKET);
-      setState(65); 
+      setState(70); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
         {
-        setState(64);
+        setState(69);
         note();
         }
         }
-        setState(67); 
+        setState(72); 
         _errHandler.sync(this);
         _la = _input.LA(1);
       } while ( _la==ACCIDENTAL || _la==LETTER );
-      setState(69);
+      setState(74);
       match(RIGHTBRACKET);
       }
     }
@@ -687,22 +793,22 @@ public class AbcBodyParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(72);
+      setState(77);
       _la = _input.LA(1);
       if (_la==ACCIDENTAL) {
         {
-        setState(71);
+        setState(76);
         match(ACCIDENTAL);
         }
       }
 
-      setState(74);
+      setState(79);
       match(LETTER);
-      setState(76);
-      switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+      setState(81);
+      switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
       case 1:
         {
-        setState(75);
+        setState(80);
         _la = _input.LA(1);
         if ( !(_la==NUMBER || _la==FRACTION) ) {
         _errHandler.recoverInline(this);
@@ -741,29 +847,30 @@ public class AbcBodyParser extends Parser {
   }
 
   public static final String _serializedATN =
-    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\21Q\4\2\t\2\4\3"+
+    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\21V\4\2\t\2\4\3"+
       "\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\6\2\24\n"+
       "\2\r\2\16\2\25\3\2\5\2\31\n\2\3\2\3\2\3\3\3\3\6\3\37\n\3\r\3\16\3"+
       " \3\3\5\3$\n\3\3\4\5\4\'\n\4\3\4\5\4*\n\4\3\4\3\4\3\4\6\4/\n\4\r\4"+
-      "\16\4\60\3\5\3\5\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\7\7=\n\7\f\7\16\7"+
-      "@\13\7\3\b\3\b\6\bD\n\b\r\b\16\bE\3\b\3\b\3\t\5\tK\n\t\3\t\3\t\5\t"+
-      "O\n\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\5\3\2\5\6\4\2\4\7\13\13\3\2\f"+
-      "\rV\2\23\3\2\2\2\4\36\3\2\2\2\6&\3\2\2\2\b\62\3\2\2\2\n\64\3\2\2\2"+
-      "\f\66\3\2\2\2\16A\3\2\2\2\20J\3\2\2\2\22\24\5\4\3\2\23\22\3\2\2\2"+
-      "\24\25\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\31\5\n"+
-      "\6\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\7\2\2\3\33\3"+
-      "\3\2\2\2\34\37\7\b\2\2\35\37\5\6\4\2\36\34\3\2\2\2\36\35\3\2\2\2\37"+
-      " \3\2\2\2 \36\3\2\2\2 !\3\2\2\2!#\3\2\2\2\"$\5\n\6\2#\"\3\2\2\2#$"+
-      "\3\2\2\2$\5\3\2\2\2%\'\5\n\6\2&%\3\2\2\2&\'\3\2\2\2\')\3\2\2\2(*\5"+
-      "\b\5\2)(\3\2\2\2)*\3\2\2\2*.\3\2\2\2+/\5\f\7\2,/\5\20\t\2-/\5\16\b"+
-      "\2.+\3\2\2\2.,\3\2\2\2.-\3\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3\2"+
-      "\2\2\61\7\3\2\2\2\62\63\t\2\2\2\63\t\3\2\2\2\64\65\t\3\2\2\65\13\3"+
-      "\2\2\2\66\67\7\3\2\2\67>\7\f\2\289\6\7\2\39:\5\20\t\2:;\b\7\1\2;="+
-      "\3\2\2\2<8\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?\r\3\2\2\2@>\3\2"+
-      "\2\2AC\7\t\2\2BD\5\20\t\2CB\3\2\2\2DE\3\2\2\2EC\3\2\2\2EF\3\2\2\2"+
-      "FG\3\2\2\2GH\7\n\2\2H\17\3\2\2\2IK\7\16\2\2JI\3\2\2\2JK\3\2\2\2KL"+
-      "\3\2\2\2LN\7\17\2\2MO\t\4\2\2NM\3\2\2\2NO\3\2\2\2O\21\3\2\2\2\17\25"+
-      "\30\36 #&).\60>EJN";
+      "\16\4\60\3\5\3\5\3\6\3\6\3\6\3\6\3\6\5\6:\n\6\3\7\3\7\3\7\3\7\3\7"+
+      "\3\7\7\7B\n\7\f\7\16\7E\13\7\3\b\3\b\6\bI\n\b\r\b\16\bJ\3\b\3\b\3"+
+      "\t\5\tP\n\t\3\t\3\t\5\tT\n\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\4\3\2\5"+
+      "\6\3\2\f\r_\2\23\3\2\2\2\4\36\3\2\2\2\6&\3\2\2\2\b\62\3\2\2\2\n9\3"+
+      "\2\2\2\f;\3\2\2\2\16F\3\2\2\2\20O\3\2\2\2\22\24\5\4\3\2\23\22\3\2"+
+      "\2\2\24\25\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\31"+
+      "\5\n\6\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\7\2\2\3\33"+
+      "\3\3\2\2\2\34\37\7\b\2\2\35\37\5\6\4\2\36\34\3\2\2\2\36\35\3\2\2\2"+
+      "\37 \3\2\2\2 \36\3\2\2\2 !\3\2\2\2!#\3\2\2\2\"$\5\n\6\2#\"\3\2\2\2"+
+      "#$\3\2\2\2$\5\3\2\2\2%\'\5\n\6\2&%\3\2\2\2&\'\3\2\2\2\')\3\2\2\2("+
+      "*\5\b\5\2)(\3\2\2\2)*\3\2\2\2*.\3\2\2\2+/\5\f\7\2,/\5\20\t\2-/\5\16"+
+      "\b\2.+\3\2\2\2.,\3\2\2\2.-\3\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3"+
+      "\2\2\2\61\7\3\2\2\2\62\63\t\2\2\2\63\t\3\2\2\2\64:\7\13\2\2\65:\7"+
+      "\4\2\2\66:\7\5\2\2\67:\7\6\2\28:\7\7\2\29\64\3\2\2\29\65\3\2\2\29"+
+      "\66\3\2\2\29\67\3\2\2\298\3\2\2\2:\13\3\2\2\2;<\7\3\2\2<C\7\f\2\2"+
+      "=>\6\7\2\3>?\5\20\t\2?@\b\7\1\2@B\3\2\2\2A=\3\2\2\2BE\3\2\2\2CA\3"+
+      "\2\2\2CD\3\2\2\2D\r\3\2\2\2EC\3\2\2\2FH\7\t\2\2GI\5\20\t\2HG\3\2\2"+
+      "\2IJ\3\2\2\2JH\3\2\2\2JK\3\2\2\2KL\3\2\2\2LM\7\n\2\2M\17\3\2\2\2N"+
+      "P\7\16\2\2ON\3\2\2\2OP\3\2\2\2PQ\3\2\2\2QS\7\17\2\2RT\t\3\2\2SR\3"+
+      "\2\2\2ST\3\2\2\2T\21\3\2\2\2\20\25\30\36 #&).\609CJOS";
   public static final ATN _ATN =
     new ATNDeserializer().deserialize(_serializedATN.toCharArray());
   static {

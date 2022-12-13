@@ -38,11 +38,40 @@ public interface AbcBodyVisitor<T> extends ParseTreeVisitor<T> {
    */
   T visitParts(AbcBodyParser.PartsContext ctx);
   /**
-   * Visit a parse tree produced by {@link AbcBodyParser#divider}.
+   * Visit a parse tree produced by the {@code bar}
+   * labeled alternative in {@link AbcBodyParser#divider}.
    * @param ctx the parse tree
    * @return the visitor result
    */
-  T visitDivider(AbcBodyParser.DividerContext ctx);
+  T visitBar(AbcBodyParser.BarContext ctx);
+  /**
+   * Visit a parse tree produced by the {@code beginRepeat}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   * @return the visitor result
+   */
+  T visitBeginRepeat(AbcBodyParser.BeginRepeatContext ctx);
+  /**
+   * Visit a parse tree produced by the {@code partOne}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   * @return the visitor result
+   */
+  T visitPartOne(AbcBodyParser.PartOneContext ctx);
+  /**
+   * Visit a parse tree produced by the {@code partTwo}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   * @return the visitor result
+   */
+  T visitPartTwo(AbcBodyParser.PartTwoContext ctx);
+  /**
+   * Visit a parse tree produced by the {@code endRepeat}
+   * labeled alternative in {@link AbcBodyParser#divider}.
+   * @param ctx the parse tree
+   * @return the visitor result
+   */
+  T visitEndRepeat(AbcBodyParser.EndRepeatContext ctx);
   /**
    * Visit a parse tree produced by {@link AbcBodyParser#tuplet}.
    * @param ctx the parse tree

@@ -27,11 +27,11 @@ parts
  ;
  
  divider
- : BAR
- | BEGINREPEAT
- | PARTONE
- | PARTTWO
- | ENDREPEAT
+ : BAR																#bar
+ | BEGINREPEAT														#beginRepeat
+ | PARTONE															#partOne
+ | PARTTWO															#partTwo
+ | ENDREPEAT														#endRepeat
  ;
   
 tuplet
