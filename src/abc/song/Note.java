@@ -53,7 +53,7 @@ public class Note {
 	}
 
 	public Pitch getPitch() {
-		return new Pitch(pitch);
+		return this.pitch;
 	}
 
 	public void setPitch(Pitch pitch) {
