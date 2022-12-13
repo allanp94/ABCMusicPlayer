@@ -74,8 +74,8 @@ public class HeaderVisitor extends AbcHeaderBaseVisitor<Header> {
 		Header headerObj = new Header(
 				 composerName,
 				 keySignature,
-				 meter,
 				 length,
+				 meter,
 				 tempoLength,
 				 tempo,
 				 title,

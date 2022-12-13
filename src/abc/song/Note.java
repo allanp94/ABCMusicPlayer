@@ -1,13 +1,15 @@
 package abc.song;
 
+import abc.sound.Pitch;
+
 /*
  * The Header class represents any given note information for an ABC file song.
  */
 public class Note {
 	private Pitch pitch;
-	private float length;
+	private double length;
 	private String accidental;
-	private int chord;
+	private Integer chordId;
 	private String voice;
 	
 	/*
@@ -15,11 +17,11 @@ public class Note {
 	 * All fields allow null.
 	 * 
 	 */
-	public Note(Pitch pitch, float length) {
+	public Note(Pitch pitch, double length) {
 		this.setPitch(pitch);
 		this.setLength(length);
 		this.setAccidental(null);
-		this.setChordID(0);
+		this.setChordId(null);
 		this.setVoice(null);
 	}
 	
@@ -29,15 +31,15 @@ public class Note {
 	 */
 	public Note(
 			Pitch pitch,
-			float length,
+			double length,
 			String accidental,
-			int chord,
+			Integer chordId,
 			String voice
 			) {
 		this.setPitch(pitch);
 		this.setLength(length);
 		this.setAccidental(accidental);
-		this.setChordID(chord);
+		this.setChordId(chordId);
 		this.setVoice(voice);
 	}
 	
@@ -48,32 +50,34 @@ public class Note {
 		this.setPitch(note.getPitch());
 		this.setLength(note.getLength());
 		this.setAccidental(note.getAccidental());
-		this.setChordID(note.getChordID());
+		this.setChordId(note.getChordId());
 		this.setVoice(note.getVoice());
 	}
 
 	public Pitch getPitch() {
-		return this.pitch;
+		if (pitch == null)
+			return null;
+		return new Pitch(pitch);
 	}
 
 	public void setPitch(Pitch pitch) {
 		this.pitch = pitch;
 	}
 
-	public float getLength() {
+	public double getLength() {
 		return length;
 	}
 
-	public void setLength(float length) {
+	public void setLength(double length) {
 		this.length = length;
 	}
 
-	public int getChordID() {
-		return chord;
+	public Integer getChordId() {
+		return chordId;
 	}
 
-	public void setChordID(int chord) {
-		this.chord = chord;
+	public void setChordId(Integer chordId) {
+		this.chordId = chordId;
 	}
 
 	public String getVoice() {
@@ -85,7 +89,7 @@ public class Note {
 	}
 	
 	public String toString() {
-		return "{"+"Pitch: "+pitch+" Length: "+String.valueOf(length)+" Chord: "+String.valueOf(chord)+" Voice: "+voice+"}";
+		return "{"+"Pitch: "+pitch+" Length: "+String.valueOf(length)+" Chord: "+String.valueOf(chordId)+" Voice: "+voice+"}";
 	}
 
 	public String getAccidental() {

@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 
-import abc.sound.Pitch;
 import abc.sound.SequencePlayer;
 
 /*
@@ -18,14 +17,14 @@ import abc.sound.SequencePlayer;
 public class Song {
 
 	private Header header;
-	private Body body;
+	private List<Note> notes;
 	
 	/*
 	 * Get a Song instance with the specified Header and Note List.
 	 */
-	public Song(Header header, Body body) {
+	public Song(Header header, List<Note> notes) {
 		this.setHeader(header);
-		this.setBody(body);
+		this.setNotes(notes);
 	}
 	
 	/*
@@ -33,15 +32,11 @@ public class Song {
 	 */
 	public Song(Header header) {
 		this.setHeader(header);
-		this.body = new Body(new ArrayList<>());
+		this.notes = new ArrayList<>();
 	}
 	
 	public Header getHeader() {
 		return new Header(this.header);
-	}
-	
-	public Body getBody() {
-		return new Body(this.body.getNotes());
 	}
 	
 	public void setHeader(Header header) {
@@ -49,77 +44,83 @@ public class Song {
 		this.header = header;
 	}
 	
-	public void setBody(Body body) {
-		this.body = body;
-	}
-	
 	public List<Note> getNotes() {
-		return body.getNotes().stream()
+		return this.notes.stream()
 				.map(note -> new Note(note))
 				.collect(Collectors.toList());
 	}
-
+	
+	/*
+	 * Add the given notes to the end of the note list.
+	 * Any given notes Voice must be either null or be listed in the header voices list
+	 */
+	public void setNotes(List<Note> notes) {
+		this.notes = new ArrayList<>();
+		
+		for(Note note: notes) {
+			this.AddNote(note);
+		}
+	}
+	
+	/*
+	 * Add the given note to the end of the note list.
+	 * Any given notes Voice must be either null or be listed in the header voices list
+	 */
+	public void AddNote(Note note) {
+		// check if notes voice is in header if not the default null voice
+		if (note.getVoice() != null && !header.getVoices().contains(note.getVoice())) {
+			throw new IllegalArgumentException("The notes voice must be included in the header voices");
+		}
+		
+		this.notes.add(note);
+	}
+	
 	public String toString() {
-		return header.toString() + body.getNotes().toString();
+		return header.toString() + notes.toString();
 	}
 	
 	/*
 	 * toSequencePlayer will transfer the song information to a SequencePlayer that can play the song instance.
 	 */
-	public void toSequencePlayer() throws MidiUnavailableException, InvalidMidiDataException {
-
-		//System.out.println(this.header.getTempo());
-		//System.out.println(this.header.getTempoLength());
-		//System.out.println(this.header.getLength());
-		
+	public SequencePlayer toSequencePlayer() throws MidiUnavailableException, InvalidMidiDataException {
 		Integer beatsPerMinute = (int) (this.header.getTempoLength()/this.header.getLength()*this.header.getTempo());
 		Integer ticksPerBeat = 12;
 		
 		SequencePlayer player = new SequencePlayer(beatsPerMinute, ticksPerBeat);
 
 		Integer tickcount = 12;
-		Integer chordID = 1;
+		Integer firstChordNoteLength = null;
+		Integer lastChordId = -1;
 		
-		for (int i = 0; i < body.getNotes().size(); i++) {
+		for (int i = 0; i < notes.size(); i++) {
+			Note note = notes.get(i);
 			
-			
-			//System.out.println(body.getNotes().size());
-
-			Note note = body.getNotes().get(i);
-
-			//System.out.println(note.getChordID());
-			//System.out.println(note.getPitch().toMidiNote());
-			//System.out.println(note.getPitch().isRest());
-
-			if (note.getChordID() > 0)
-			{
-				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));
-				if  (!chordID.equals(note.getChordID()))
-				{
-					chordID = note.getChordID();
-					tickcount += (int)(note.getLength()*ticksPerBeat);
-				}
+			// if different chord or note, apply firstChordNoteLength
+			if (lastChordId != -1 && (note.getChordId() == null || note.getChordId() != lastChordId) ) {
+				tickcount += firstChordNoteLength;
+				firstChordNoteLength = null;
+				lastChordId = -1;
 			}
-			else if (!note.getPitch().isRest())
+			
+			if (note.getPitch() == null) // if is rest
 			{
-				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));
 				tickcount += (int)(note.getLength()*ticksPerBeat);
+			}
+			else if (note.getChordId() != null)
+			{
+				if (firstChordNoteLength == null) {
+					firstChordNoteLength = (int)(note.getLength()*ticksPerBeat);
+					lastChordId = note.getChordId();
+				}
+				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));					
 			}
 			else 
 			{
+				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));
 				tickcount += (int)(note.getLength()*ticksPerBeat);
-				//System.out.println(tickcount);
 			}
 		}
 		
-	       //player.addNote(new Pitch('C').toMidiNote(), 0, 1);
-
-           //System.out.println(player);
-
-           // play!
-           player.play();
-		
-		
-		//throw new UnsupportedOperationException();
+        return player;
 	}
 }

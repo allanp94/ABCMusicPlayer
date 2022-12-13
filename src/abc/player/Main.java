@@ -27,10 +27,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import abc.parser.HeaderVisitor;
-import abc.song.Header; 
-
+import abc.song.Header;
+import abc.song.Note;
 import abc.parser.BodyVisitor;
-import abc.song.Body; 
 
 import abc.song.Song; 
 /**
@@ -61,15 +60,15 @@ public class Main {
         int headerEndPosition = matcher.end();
         
 
-        String header = content.substring(0, headerEndPosition);
-        Header Header = readHeader(header);
+        String headerString = content.substring(0, headerEndPosition);
+        Header header = readHeader(headerString);
         
-        String body = content.substring(headerEndPosition);
-        Body Body = readBody(body);
+        String bodyString = content.substring(headerEndPosition);
+        List<Note> notes = readBody(bodyString);
         
-        //Song Song = new Song(Header, Body);
-        //Song.toSequencePlayer();
+        Song song = new Song(header, notes);
         
+        song.toSequencePlayer().play();
     }
     
 	public static Header readHeader(String headerString) {
@@ -89,7 +88,7 @@ public class Main {
     	
     }
     
-    public static Body readBody(String bodyString) {
+    public static List<Note> readBody(String bodyString) {
     	CharStream stream = new ANTLRInputStream(bodyString);
     	AbcBodyLexer lexer  = new AbcBodyLexer(stream);
         TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -97,12 +96,13 @@ public class Main {
         ParseTree tree = parser.body();
         
         BodyVisitor body = new BodyVisitor(); 
-        Body bodyObj = body.visit(tree);
-        //System.out.println(bodyObj.toString());
+        List<Note> notes = body.visit(tree);
+        
+        
                 
         showTree(tree, parser);
         
-        return bodyObj;
+        return notes;
         
     }
 
@@ -113,12 +113,13 @@ public class Main {
                 //"sample_abc/abc_song.abc",
                 //"sample_abc/waxies_dargle.abc",
     	        //"sample_abc/fur_elise.abc",
-    	        //"sample_abc/little_night_music.abc",
+    	        "sample_abc/little_night_music.abc",
     	        //"sample_abc/paddy.abc",
     	        //"sample_abc/scale.abc",
     	        //"sample_abc/invention.abc",
-    	        "sample_abc/test.abc",
-    	        //"sample_abc/sample1.abc"       
+    	        //"sample_abc/test.abc",
+    	        //"sample_abc/sample1.abc",
+    	        //"sample_abc/piece1.abc"
     	}; 
     	
     	for(String i: songList) {

@@ -9,8 +9,8 @@ import java.util.List;
 public class Header {
 	private String composerName; // C
 	private String keySignature; // K
-	private Float meter; // M
 	private Float length; // L
+	private Float meter; // M
 	private Float tempoLength; // Q
 	private Integer tempo; // Q
 	private String title; // T
@@ -31,8 +31,8 @@ public class Header {
 	public Header(
 				String composerName,
 				String keySignature,
-				Float meter,
 				Float length,
+				Float meter,
 				Float tempoLength,
 				Integer tempo,
 				String title,
@@ -57,6 +57,7 @@ public class Header {
 		this.setKeySignature(headerToCopy.getKeySignature());
 		this.setMeter(headerToCopy.getMeter());
 		this.setLength(headerToCopy.getLength());
+		this.setTempoLength(headerToCopy.getTempoLength());
 		this.setTempo(headerToCopy.getTempo());
 		this.setTitle(headerToCopy.getTitle());
 		this.setVoices(headerToCopy.getVoices());
@@ -130,6 +131,9 @@ public class Header {
 	}
 
 	public List<String> getVoices() {
+		if (voices == null)
+			return this.voices;
+		
 		return new ArrayList<>(voices);
 	}
 
@@ -152,11 +156,12 @@ public class Header {
 	public String toString() {
 		return "Composer Name: " + composerName + "\n" +
 				"Key Signature: " + keySignature + "\n" +
-				"Meter: " + meter + "\n" +
 				"Default Length: " + length + "\n" +
+				"Meter: " + meter + "\n" +
 				"Tempo: " + tempo + "\n" +
+				"Tempo Length: " + tempoLength + "\n" +
 				"Title: " + title + "\n" +
-				"Voices: " + voices + "\n";
+				"Voices: " + String.join(", ", voices).trim() + "\n";
 	}
 
 }

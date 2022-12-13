@@ -16,6 +16,7 @@ package abc.sound;
 public class Pitch {
 
     private final int value;
+    private final char letter;
 
     /*
      * Rep invariant: true.
@@ -43,30 +44,13 @@ public class Pitch {
     /**
      * Middle C.
      */
-    public static final Pitch MIDDLE_C = new Pitch('C');
+    public static final Pitch MIDDLE_C = new Pitch("C");
     
     /**
      * Number of pitches in an octave.
      */
     public static final int OCTAVE = 12;
     
-    private Pitch(int value) {
-        this.value = value;
-    }
-
-    /**
-     * Make a Pitch named c in the middle octave of the piano keyboard.
-     * For example, new Pitch('C') constructs middle C.
-     * @param c letter in {'A',...,'G'}
-     */
-    public Pitch(char c) {
-        try {
-            value = SCALE[c-'A'];
-            //System.out.println(value);
-        } catch (ArrayIndexOutOfBoundsException aioobe) {
-            throw new IllegalArgumentException(c + " must be in the range A-G");
-        }
-    }
 
     /**
      * Make a Pitch named c in the middle octave of the piano keyboard.
@@ -76,41 +60,48 @@ public class Pitch {
     public Pitch(String c) {
         try {
         	char letter = c.charAt(0);
+        	int pitch = 0;
+
         	char octave = '\0';
         	if (c.length() > 1)
         		octave = c.charAt(1);
-        	
-        	int basepitch = 60;
+        	pitch = 60;
         	if (Character.isUpperCase(letter))
         	{
-        		basepitch = SCALE[letter-'A'];
+        		pitch = SCALE[letter-'A'];
         	}
         	else
         	{
-        		basepitch = SCALE[Character.toUpperCase(letter) -'A'];
-        		basepitch += 12;
+        		pitch = SCALE[Character.toUpperCase(letter) -'A'];
+        		pitch += OCTAVE;
         	}
         	
         	if (octave != '\0') {
         		if (octave == '\'') {
-        			basepitch += 12;
+        			pitch += OCTAVE;
         		}
         		else {
-        			basepitch -= 12;
+        			pitch -= OCTAVE;
         		}
         	}
-        	
-        	//System.out.println(test3);
-        	
-            //value = SCALE[c-'A'];
-            value = basepitch;
+
+
+
+            this.value = pitch;
+            this.letter = Character.toUpperCase(letter);
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new IllegalArgumentException(c + " must be in the range A-G");
         }
     }
     
+    private Pitch(int value, char letter) {
+        this.value = value;
+        this.letter = letter;
+    }
+    
     public Pitch(Pitch pitch) {
     	this.value = pitch.value;
+    	this.letter = pitch.letter;
     }
 
     /**
@@ -119,7 +110,7 @@ public class Pitch {
      *         E transposed by -1 semitones is E flat
      */
     public Pitch transpose(int semitonesUp) {
-        return new Pitch(value + semitonesUp);
+        return new Pitch(value + semitonesUp, letter);
     }
 
     /**
@@ -152,11 +143,11 @@ public class Pitch {
         return value;
     }
 
-
     /**
      * @return the MIDI note of this pitch
      */
     public int toMidiNote() {
+    	//System.out.println(value);
         return value + 60;
     }
 
