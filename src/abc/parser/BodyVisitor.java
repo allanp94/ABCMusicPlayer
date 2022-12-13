@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import abc.song.*;
-import abc.sound.Pitch;
+import abc.song.Pitch;
 import abc.parser.AbcBodyParser.MeasureContext;
 import abc.song.Body;
+import abc.song.Note;
 import abc.song.Song;
 
 public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
@@ -23,7 +23,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 				Body measure1 = visit(s.measure(i)); 
 			}
 	});
-		System.out.println(stringNoteList);
+//		System.out.println(stringNoteList);
 		
 		
 //		ctx.section().forEach( (s) -> {
@@ -208,44 +208,50 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 	@Override public Body visitNote(AbcBodyParser.NoteContext ctx) {
 		System.out.println(ctx.getText());
 		String A = null,V = null;
-		Float L = null;
+		float L = 0;
 		Pitch P = null; 
 		int C = ChordID;
 		V = "1";
 		
 
 		if (ctx.LETTER() != null) {
-//			P = new Pitch((ctx.LETTER().getText().charAt(0))); 
+			P = new Pitch((ctx.LETTER().getText())); 
+//			System.out.println("Pitch " + P);
 		}; 
-		
-		if (ctx.NUMBER() != null) {
-			L = parseStringToFloat(ctx.NUMBER().getText()); 
-//			System.out.println(L);
-		}
 		
 		if (ctx.FRACTION() != null) {
 			L = parseStringToFloat(ctx.FRACTION().getText());
-//			System.out.println(L);
+//			System.out.println("Length " + L);
 		}
+		else if (ctx.NUMBER() != null) {
+			L = parseStringToFloat(ctx.NUMBER().getText()); 
+//			System.out.println("Length " + L);
+		}
+		
 		
 		if (ctx.ACCIDENTAL() != null) {
 			A = ctx.ACCIDENTAL().getText(); 
-			System.out.println(A);
+//			System.out.println("Accidental" + A);
 		}
+		
+		System.out.println("Pitch " + P);
+		System.out.println("Length " + L);
+		System.out.println("Accidental " + A);
 
 		
-//		Note N = new Note(P,L,A,C,V);
-//
-////				P, 
-////				L, 
-////				A, 
-////				C, 
-////				V
-////				);
+		Note N = new Note(P,L,A,C,V);
+
+//				P, 
+//				L, 
+//				A, 
+//				C, 
+//				V
+//				);
+		System.out.println(N);
 		
 		stringNoteList.add(ctx.getText()); 
+		orderedNoteList.add(N);
 
-		
 		return visitChildren(ctx); 
 		}
 	  
