@@ -49,7 +49,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 									L = parseStringToFloat(n.NUMBER().getText());
 								}
 								
-								System.out.println(L);
+								//System.out.println(L);
 
 								String A = null;
 								if (n.ACCIDENTAL() != null) {
@@ -140,8 +140,69 @@ public class BodyVisitor extends AbcBodyBaseVisitor<Body> {
 					}
 					
 					else if (m.tuplet() != null && !m.tuplet().isEmpty()) {
+						m.tuplet().forEach( (t) -> {
+							if (t.NUMBER() != null)
+							{
+								System.out.println(t.NUMBER().getText());
+							}
+							if (t.note() != null && !t.note().isEmpty()) {
+								//System.out.println(c.note());
+								t.note().forEach( (n) -> {
+									if (n.ACCIDENTAL() != null) {
+										//System.out.println(n.ACCIDENTAL().getText());
+									}
+									if (n.LETTER() != null) {
+										//System.out.println(n.LETTER().getText());
+										
+										Pitch P = new Pitch(n.LETTER().getText());
+										//new Pitch('C').toMidiNote();
+										
+										float L = 1;
+										if (n.FRACTION() != null) {
+											//System.out.println(n.NUMBER().getText());
+											L = parseStringToFloat(n.FRACTION().getText());
+											//System.out.println(L);
+										}
+										else if (n.NUMBER() != null) {
+											L = parseStringToFloat(n.NUMBER().getText());
+										}
+										L=(L*2)/3;
+
+										String A = null;
+										if (n.ACCIDENTAL() != null) {
+											A = n.ACCIDENTAL().getText();
+										}
+
+										String V = null;
+										if (s.VOICE() != null && !s.VOICE().isEmpty()) {
+											V = s.VOICE().get(0).getText();
+										}
+										
+										int C = 0;
+										
+										Note N = new Note(
+												P, 
+												L, 
+												A, 
+												C, 
+												V
+												);
+										orderedNoteList.add(N);
+									}
+
+									if (n.NUMBER() != null) {
+										//System.out.println(n.NUMBER().getText());
+									}
+									else if (n.FRACTION() != null) {
+										//System.out.println(n.FRACTION().getText());
+									}
+								});
+							}
+
+							//'(' NUMBER ( {counter<=$NUMBER.int}? note {counter++;} )*
+							
+						});
 						//System.out.println(m.tuplet());
-						//'(' NUMBER ( {counter<=$NUMBER.int}? note {counter++;} )*
 					}
 				});
 				if (s.divider() != null && !s.divider().isEmpty()) {

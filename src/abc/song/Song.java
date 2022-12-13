@@ -77,7 +77,7 @@ public class Song {
 		
 		SequencePlayer player = new SequencePlayer(beatsPerMinute, ticksPerBeat);
 
-		Integer tickcount = 0;
+		Integer tickcount = 12;
 		Integer chordID = 1;
 		
 		for (int i = 0; i < body.getNotes().size(); i++) {
@@ -105,7 +105,7 @@ public class Song {
 		
 	       //player.addNote(new Pitch('C').toMidiNote(), 0, 1);
 
-           System.out.println(player);
+           //System.out.println(player);
 
            // play!
            player.play();
