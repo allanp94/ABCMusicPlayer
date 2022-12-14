@@ -87,7 +87,7 @@ public class SongTests {
 						+ "Default Length: 0.125\n"
 						+ "Meter: 1.0\n"
 						+ "Tempo: 100\n"
-						+ "Tempo Length: null\n"
+						+ "Tempo Length: 0.125\n"
 						+ "Title: \n"
 						+ "Voices: \n"
 						+ "[{Pitch: A Length: 1.0 Chord: null Voice: null}]";
