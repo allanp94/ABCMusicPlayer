@@ -158,8 +158,8 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 	// helper functions
 	private Float getLengthFromString(String ratioString) {
 		try { 
-			if (ratioString == null || ratioString.isBlank()) //// throw
-				new Exception("invalid"); 
+			//if (ratioString == null || ratioString.isBlank()) //// 
+			//	throw new Exception("invalid"); 
 		 	String ratio = ratioString.trim();
 			if (ratio.contains("/")) {
 				String[] rat = ratio.split("/");

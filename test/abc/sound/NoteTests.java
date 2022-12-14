@@ -14,7 +14,7 @@ public class NoteTests {
 	public void Note_Ctor_Pitch_And_Length_Should_Map_Properties_Correctly() {
 		
 		// Arrange
-		Pitch pitch = new Pitch('A');
+		Pitch pitch = new Pitch("A");
 		double length = 2.0;
 		
 		// Act
@@ -32,7 +32,7 @@ public class NoteTests {
 	public void Note_Ctor_Should_Map_Properties_Correctly() {
 		
 		// Arrange
-		Pitch pitch = new Pitch('A');
+		Pitch pitch = new Pitch("A");
 		double length = 2.0;
 		String accidental = "accidental";
 		boolean chord = true;
@@ -53,7 +53,7 @@ public class NoteTests {
 	public void NoteToMap_Ctor_Should_Map_Properties_Correctly() {
 		
 		// Arrange
-		Pitch pitch = new Pitch('A');
+		Pitch pitch = new Pitch("A");
 		double length = 2.0;
 		String accidental = "accidental";
 		boolean chord = true;
