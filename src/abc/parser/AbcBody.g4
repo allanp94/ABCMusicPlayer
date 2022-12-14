@@ -15,7 +15,7 @@ body
  ;
  
 section
- : (VOICE | measure)+ divider?
+ : VOICE? measure+ divider?
  ;
  
 measure

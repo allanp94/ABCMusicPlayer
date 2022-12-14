@@ -192,10 +192,7 @@ public class AbcBodyParser extends Parser {
   }
 
   public static class SectionContext extends ParserRuleContext {
-    public List<TerminalNode> VOICE() { return getTokens(AbcBodyParser.VOICE); }
-    public TerminalNode VOICE(int i) {
-      return getToken(AbcBodyParser.VOICE, i);
-    }
+    public TerminalNode VOICE() { return getToken(AbcBodyParser.VOICE, 0); }
     public List<MeasureContext> measure() {
       return getRuleContexts(MeasureContext.class);
     }
@@ -227,56 +224,45 @@ public class AbcBodyParser extends Parser {
   public final SectionContext section() throws RecognitionException {
     SectionContext _localctx = new SectionContext(_ctx, getState());
     enterRule(_localctx, 2, RULE_section);
+    int _la;
     try {
       int _alt;
       enterOuterAlt(_localctx, 1);
       {
-      setState(28); 
+      setState(27);
+      _la = _input.LA(1);
+      if (_la==VOICE) {
+        {
+        setState(26);
+        match(VOICE);
+        }
+      }
+
+      setState(30); 
       _errHandler.sync(this);
       _alt = 1;
       do {
         switch (_alt) {
         case 1:
           {
-          setState(28);
-          switch (_input.LA(1)) {
-          case VOICE:
-            {
-            setState(26);
-            match(VOICE);
-            }
-            break;
-          case T__0:
-          case BEGINREPEAT:
-          case PARTONE:
-          case PARTTWO:
-          case ENDREPEAT:
-          case LEFTBRACKET:
-          case BAR:
-          case ACCIDENTAL:
-          case LETTER:
-            {
-            setState(27);
-            measure();
-            }
-            break;
-          default:
-            throw new NoViableAltException(this);
+          {
+          setState(29);
+          measure();
           }
           }
           break;
         default:
           throw new NoViableAltException(this);
         }
-        setState(30); 
+        setState(32); 
         _errHandler.sync(this);
         _alt = getInterpreter().adaptivePredict(_input,3,_ctx);
       } while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-      setState(33);
+      setState(35);
       switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
       case 1:
         {
-        setState(32);
+        setState(34);
         divider();
         }
         break;
@@ -346,49 +332,49 @@ public class AbcBodyParser extends Parser {
       int _alt;
       enterOuterAlt(_localctx, 1);
       {
-      setState(36);
+      setState(38);
       switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
       case 1:
         {
-        setState(35);
+        setState(37);
         divider();
         }
         break;
       }
-      setState(39);
+      setState(41);
       _la = _input.LA(1);
       if (_la==PARTONE || _la==PARTTWO) {
         {
-        setState(38);
+        setState(40);
         parts();
         }
       }
 
-      setState(44); 
+      setState(46); 
       _errHandler.sync(this);
       _alt = 1;
       do {
         switch (_alt) {
         case 1:
           {
-          setState(44);
+          setState(46);
           switch (_input.LA(1)) {
           case T__0:
             {
-            setState(41);
+            setState(43);
             tuplet();
             }
             break;
           case ACCIDENTAL:
           case LETTER:
             {
-            setState(42);
+            setState(44);
             note();
             }
             break;
           case LEFTBRACKET:
             {
-            setState(43);
+            setState(45);
             chord();
             }
             break;
@@ -400,7 +386,7 @@ public class AbcBodyParser extends Parser {
         default:
           throw new NoViableAltException(this);
         }
-        setState(46); 
+        setState(48); 
         _errHandler.sync(this);
         _alt = getInterpreter().adaptivePredict(_input,8,_ctx);
       } while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
@@ -446,7 +432,7 @@ public class AbcBodyParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(48);
+      setState(50);
       _la = _input.LA(1);
       if ( !(_la==PARTONE || _la==PARTTWO) ) {
       _errHandler.recoverInline(this);
@@ -498,7 +484,7 @@ public class AbcBodyParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(50);
+      setState(52);
       _la = _input.LA(1);
       if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BEGINREPEAT) | (1L << PARTONE) | (1L << PARTTWO) | (1L << ENDREPEAT) | (1L << BAR))) != 0)) ) {
       _errHandler.recoverInline(this);
@@ -554,26 +540,26 @@ public class AbcBodyParser extends Parser {
       int _alt;
       enterOuterAlt(_localctx, 1);
       {
-      setState(52);
+      setState(54);
       match(T__0);
-      setState(53);
+      setState(55);
       ((TupletContext)_localctx).NUMBER = match(NUMBER);
-      setState(60);
+      setState(62);
       _errHandler.sync(this);
       _alt = getInterpreter().adaptivePredict(_input,9,_ctx);
       while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
         if ( _alt==1 ) {
           {
           {
-          setState(54);
+          setState(56);
           if (!(counter<=(((TupletContext)_localctx).NUMBER!=null?Integer.valueOf(((TupletContext)_localctx).NUMBER.getText()):0))) throw new FailedPredicateException(this, "counter<=$NUMBER.int");
-          setState(55);
+          setState(57);
           note();
           counter++;
           }
           } 
         }
-        setState(62);
+        setState(64);
         _errHandler.sync(this);
         _alt = getInterpreter().adaptivePredict(_input,9,_ctx);
       }
@@ -625,23 +611,23 @@ public class AbcBodyParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(63);
+      setState(65);
       match(LEFTBRACKET);
-      setState(65); 
+      setState(67); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
         {
-        setState(64);
+        setState(66);
         note();
         }
         }
-        setState(67); 
+        setState(69); 
         _errHandler.sync(this);
         _la = _input.LA(1);
       } while ( _la==ACCIDENTAL || _la==LETTER );
-      setState(69);
+      setState(71);
       match(RIGHTBRACKET);
       }
     }
@@ -687,22 +673,22 @@ public class AbcBodyParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(72);
+      setState(74);
       _la = _input.LA(1);
       if (_la==ACCIDENTAL) {
         {
-        setState(71);
+        setState(73);
         match(ACCIDENTAL);
         }
       }
 
-      setState(74);
-      match(LETTER);
       setState(76);
+      match(LETTER);
+      setState(78);
       switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
       case 1:
         {
-        setState(75);
+        setState(77);
         _la = _input.LA(1);
         if ( !(_la==NUMBER || _la==FRACTION) ) {
         _errHandler.recoverInline(this);
@@ -741,29 +727,30 @@ public class AbcBodyParser extends Parser {
   }
 
   public static final String _serializedATN =
-    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\21Q\4\2\t\2\4\3"+
+    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\21S\4\2\t\2\4\3"+
       "\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\6\2\24\n"+
-      "\2\r\2\16\2\25\3\2\5\2\31\n\2\3\2\3\2\3\3\3\3\6\3\37\n\3\r\3\16\3"+
-      " \3\3\5\3$\n\3\3\4\5\4\'\n\4\3\4\5\4*\n\4\3\4\3\4\3\4\6\4/\n\4\r\4"+
-      "\16\4\60\3\5\3\5\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\7\7=\n\7\f\7\16\7"+
-      "@\13\7\3\b\3\b\6\bD\n\b\r\b\16\bE\3\b\3\b\3\t\5\tK\n\t\3\t\3\t\5\t"+
-      "O\n\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\5\3\2\5\6\4\2\4\7\13\13\3\2\f"+
-      "\rV\2\23\3\2\2\2\4\36\3\2\2\2\6&\3\2\2\2\b\62\3\2\2\2\n\64\3\2\2\2"+
-      "\f\66\3\2\2\2\16A\3\2\2\2\20J\3\2\2\2\22\24\5\4\3\2\23\22\3\2\2\2"+
-      "\24\25\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2\2\27\31\5\n"+
-      "\6\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\7\2\2\3\33\3"+
-      "\3\2\2\2\34\37\7\b\2\2\35\37\5\6\4\2\36\34\3\2\2\2\36\35\3\2\2\2\37"+
-      " \3\2\2\2 \36\3\2\2\2 !\3\2\2\2!#\3\2\2\2\"$\5\n\6\2#\"\3\2\2\2#$"+
-      "\3\2\2\2$\5\3\2\2\2%\'\5\n\6\2&%\3\2\2\2&\'\3\2\2\2\')\3\2\2\2(*\5"+
-      "\b\5\2)(\3\2\2\2)*\3\2\2\2*.\3\2\2\2+/\5\f\7\2,/\5\20\t\2-/\5\16\b"+
-      "\2.+\3\2\2\2.,\3\2\2\2.-\3\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3\2"+
-      "\2\2\61\7\3\2\2\2\62\63\t\2\2\2\63\t\3\2\2\2\64\65\t\3\2\2\65\13\3"+
-      "\2\2\2\66\67\7\3\2\2\67>\7\f\2\289\6\7\2\39:\5\20\t\2:;\b\7\1\2;="+
-      "\3\2\2\2<8\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?\r\3\2\2\2@>\3\2"+
-      "\2\2AC\7\t\2\2BD\5\20\t\2CB\3\2\2\2DE\3\2\2\2EC\3\2\2\2EF\3\2\2\2"+
-      "FG\3\2\2\2GH\7\n\2\2H\17\3\2\2\2IK\7\16\2\2JI\3\2\2\2JK\3\2\2\2KL"+
-      "\3\2\2\2LN\7\17\2\2MO\t\4\2\2NM\3\2\2\2NO\3\2\2\2O\21\3\2\2\2\17\25"+
-      "\30\36 #&).\60>EJN";
+      "\2\r\2\16\2\25\3\2\5\2\31\n\2\3\2\3\2\3\3\5\3\36\n\3\3\3\6\3!\n\3"+
+      "\r\3\16\3\"\3\3\5\3&\n\3\3\4\5\4)\n\4\3\4\5\4,\n\4\3\4\3\4\3\4\6\4"+
+      "\61\n\4\r\4\16\4\62\3\5\3\5\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\7\7?\n"+
+      "\7\f\7\16\7B\13\7\3\b\3\b\6\bF\n\b\r\b\16\bG\3\b\3\b\3\t\5\tM\n\t"+
+      "\3\t\3\t\5\tQ\n\t\3\t\2\2\n\2\4\6\b\n\f\16\20\2\5\3\2\5\6\4\2\4\7"+
+      "\13\13\3\2\f\rX\2\23\3\2\2\2\4\35\3\2\2\2\6(\3\2\2\2\b\64\3\2\2\2"+
+      "\n\66\3\2\2\2\f8\3\2\2\2\16C\3\2\2\2\20L\3\2\2\2\22\24\5\4\3\2\23"+
+      "\22\3\2\2\2\24\25\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2"+
+      "\2\27\31\5\n\6\2\30\27\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\7"+
+      "\2\2\3\33\3\3\2\2\2\34\36\7\b\2\2\35\34\3\2\2\2\35\36\3\2\2\2\36 "+
+      "\3\2\2\2\37!\5\6\4\2 \37\3\2\2\2!\"\3\2\2\2\" \3\2\2\2\"#\3\2\2\2"+
+      "#%\3\2\2\2$&\5\n\6\2%$\3\2\2\2%&\3\2\2\2&\5\3\2\2\2\')\5\n\6\2(\'"+
+      "\3\2\2\2()\3\2\2\2)+\3\2\2\2*,\5\b\5\2+*\3\2\2\2+,\3\2\2\2,\60\3\2"+
+      "\2\2-\61\5\f\7\2.\61\5\20\t\2/\61\5\16\b\2\60-\3\2\2\2\60.\3\2\2\2"+
+      "\60/\3\2\2\2\61\62\3\2\2\2\62\60\3\2\2\2\62\63\3\2\2\2\63\7\3\2\2"+
+      "\2\64\65\t\2\2\2\65\t\3\2\2\2\66\67\t\3\2\2\67\13\3\2\2\289\7\3\2"+
+      "\29@\7\f\2\2:;\6\7\2\3;<\5\20\t\2<=\b\7\1\2=?\3\2\2\2>:\3\2\2\2?B"+
+      "\3\2\2\2@>\3\2\2\2@A\3\2\2\2A\r\3\2\2\2B@\3\2\2\2CE\7\t\2\2DF\5\20"+
+      "\t\2ED\3\2\2\2FG\3\2\2\2GE\3\2\2\2GH\3\2\2\2HI\3\2\2\2IJ\7\n\2\2J"+
+      "\17\3\2\2\2KM\7\16\2\2LK\3\2\2\2LM\3\2\2\2MN\3\2\2\2NP\7\17\2\2OQ"+
+      "\t\4\2\2PO\3\2\2\2PQ\3\2\2\2Q\21\3\2\2\2\17\25\30\35\"%(+\60\62@G"+
+      "LP";
   public static final ATN _ATN =
     new ATNDeserializer().deserialize(_serializedATN.toCharArray());
   static {
