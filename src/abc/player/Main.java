@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,6 +68,7 @@ public class Main {
         List<Note> notes = readBody(bodyString);
         
         Song song = new Song(header, notes);
+        System.out.println(song.toString());
         
         song.toSequencePlayer().play();
     }
@@ -109,23 +111,26 @@ public class Main {
     public static void main(String[] args) throws IOException, MidiUnavailableException, InvalidMidiDataException {
     	//play("sample_abc/paddy.abc");
     	
-    	String songList[] = {
-                //"sample_abc/abc_song.abc",
-                //"sample_abc/waxies_dargle.abc",
-    	        //"sample_abc/fur_elise.abc",
-    	        //"sample_abc/little_night_music.abc",
-    	        //"sample_abc/paddy.abc",
-    	        //"sample_abc/scale.abc",
-    	        //"sample_abc/invention.abc",
-    	        "sample_abc/test.abc",
-    	        //"sample_abc/sample1.abc",
-    	        //"sample_abc/piece1.abc"
-    	}; 
+//    	String songList[] = {
+//                //"sample_abc/abc_song.abc",
+//                "sample_abc/waxies_dargle.abc",
+//    	        //"sample_abc/fur_elise.abc",
+//    	        //"sample_abc/little_night_music.abc",
+//    	        //"sample_abc/paddy.abc",
+//    	        //"sample_abc/scale.abc",
+//    	        //"sample_abc/invention.abc",
+//    	        //"sample_abc/test.abc",
+//    	        //"sample_abc/sample1.abc",
+//    	        //"sample_abc/piece1.abc"
+//    	}; 
+//    	
+//    	for(String i: songList) {
+//    		//System.out.println(i);
+//    		play(i);
+//    	}
     	
-    	for(String i: songList) {
-    		//System.out.println(i);
-    		play(i);
-    	}
+    readFileFromUser();
+
     }
     
     public static void showTree(ParseTree tree, Parser parser) {
@@ -144,4 +149,47 @@ public class Main {
         frame.pack();
         frame.setVisible(true);
     }
+    
+    
+    //function that prompts the user for file to play  
+    //and allows for multiple songs to be played back to back
+    public static void readFileFromUser() throws IOException, MidiUnavailableException, InvalidMidiDataException {
+    	Scanner scanner = new Scanner(System.in);
+    	System.out.println("Enter the relative location of the file that you want to play");
+    	
+    	String fileName = scanner.nextLine(); 
+    	
+    	try {
+    		play(fileName); 
+    	} catch (Exception e){
+    		System.out.println("File that you chose was not able to be played");
+    		readFileFromUser(); 
+    	}
+    	
+    	System.out.println("Would you like to play another song (Y / N)?");
+    	char yesOrNo = scanner.next().charAt(0);
+    	
+    	switch(yesOrNo) {
+    	
+    	case 'y':
+    	case 'Y':
+    		readFileFromUser(); 
+    	case 'n':
+    	case 'N':
+    		System.out.println();
+    		System.out.println();
+    		System.out.println("What do you call it when you plagiarize sheet music? Taking notes.");
+    		scanner.close();
+    		System.exit(0);
+    	}
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

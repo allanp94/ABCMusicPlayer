@@ -157,8 +157,8 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 	// helper functions
 	private Float getLengthFromString(String ratioString) {
 		try { 
-			if (ratioString == null || ratioString.isBlank()) //// throw
-				new Exception("invalid"); 
+			//if (ratioString == null || ratioString.isBlank()) //// 
+			//	throw new Exception("invalid"); 
 		 	String ratio = ratioString.trim();
 			if (ratio.contains("/")) {
 				String[] rat = ratio.split("/");
@@ -201,7 +201,6 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 						note.setAccidental(accidentals.get(notePitch));
 					}
 				}
-				accidentals.containsKey("");
 			}
 		});
 	}
@@ -225,41 +224,41 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 	}
 
 	private void applyRepeats(List<Note> notes, List<Divider> dividers) {	
-		// get all voices
-		Set<String> voices = new LinkedHashSet<>();
-		notes.forEach(note -> voices.add(note.getVoice()));
-		
-		System.out.print(voices.toString());
-		
-		// iterate accross dividers respective to each voice
-		voices.forEach(new Consumer<String>() {
-			public void accept(String voice) {
-				
-//				System.out.println(dividers.stream()
-//						//.filter(divider -> divider.getVoice() == null)
-//						.map(divider -> divider.getVoice())
-//						.collect(Collectors.toList()).toString());
-				
-				dividers.stream()
-				.filter(divider -> divider.getVoice() == voice)
-				.forEach(new Consumer<Divider>() {
-					Integer lastRepeatStartIndex = 0;
-					
-					public void accept(Divider divider) {
-						System.out.println(lastRepeatStartIndex);
-//						switch(divider.getType()) {
-//						case "|:":
-//							lastRepeatStartIndex = divider.getIndex();
-//							
-//						case "":
-//						default:
-//						}
-						
-					}
-				});
-			}
-		});
-		
+//		// get all voices
+//		Set<String> voices = new LinkedHashSet<>();
+//		notes.forEach(note -> voices.add(note.getVoice()));
+//		
+////		System.out.print(voices.toString());
+//		
+//		// iterate accross dividers respective to each voice
+//		voices.forEach(new Consumer<String>() {
+//			public void accept(String voice) {
+//				
+////				System.out.println(dividers.stream()
+////						//.filter(divider -> divider.getVoice() == null)
+////						.map(divider -> divider.getVoice())
+////						.collect(Collectors.toList()).toString());
+//				
+//				dividers.stream()
+//				.filter(divider -> divider.getVoice() == voice)
+//				.forEach(new Consumer<Divider>() {
+//					Integer lastRepeatStartIndex = 0;
+//					
+//					public void accept(Divider divider) {
+//						System.out.println(lastRepeatStartIndex);
+////						switch(divider.getType()) {
+////						case "|:":
+////							lastRepeatStartIndex = divider.getIndex();
+////							
+////						case "":
+////						default:
+////						}
+//						
+//					}
+//				});
+//			}
+//		});
+//		
 
 	}
 }

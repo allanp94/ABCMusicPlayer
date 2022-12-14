@@ -110,6 +110,9 @@ public class SequencePlayer {
         sequencer.open();
         sequencer.setTempoInBPM(this.beatsPerMinute);
 
+        // start playing!
+        sequencer.start(); 
+        
         sequencer.addMetaEventListener(new MetaEventListener() {
             public void meta(MetaMessage meta) {
                 if (meta.getType() == META_END_OF_TRACK) {
@@ -122,8 +125,7 @@ public class SequencePlayer {
             }
         });
 
-        // start playing!
-        sequencer.start();   
+  
 
         while (sequencer.isRunning()) {
             Thread.yield();
