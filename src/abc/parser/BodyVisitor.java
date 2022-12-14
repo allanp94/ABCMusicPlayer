@@ -36,7 +36,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 		// set voice for section
 		String voice = null;
 		if (section.VOICE() != null && !section.VOICE().isEmpty()) {
-			voice = section.VOICE().get(0).getText();
+			voice = section.VOICE().get(0).getText().split(":")[1].trim();
 		}
 		
 		// iterate through each measure
