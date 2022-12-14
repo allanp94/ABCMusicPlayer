@@ -2,9 +2,13 @@ package abc.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import abc.song.Note;
 import abc.parser.AbcBodyParser.ChordContext;
@@ -19,20 +23,30 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 	
 	int chordId = 1;
 	
-	public List<Note> visitBody(AbcBodyParser.BodyContext ctx) {
-		List<Note> orderedNoteList = new ArrayList<Note>();
-		int ChordID = 1;
+	public List<Note> visitBody(AbcBodyParser.BodyContext body) {
+		List<Note> notes = new ArrayList<>();
+		List<Divider> dividers = new ArrayList<>();
 		
-		for (int s = 0; s < ctx.section().size(); s++)
+		for (int s = 0; s < body.section().size(); s++)
 		{
-			AbcBodyParser.SectionContext section = ctx.section(s);
-			visitSection(orderedNoteList, section);
+			AbcBodyParser.SectionContext section = body.section(s);
+			visitSection(notes, dividers, section);
 		}
 		
-		return orderedNoteList;
+		if (body.divider() != null && !body.divider().isEmpty()) {
+			dividers.add(new Divider(
+				notes.size()-1,
+				body.divider().getText(),
+				notes.get(notes.size() - 1).getVoice()
+			));
+		}
+		
+		applyRepeats(notes, dividers);
+		
+		return notes;
 	}
-	
-	private void visitSection(List<Note> notes, SectionContext section) {
+
+	private void visitSection(List<Note> notes, List<Divider> dividers, SectionContext section) {
 		// set voice for section
 		String voice = null;
 		if (section.VOICE() != null && !section.VOICE().isEmpty()) {
@@ -43,22 +57,33 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 		for (int m = 0; m < section.measure().size(); m++)
 		{
 			AbcBodyParser.MeasureContext measure = section.measure(m);
-			visitMeasure(notes, voice, measure);
+			visitMeasure(notes, dividers, voice, measure);
 		}
 		
-		// handle divider
 		if (section.divider() != null && !section.divider().isEmpty()) {
-			//System.out.println(s.divider().getText());
+			dividers.add(new Divider(
+					notes.size()-1,
+					section.divider().getText(),
+					voice
+				));
 		}
 	}
 	
-	private void visitMeasure(List<Note> notes, String voice, MeasureContext measure) {
+	private void visitMeasure(List<Note> notes, List<Divider> dividers, String voice, MeasureContext measure) {
 		if (measure.divider() != null && !measure.divider().isEmpty()) {
-			//System.out.println(measure.divider().getText());
+			dividers.add(new Divider(
+					notes.size()-1,
+					measure.divider().getText(),
+					voice
+				));
 		}
 		
 		if (measure.parts() != null && !measure.parts().isEmpty()) {
-			//System.out.println(m.parts().getText());
+			dividers.add(new Divider(
+					notes.size()-1,
+					measure.parts().getText(),
+					voice
+				));
 		}
 		
 		// parse through notes of the measure and add to private list
@@ -110,10 +135,10 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 		
 		double length = 1;
 		if (note.FRACTION() != null) {
-			length = parseStringToFloat(note.FRACTION().getText());
+			length = getLengthFromString(note.FRACTION().getText());
 		}
 		else if (note.NUMBER() != null) {
-			length = parseStringToFloat(note.NUMBER().getText());
+			length = getLengthFromString(note.NUMBER().getText());
 		}
 		
 		Note noteObject = new Note(
@@ -130,15 +155,22 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 	}
 	
 	// helper functions
-	private Float parseStringToFloat(String ratio) {
-		try {
+	private Float getLengthFromString(String ratioString) {
+		try { 
+			if (ratioString == null || ratioString.isBlank()) //// throw
+				new Exception("invalid"); 
+		 	String ratio = ratioString.trim();
 			if (ratio.contains("/")) {
 				String[] rat = ratio.split("/");
 				if (ratio.length() == 3) {
 					return Float.parseFloat(rat[0]) / Float.parseFloat(rat[1]);
 				}
 				else if (ratio.length() == 2) {
-					return 1 / Float.parseFloat(rat[1]);
+					if (ratio.charAt(1) == '/') {
+						return Float.parseFloat(rat[0])/2f;
+					} else {
+						return 1 / Float.parseFloat(rat[1]);
+					}
 				}
 				else {
 					return (float) 0.5;
@@ -147,7 +179,7 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 				return Float.parseFloat(ratio);
 			}
 		} catch(Exception e) {
-			return null;
+			throw new IllegalArgumentException("Invalid string to convert to length: "+ratioString);
 		}
 	}
 	
@@ -190,5 +222,44 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 			default:
 			}
 		}
+	}
+
+	private void applyRepeats(List<Note> notes, List<Divider> dividers) {	
+		// get all voices
+		Set<String> voices = new LinkedHashSet<>();
+		notes.forEach(note -> voices.add(note.getVoice()));
+		
+		System.out.print(voices.toString());
+		
+		// iterate accross dividers respective to each voice
+		voices.forEach(new Consumer<String>() {
+			public void accept(String voice) {
+				
+//				System.out.println(dividers.stream()
+//						//.filter(divider -> divider.getVoice() == null)
+//						.map(divider -> divider.getVoice())
+//						.collect(Collectors.toList()).toString());
+				
+				dividers.stream()
+				.filter(divider -> divider.getVoice() == voice)
+				.forEach(new Consumer<Divider>() {
+					Integer lastRepeatStartIndex = 0;
+					
+					public void accept(Divider divider) {
+						System.out.println(lastRepeatStartIndex);
+//						switch(divider.getType()) {
+//						case "|:":
+//							lastRepeatStartIndex = divider.getIndex();
+//							
+//						case "":
+//						default:
+//						}
+						
+					}
+				});
+			}
+		});
+		
+
 	}
 }
