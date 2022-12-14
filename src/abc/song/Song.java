@@ -148,7 +148,7 @@ public class Song {
 
 		boolean isSharp = true;
 		List<String> keynotes = getSharpOrFlatNotes(key);
-		if (keynotes.get(0).equals("B"))
+		if (!keynotes.isEmpty() && keynotes.get(0).equals("B"))
 			isSharp = false;
 
 		if (keynotes.contains(""+letter))
