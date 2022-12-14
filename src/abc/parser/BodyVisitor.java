@@ -1,6 +1,7 @@
 package abc.parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -201,7 +202,6 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 						note.setAccidental(accidentals.get(notePitch));
 					}
 				}
-				accidentals.containsKey("");
 			}
 		});
 	}
@@ -228,38 +228,67 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 		// get all voices
 		Set<String> voices = new LinkedHashSet<>();
 		notes.forEach(note -> voices.add(note.getVoice()));
+		List<Note> notesReadOnly = new ArrayList<>(notes);
 		
-		System.out.print(voices.toString());
+		Integer globalAdd = 0;
 		
 		// iterate accross dividers respective to each voice
-		voices.forEach(new Consumer<String>() {
-			public void accept(String voice) {
-				
-//				System.out.println(dividers.stream()
-//						//.filter(divider -> divider.getVoice() == null)
-//						.map(divider -> divider.getVoice())
-//						.collect(Collectors.toList()).toString());
-				
-				dividers.stream()
-				.filter(divider -> divider.getVoice() == voice)
-				.forEach(new Consumer<Divider>() {
-					Integer lastRepeatStartIndex = 0;
+		for(String voice: voices) {
+			Integer lastRepeatStartIndex = 0;
+			Integer lastPartOne = null;
+			
+			List<Divider> dividersForVoice = dividers.stream()
+				.filter(divider -> voice == null || divider.getVoice().equals(voice))
+				.collect(Collectors.toList());
+			
+			System.out.println(
+	        dividersForVoice.stream()
+			.map(divider -> divider.getType())
+			.collect(Collectors.toList()).toString());
+			
+			
+			for (int i = 0; i < dividersForVoice.size(); i++) {
+				Divider divider = dividersForVoice.get(i);
+				switch(divider.getType()) {
+				case "|:":
+				case "|]":
+					lastRepeatStartIndex = divider.getIndex() + 1;
+					break;
+				case ":|":
+					if (i != dividersForVoice.size()-1 && dividersForVoice.get(i+1).getType().equals("[2"))
+						break;
+					List<Note> repeatNotes = getNotesOfVoiceFromRange(notesReadOnly, voice, lastRepeatStartIndex, divider.getIndex()+1);
+					System.out.println("case 1");
+					printNotes(repeatNotes);
 					
-					public void accept(Divider divider) {
-						System.out.println(lastRepeatStartIndex);
-//						switch(divider.getType()) {
-//						case "|:":
-//							lastRepeatStartIndex = divider.getIndex();
-//							
-//						case "":
-//						default:
-//						}
-						
-					}
-				});
+					notes.addAll(globalAdd + divider.getIndex()+1, repeatNotes);
+					globalAdd += repeatNotes.size();
+					break;
+				case "[2":
+					List<Note> repeatNotes2 = getNotesOfVoiceFromRange(notesReadOnly, voice, lastRepeatStartIndex, lastPartOne+1);
+					notes.addAll(globalAdd + divider.getIndex()+1, repeatNotes2);
+					globalAdd += repeatNotes2.size();
+					System.out.println("case 2");
+					printNotes(repeatNotes2);
+					break;
+				case "[1":
+					lastPartOne = divider.getIndex();
+				default:
+				}
 			}
-		});
-		
-
+		}
+	}
+	
+	private List<Note> getNotesOfVoiceFromRange(List<Note> notes, String voice, int start, int stop) {
+		return notes.subList(start, stop).stream()
+				.filter(note -> voice == null || note.getVoice().equals(voice))
+				.collect(Collectors.toList());
+	}
+	
+	private void printNotes(List<Note> notes) {
+		System.out.println(
+		        notes.stream()
+				.map(note -> note.getPitch())
+				.collect(Collectors.toList()).toString());
 	}
 }
