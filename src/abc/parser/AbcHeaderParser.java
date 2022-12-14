@@ -119,6 +119,11 @@ public class AbcHeaderParser extends Parser {
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).exitHeader(this);
     }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcHeaderVisitor ) return ((AbcHeaderVisitor<? extends T>)visitor).visitHeader(this);
+      else return visitor.visitChildren(this);
+    }
   }
 
   public final HeaderContext header() throws RecognitionException {
@@ -174,6 +179,11 @@ public class AbcHeaderParser extends Parser {
     @Override
     public void exitRule(ParseTreeListener listener) {
       if ( listener instanceof AbcHeaderListener ) ((AbcHeaderListener)listener).exitHeaderRules(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+      if ( visitor instanceof AbcHeaderVisitor ) return ((AbcHeaderVisitor<? extends T>)visitor).visitHeaderRules(this);
+      else return visitor.visitChildren(this);
     }
   }
 

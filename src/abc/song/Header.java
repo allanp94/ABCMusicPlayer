@@ -150,6 +150,10 @@ public class Header {
 	}
 	
 	public void setTempoLength(Float tempoLength) {
+		if (tempoLength == null) {
+			this.tempoLength = this.length; 
+			return; 
+		}
 		this.tempoLength = tempoLength;
 	}
 	
@@ -159,6 +163,7 @@ public class Header {
 				"Default Length: " + length + "\n" +
 				"Meter: " + meter + "\n" +
 				"Tempo: " + tempo + "\n" +
+				"Tempo Length: " + tempoLength + "\n" +
 				"Title: " + title + "\n" +
 				"Voices: " + String.join(", ", voices).trim() + "\n";
 	}

@@ -14,7 +14,7 @@ public class NoteTests {
 	public void Note_Ctor_Pitch_And_Length_Should_Map_Properties_Correctly() {
 		
 		// Arrange
-		Pitch pitch = new Pitch('A');
+		Pitch pitch = new Pitch("A");
 		double length = 2.0;
 		
 		// Act
@@ -24,7 +24,7 @@ public class NoteTests {
 		assertEquals(pitch, note.getPitch());
 		assertEquals(length, note.getLength(), 0);
 		assertNull(note.getAccidental());
-		assertFalse(note.isChord());
+		assertNull(note.getChordId());
 		assertNull(note.getVoice());
 	}	
 	
@@ -32,10 +32,10 @@ public class NoteTests {
 	public void Note_Ctor_Should_Map_Properties_Correctly() {
 		
 		// Arrange
-		Pitch pitch = new Pitch('A');
+		Pitch pitch = new Pitch("A");
 		double length = 2.0;
 		String accidental = "accidental";
-		boolean chord = true;
+		Integer chord = 1;
 		String voice = "voice";
 		
 		// Act
@@ -45,7 +45,7 @@ public class NoteTests {
 		assertEquals(pitch, note.getPitch());
 		assertEquals(length, note.getLength(), 0);
 		assertEquals(accidental, note.getAccidental());
-		assertEquals(chord, note.isChord());
+		assertEquals(chord, note.getChordId());
 		assertEquals(voice, note.getVoice());
 	}
 	
@@ -53,10 +53,10 @@ public class NoteTests {
 	public void NoteToMap_Ctor_Should_Map_Properties_Correctly() {
 		
 		// Arrange
-		Pitch pitch = new Pitch('A');
+		Pitch pitch = new Pitch("A");
 		double length = 2.0;
 		String accidental = "accidental";
-		boolean chord = true;
+		Integer chord = 1;
 		String voice = "voice";		
 
 		Note noteToMap = new Note(pitch, length, accidental, chord, voice);
@@ -68,22 +68,22 @@ public class NoteTests {
 		assertEquals(pitch, note.getPitch());
 		assertEquals(length, note.getLength(), 0);
 		assertEquals(accidental, note.getAccidental());
-		assertEquals(chord, note.isChord());
+		assertEquals(chord, note.getChordId());
 		assertEquals(voice, note.getVoice());
 	}
 	
 	@Test
 	public void testToString() {
 		// Arrange
-		Pitch pitch = new Pitch('A');
+		Pitch pitch = new Pitch("A");
 		double length = 2.0;
 		String accidental = "accidental";
-		boolean chord = true;
+		Integer chord = 1;
 		String voice = "voice";		
 
 		Note note = new Note(pitch, length, accidental, chord, voice);
 		
-		String expected = "{Pitch: A Length: 2.0 Chord: true Voice: voice}";
+		String expected = "{Pitch: A Length: 2.0 Chord: 1 Voice: voice}";
 		
 		// Act
 		String actual = note.toString();

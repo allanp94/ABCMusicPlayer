@@ -9,7 +9,7 @@ public class Note {
 	private Pitch pitch;
 	private double length;
 	private String accidental;
-	private boolean chord;
+	private Integer chordId;
 	private String voice;
 	
 	/*
@@ -21,7 +21,7 @@ public class Note {
 		this.setPitch(pitch);
 		this.setLength(length);
 		this.setAccidental(null);
-		this.setChord(false);
+		this.setChordId(null);
 		this.setVoice(null);
 	}
 	
@@ -33,13 +33,13 @@ public class Note {
 			Pitch pitch,
 			double length,
 			String accidental,
-			boolean chord,
+			Integer chordId,
 			String voice
 			) {
 		this.setPitch(pitch);
 		this.setLength(length);
 		this.setAccidental(accidental);
-		this.setChord(chord);
+		this.setChordId(chordId);
 		this.setVoice(voice);
 	}
 	
@@ -50,11 +50,13 @@ public class Note {
 		this.setPitch(note.getPitch());
 		this.setLength(note.getLength());
 		this.setAccidental(note.getAccidental());
-		this.setChord(note.isChord());
+		this.setChordId(note.getChordId());
 		this.setVoice(note.getVoice());
 	}
 
 	public Pitch getPitch() {
+		if (pitch == null)
+			return null;
 		return new Pitch(pitch);
 	}
 
@@ -70,12 +72,12 @@ public class Note {
 		this.length = length;
 	}
 
-	public boolean isChord() {
-		return chord;
+	public Integer getChordId() {
+		return chordId;
 	}
 
-	public void setChord(boolean chord) {
-		this.chord = chord;
+	public void setChordId(Integer chordId) {
+		this.chordId = chordId;
 	}
 
 	public String getVoice() {
@@ -87,7 +89,7 @@ public class Note {
 	}
 	
 	public String toString() {
-		return "{"+"Pitch: "+pitch+" Length: "+String.valueOf(length)+" Chord: "+String.valueOf(chord)+" Voice: "+voice+"}";
+		return "{"+"Pitch: "+pitch+" Length: "+String.valueOf(length)+" Chord: "+String.valueOf(chordId)+" Voice: "+voice+"}";
 	}
 
 	public String getAccidental() {

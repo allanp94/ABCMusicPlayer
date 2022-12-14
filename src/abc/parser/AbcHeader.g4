@@ -7,13 +7,13 @@ grammar AbcHeader;
 import Configuration;
 
 header
- : headerRules+ EOF
+ : headerRules+ EOF								
  ;
 
-headerRules
+headerRules									
  : TEXT COLON TEXT
  ;
 
 COLON   : ':';
-TEXT : ~[:\r\n]+;
+TEXT :  ~[:\r\n]+ ;
 NEWLINE : [\n\t\r]+ -> skip;

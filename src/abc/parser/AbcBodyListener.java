@@ -41,6 +41,16 @@ public interface AbcBodyListener extends ParseTreeListener {
    */
   void exitMeasure(AbcBodyParser.MeasureContext ctx);
   /**
+   * Enter a parse tree produced by {@link AbcBodyParser#parts}.
+   * @param ctx the parse tree
+   */
+  void enterParts(AbcBodyParser.PartsContext ctx);
+  /**
+   * Exit a parse tree produced by {@link AbcBodyParser#parts}.
+   * @param ctx the parse tree
+   */
+  void exitParts(AbcBodyParser.PartsContext ctx);
+  /**
    * Enter a parse tree produced by {@link AbcBodyParser#divider}.
    * @param ctx the parse tree
    */

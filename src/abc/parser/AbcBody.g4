@@ -15,11 +15,15 @@ body
  ;
  
 section
- : (VOICE | measure)+ divider?
+ : VOICE? measure+ divider?
  ;
  
 measure
- : divider? (PARTONE | PARTTWO)? (tuplet | note | chord)+
+ : divider? parts? (tuplet | note | chord)+
+ ;
+ 
+parts
+ : PARTONE | PARTTWO
  ;
  
  divider
@@ -42,9 +46,7 @@ chord
 note
  : ACCIDENTAL? LETTER (NUMBER|FRACTION)?
  ;
-
-
-
+ 
 BEGINREPEAT
  : '|:'
  ;
@@ -69,4 +71,7 @@ FRACTION	: NUMBER? '/' NUMBER?;
 ACCIDENTAL	: ('_'|'^'|'=')+;
 LETTER	: ('a'..'z'|'A'..'Z') (','|'\'')*;
 WS: [ \n\t\r]+ -> skip;
+
+
+
 PERCENT: '%' -> skip;
