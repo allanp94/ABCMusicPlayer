@@ -39,7 +39,7 @@ public class SongTests {
 	public void Song_Ctor_With_Header_And_Notes_Should_Map_Correctly() {
 		// Arrange
 		List<Note> notes = new ArrayList<Note>();
-		notes.add(new Note(new Pitch('A'), 1));
+		notes.add(new Note(new Pitch("A"), 1));
 		
 		// Act
 		Song song = new Song(_header, notes);
@@ -64,7 +64,7 @@ public class SongTests {
 	public void AddNote_Should_Throw_If_Voice_Is_Not_In_Header() {
 		// Arrange
 		Song song = new Song(_header);
-		Note note = new Note(new Pitch('A'), 1, "", false, "voice");
+		Note note = new Note(new Pitch("A"), 1, "", 1, "voice");
 		
 	
 		// Act
@@ -78,7 +78,7 @@ public class SongTests {
 	public void ToString() {
 		// Arrange
 		List<Note> list = new ArrayList<Note>();
-		Note note = new Note(new Pitch('A'), 1);
+		Note note = new Note(new Pitch("A"), 1);
 		list.add(note);
 		Song song = new Song(_header, list);
 		
@@ -87,9 +87,10 @@ public class SongTests {
 						+ "Default Length: 0.125\n"
 						+ "Meter: 1.0\n"
 						+ "Tempo: 100\n"
+						+ "Tempo Length: null\n"
 						+ "Title: \n"
 						+ "Voices: \n"
-						+ "[{Pitch: A Length: 1.0 Chord: false Voice: null}]";
+						+ "[{Pitch: A Length: 1.0 Chord: null Voice: null}]";
 		
 		// Act
 		String actual = song.toString();
