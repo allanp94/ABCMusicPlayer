@@ -19,7 +19,6 @@ public class Header {
 	private static final float DEFAULT_METER = 1.0f;
 	private static final int DEFAULT_TEMPO = 100;
 	private static final String DEFAULT_COMPOSER_NAME = "Unknown";
-	private static final float DEFAULT_TEMPO_LENGTH = 100;
 	private final DefaultLength DEFAULT_LENGTH = () -> {
 		if (this.meter == null) throw new IllegalStateException("Meter must be defined to set default length");
 		return meter < .75 ? 1/16f : 1/8f;
@@ -152,7 +151,7 @@ public class Header {
 	
 	public void setTempoLength(Float tempoLength) {
 		if (tempoLength == null) {
-			this.tempoLength = Header.DEFAULT_TEMPO_LENGTH; 
+			this.tempoLength = this.length; 
 			return; 
 		}
 		this.tempoLength = tempoLength;
