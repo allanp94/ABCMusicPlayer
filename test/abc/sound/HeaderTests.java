@@ -247,6 +247,7 @@ public class HeaderTests {
 						  "Default Length: 12.0\n" + 
 						  "Meter: 1.0\n" +
 						  "Tempo: 1\n" +
+						  "Tempo Length: 2.0\n" +
 						  "Title: title\n" +
 						  "Voices: voice1, voice2\n";		
 		// Act
