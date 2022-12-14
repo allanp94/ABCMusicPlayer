@@ -89,42 +89,50 @@ public class Song {
 		
 		SequencePlayer player = new SequencePlayer(beatsPerMinute, ticksPerBeat);
 
-		Integer tickcount = 12;
-		Integer firstChordNoteLength = null;
-		Integer lastChordId = -1;
 		
-		for (int i = 0; i < notes.size(); i++) {
-			Note note = notes.get(i);
+		for (int v = 0; v < header.getVoices().size(); v++)
+		{
+			Integer tickcount = 12;
+			Integer firstChordNoteLength = null;
+			Integer lastChordId = -1;
+        
+			int voice = v;
+			List<Note> filterednotes = notes.stream().filter(note -> note.getVoice().equals(header.getVoices().get(voice).toString())).collect(Collectors.toList());
 			
-			int accidental = 0;
-			if (note.getPitch() != null)
-				accidental = getAccidental(note.getPitch().getLetter(), note.getAccidental(), header.getKeySignature());
-			
-			// if different chord or note, apply firstChordNoteLength
-			if (lastChordId != -1 && (note.getChordId() == null || note.getChordId() != lastChordId) ) {
-				tickcount += firstChordNoteLength;
-				firstChordNoteLength = null;
-				lastChordId = -1;
-			}
-			
-			if (note.getPitch() == null) // if is rest
-			{
-				tickcount += (int)(note.getLength()*ticksPerBeat);
-			}
-			else if (note.getChordId() != null)
-			{
-				if (firstChordNoteLength == null) {
-					firstChordNoteLength = (int)(note.getLength()*ticksPerBeat);
-					lastChordId = note.getChordId();
+			for (int i = 0; i < filterednotes.size(); i++) {
+				Note note = filterednotes.get(i);
+				
+				int accidental = 0;
+				if (note.getPitch() != null)
+					accidental = getAccidental(note.getPitch().getLetter(), note.getAccidental(), header.getKeySignature());
+				
+				// if different chord or note, apply firstChordNoteLength
+				if (lastChordId != -1 && (note.getChordId() == null || note.getChordId() != lastChordId) ) {
+					tickcount += firstChordNoteLength;
+					firstChordNoteLength = null;
+					lastChordId = -1;
 				}
-				player.addNote(note.getPitch().toMidiNote() + accidental, tickcount, (int)(note.getLength()*ticksPerBeat));					
-			}
-			else 
-			{
-				player.addNote(note.getPitch().toMidiNote() + accidental, tickcount, (int)(note.getLength()*ticksPerBeat));
-				tickcount += (int)(note.getLength()*ticksPerBeat);
+				
+				if (note.getPitch() == null) // if is rest
+				{
+					tickcount += (int)(note.getLength()*ticksPerBeat);
+				}
+				else if (note.getChordId() != null)
+				{
+					if (firstChordNoteLength == null) {
+						firstChordNoteLength = (int)(note.getLength()*ticksPerBeat);
+						lastChordId = note.getChordId();
+					}
+					player.addNote(note.getPitch().toMidiNote() + accidental, tickcount, (int)(note.getLength()*ticksPerBeat));					
+				}
+				else 
+				{
+					player.addNote(note.getPitch().toMidiNote() + accidental, tickcount, (int)(note.getLength()*ticksPerBeat));
+					tickcount += (int)(note.getLength()*ticksPerBeat);
+				}
 			}
 		}
+		
 		
         return player;
 	}
@@ -145,7 +153,6 @@ public class Song {
 
 		if (keynotes.contains(""+letter))
 		{
-		System.out.println(letter);
 			if(isSharp)
 				return 1;
 			else
