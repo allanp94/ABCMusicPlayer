@@ -112,16 +112,20 @@ public class Main {
     	//play("sample_abc/paddy.abc");
     	
 //    	String songList[] = {
-//                //"sample_abc/abc_song.abc",
-//                "sample_abc/waxies_dargle.abc",
+//              //"sample_abc/abc_song.abc",
 //    	        //"sample_abc/fur_elise.abc",
+//    	        //"sample_abc/invention.abc",
 //    	        //"sample_abc/little_night_music.abc",
 //    	        //"sample_abc/paddy.abc",
-//    	        //"sample_abc/scale.abc",
-//    	        //"sample_abc/invention.abc",
-//    	        //"sample_abc/test.abc",
+//        		//"sample_abc/piece1.abc",
+//				//"sample_abc/piece2.abc",
+//				//"sample_abc/prelude.abc",
 //    	        //"sample_abc/sample1.abc",
-//    	        //"sample_abc/piece1.abc"
+//        		//"sample_abc/sample2.abc",
+//        		//"sample_abc/sample3.abc",
+//    	        //"sample_abc/scale.abc",
+//              //"sample_abc/waxies_dargle.abc",
+//    	        //"sample_abc/test.abc",
 //    	}; 
 //    	
 //    	for(String i: songList) {
