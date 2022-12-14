@@ -100,7 +100,7 @@ public class Main {
         
         
                 
-        showTree(tree, parser);
+        //showTree(tree, parser);
         
         return notes;
         
@@ -113,11 +113,11 @@ public class Main {
                 //"sample_abc/abc_song.abc",
                 //"sample_abc/waxies_dargle.abc",
     	        //"sample_abc/fur_elise.abc",
-    	        "sample_abc/little_night_music.abc",
+    	        //"sample_abc/little_night_music.abc",
     	        //"sample_abc/paddy.abc",
     	        //"sample_abc/scale.abc",
     	        //"sample_abc/invention.abc",
-    	        //"sample_abc/test.abc",
+    	        "sample_abc/test.abc",
     	        //"sample_abc/sample1.abc",
     	        //"sample_abc/piece1.abc"
     	}; 

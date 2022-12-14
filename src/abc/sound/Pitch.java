@@ -151,6 +151,10 @@ public class Pitch {
         return value + 60;
     }
 
+	public char getLetter() {
+		return letter;
+	}
+
     /**
      * @return this pitch in abc music notation
      * @see http://www.walshaw.plus.com/abc/examples/

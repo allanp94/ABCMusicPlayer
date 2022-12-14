@@ -1,6 +1,7 @@
 package abc.song;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +96,10 @@ public class Song {
 		for (int i = 0; i < notes.size(); i++) {
 			Note note = notes.get(i);
 			
+			int accidental = 0;
+			if (note.getPitch() != null)
+				accidental = getAccidental(note.getPitch().getLetter(), note.getAccidental(), header.getKeySignature());
+			
 			// if different chord or note, apply firstChordNoteLength
 			if (lastChordId != -1 && (note.getChordId() == null || note.getChordId() != lastChordId) ) {
 				tickcount += firstChordNoteLength;
@@ -112,15 +117,95 @@ public class Song {
 					firstChordNoteLength = (int)(note.getLength()*ticksPerBeat);
 					lastChordId = note.getChordId();
 				}
-				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));					
+				player.addNote(note.getPitch().toMidiNote() + accidental, tickcount, (int)(note.getLength()*ticksPerBeat));					
 			}
 			else 
 			{
-				player.addNote(note.getPitch().toMidiNote(), tickcount, (int)(note.getLength()*ticksPerBeat));
+				player.addNote(note.getPitch().toMidiNote() + accidental, tickcount, (int)(note.getLength()*ticksPerBeat));
 				tickcount += (int)(note.getLength()*ticksPerBeat);
 			}
 		}
 		
         return player;
 	}
+	
+	// helper functions
+	private int getAccidental(char letter, String accidental, String key) {
+		if (accidental != null)
+		{
+			if (accidental.equals("^")) return 1;
+			if (accidental.equals("_")) return -1;
+			if (accidental.equals("=")) return 0;
+		}
+
+		boolean isSharp = true;
+		List<String> keynotes = getSharpOrFlatNotes(key);
+		if (keynotes.get(0).equals("B"))
+			isSharp = false;
+
+		if (keynotes.contains(""+letter))
+		{
+		System.out.println(letter);
+			if(isSharp)
+				return 1;
+			else
+				return -1;
+		}
+		return 0;
+	}
+	
+	public static List<String> getSharpOrFlatNotes(String key) {
+	    String[] majorsharparr = {"G","D","A","E","B","F#","C#"};
+	    List<String> majorsharpkeys = Arrays.asList(majorsharparr);
+	    String[] minorsharparr = {"Em","Bm","F#m","C#m","G#m","D#m","A#m"};
+	    List<String> minorsharpkeys = Arrays.asList(minorsharparr);
+		
+	    String[] majorflatarr = {"F","B_","E_","A_","D_","G_","C_"};
+	    List<String> majorflatkeys = Arrays.asList(majorflatarr);
+	    String[] minorflatarr = {"Dm","Gm","Cm","Fm","B_m","E_m","A_m"};
+	    List<String> minorflatkeys = Arrays.asList(minorflatarr);
+	    
+	    String[] sharparr = {"F","C","G","D","A","E","B"};
+	    //List<String> sharps = Arrays.asList(majorflatarr);
+	    
+	    String[] flatarr = {"B","E","A","D","G","C","F"};
+	    //List<String> flats = Arrays.asList(majorflatarr);
+
+	    List<String> notes = new ArrayList<String>();
+	    
+	    if (majorsharpkeys.contains(key))
+	    {
+	    	for (int i = 0; i <= majorsharpkeys.indexOf(key); i++)
+	    	{
+	    		notes.add(sharparr[i]);
+	    	}
+	    }
+	    else if (minorsharpkeys.contains(key))
+	    {
+	    	for (int i = 0; i <= minorsharpkeys.indexOf(key); i++)
+	    	{
+	    		notes.add(sharparr[i]);
+	    	}
+	    }	    
+	    else if (majorflatkeys.contains(key))
+	    {
+	    	for (int i = 0; i <= majorflatkeys.indexOf(key); i++)
+	    	{
+	    		notes.add(flatarr[i]);
+	    	}
+	    }
+	    else if (minorflatkeys.contains(key))
+	    {
+	    	for (int i = 0; i <= minorflatkeys.indexOf(key); i++)
+	    	{
+	    		notes.add(flatarr[i]);
+	    	}
+	    }
+	    
+	    return notes;
+	}
+	
+
+	  
+	
 }
