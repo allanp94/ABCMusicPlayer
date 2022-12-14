@@ -241,12 +241,6 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 				.filter(divider -> voice == null || divider.getVoice().equals(voice))
 				.collect(Collectors.toList());
 			
-			System.out.println(
-	        dividersForVoice.stream()
-			.map(divider -> divider.getType())
-			.collect(Collectors.toList()).toString());
-			
-			
 			for (int i = 0; i < dividersForVoice.size(); i++) {
 				Divider divider = dividersForVoice.get(i);
 				switch(divider.getType()) {
@@ -258,9 +252,6 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 					if (i != dividersForVoice.size()-1 && dividersForVoice.get(i+1).getType().equals("[2"))
 						break;
 					List<Note> repeatNotes = getNotesOfVoiceFromRange(notesReadOnly, voice, lastRepeatStartIndex, divider.getIndex()+1);
-					System.out.println("case 1");
-					printNotes(repeatNotes);
-					
 					notes.addAll(globalAdd + divider.getIndex()+1, repeatNotes);
 					globalAdd += repeatNotes.size();
 					break;
@@ -268,8 +259,6 @@ public class BodyVisitor extends AbcBodyBaseVisitor<List<Note>> {
 					List<Note> repeatNotes2 = getNotesOfVoiceFromRange(notesReadOnly, voice, lastRepeatStartIndex, lastPartOne+1);
 					notes.addAll(globalAdd + divider.getIndex()+1, repeatNotes2);
 					globalAdd += repeatNotes2.size();
-					System.out.println("case 2");
-					printNotes(repeatNotes2);
 					break;
 				case "[1":
 					lastPartOne = divider.getIndex();
